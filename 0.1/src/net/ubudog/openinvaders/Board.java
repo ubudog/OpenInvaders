@@ -1,5 +1,6 @@
 package net.ubudog.openinvaders;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -32,6 +33,8 @@ public class Board extends JPanel implements ActionListener {
 	int ship4x;
 	int ship4y;
 	
+	static boolean win = false;
+	
 	
 	public Board() {
 		ship = new Ship(); 
@@ -60,20 +63,30 @@ public class Board extends JPanel implements ActionListener {
 		repaint();
 	}
 	
+	public boolean getWin() {
+		return win; 
+	}
+	
 	public void paint(Graphics g) {
 		
-		for (int y = 0; y < 16; y++) {
-			for (int x = 0; x < 16; x++) {				
-				if(map.getMap(x, y).equals("w")) {
-					g.drawImage(map.getWall(), x*32, y*32, null);
+		if (getWin() == true) {
+			g.setFont(font);
+			g.setColor(Color.ORANGE);
+			g.drawString("WINNER WOOHOO", 100, 200);
+		} else {
+			for (int y = 0; y < 16; y++) {
+				for (int x = 0; x < 16; x++) {				
+					if(map.getMap(x, y).equals("w")) {
+						g.drawImage(map.getWall(), x*32, y*32, null);
+					}
 				}
+				
+				g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
+				g.drawImage(ship.getShip(), ship.getX(), ship.getY(), null);
+				g.drawImage(ship2.getShip(), ship2x, ship2y, null);
+				g.drawImage(ship3.getShip(), ship3x, ship3y, null);
+				g.drawImage(ship4.getShip(), ship4x, ship4y, null);			
 			}
-			
-			g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
-			g.drawImage(ship.getShip(), ship.getX(), ship.getY(), null);
-			g.drawImage(ship2.getShip(), ship2x, ship2y, null);
-			g.drawImage(ship3.getShip(), ship3x, ship3y, null);
-			g.drawImage(ship4.getShip(), ship4x, ship4y, null);			
 		}
 	}
 	

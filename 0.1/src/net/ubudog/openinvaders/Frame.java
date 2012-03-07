@@ -28,6 +28,7 @@ public class Frame {
 		JFrame frame = new JFrame("OpenInvaders");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(515, 543);
+		frame.setLocationRelativeTo(null);
 		frame.add(new Board());
 		frame.setVisible(true);
 	}
