@@ -15,17 +15,42 @@ public class Board extends JPanel implements ActionListener {
 	static Font font = new Font("SanSerif", Font.BOLD, 25);
 	
 	private Player player; 
-	private Ship ship; 
+	private Ship ship;
+	private Ship ship2; 
+	private Ship ship3; 
+	private Ship ship4;
 	private Map map;
-	
 	private Timer time;
+	
+
+	int ship2x;
+	int ship2y;
+	
+	int ship3x;
+	int ship3y;
+	
+	int ship4x;
+	int ship4y;
+	
 	
 	public Board() {
 		ship = new Ship(); 
+		ship2 = new Ship();
+		ship3 = new Ship();
+		ship4 = new Ship();
 		map = new Map();
 		player = new Player(); 
 		addKeyListener(new AL()); 
 		setFocusable(true);
+		
+		ship2x = ship.getX() + 50;
+		ship2y = ship.getY();
+		
+		ship3x = ship.getX() + 100;
+		ship3y = ship.getY();
+		
+		ship4x = ship.getX() + 150;
+		ship4x = ship.getY();
 		
 		time = new Timer(25, this);
 		time.start();
@@ -46,7 +71,9 @@ public class Board extends JPanel implements ActionListener {
 			
 			g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
 			g.drawImage(ship.getShip(), ship.getX(), ship.getY(), null);
-			
+			g.drawImage(ship2.getShip(), ship2x, ship2y, null);
+			g.drawImage(ship3.getShip(), ship3x, ship3y, null);
+			g.drawImage(ship4.getShip(), ship4x, ship4y, null);			
 		}
 	}
 	
