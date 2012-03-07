@@ -15,11 +15,13 @@ public class Board extends JPanel implements ActionListener {
 	static Font font = new Font("SanSerif", Font.BOLD, 25);
 	
 	private Player player; 
+	private Ship ship; 
 	
 	private Timer time;
 	
 	public Board() {
 		player = new Player(); 
+		ship = new Ship(); 
 		addKeyListener(new AL()); 
 		setFocusable(true);
 		
@@ -39,6 +41,11 @@ public class Board extends JPanel implements ActionListener {
 		g.drawString("It works!", 300, 200);
 		*/
 		g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
+		g.drawImage(ship.getShip(), ship.getX(), ship.getY(), null);
+		
+		ship.y = ship.getY() + 32;
+		System.out.println("Ship's Y: " + ship.getY());
+		
 	}
 	
 	public class AL extends KeyAdapter {
