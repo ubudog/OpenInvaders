@@ -19,7 +19,7 @@ public class Bullet {
 	}
 	
 	public void move() {	
-		
+		x = x+2; 
 	}
 	
 	public int getX() {

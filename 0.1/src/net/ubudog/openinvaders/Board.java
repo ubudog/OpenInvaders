@@ -87,6 +87,14 @@ public class Board extends JPanel implements ActionListener {
 		return player.bullets;
 	}
 	
+	public int getShip2X() {
+		return ship2x;
+	}
+	
+	public int getShip2Y() {
+		return ship2y;
+	}
+	
 	public void paint(Graphics g) {
 		
 		if (getWin() == true) {
@@ -112,6 +120,13 @@ public class Board extends JPanel implements ActionListener {
 				g.drawImage(ship4.getShip(), ship4x, ship4y, null);	
 				g.drawImage(ship5.getShip(), ship5x, ship5y, null);
 				g.drawImage(ship6.getShip(), ship6x, ship6y, null);
+				
+				// Ship movement
+				if (getShip2X() == 300) {
+					
+				} else {
+					ship2x++;
+				}
 				
 				// Simple collision detection for the ships and the player
 				if (ship.getX() == player.getX() && ship.getY() == player.getY()) {
@@ -159,7 +174,6 @@ public class Board extends JPanel implements ActionListener {
 					g.setColor(Color.WHITE);
 					g.drawString("Reload! (R)", 0, 500);
 				}
-				
 			}
 		}
 	}
