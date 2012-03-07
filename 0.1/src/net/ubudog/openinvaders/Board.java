@@ -16,12 +16,14 @@ public class Board extends JPanel implements ActionListener {
 	
 	private Player player; 
 	private Ship ship; 
+	private Map map;
 	
 	private Timer time;
 	
 	public Board() {
-		player = new Player(); 
 		ship = new Ship(); 
+		map = new Map();
+		player = new Player(); 
 		addKeyListener(new AL()); 
 		setFocusable(true);
 		
@@ -35,17 +37,17 @@ public class Board extends JPanel implements ActionListener {
 	
 	public void paint(Graphics g) {
 		
-		/**
-		g.setFont(font);
-		g.setColor(Color.ORANGE);
-		g.drawString("It works!", 300, 200);
-		*/
-		g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
-		g.drawImage(ship.getShip(), ship.getX(), ship.getY(), null);
-		
-		ship.y = ship.getY() + 32;
-		System.out.println("Ship's Y: " + ship.getY());
-		
+		for (int y = 0; y < 16; y++) {
+			for (int x = 0; x < 16; x++) {				
+				if(map.getMap(x, y).equals("w")) {
+					g.drawImage(map.getWall(), x*32, y*32, null);
+				}
+			}
+			
+			g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
+			g.drawImage(ship.getShip(), ship.getX(), ship.getY(), null);
+			
+		}
 	}
 	
 	public class AL extends KeyAdapter {

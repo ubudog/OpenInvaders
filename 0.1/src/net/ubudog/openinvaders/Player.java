@@ -58,6 +58,22 @@ public class Player {
 			x = x + 32;
 		}
 		
+		if (key == KeyEvent.VK_UP) {
+			y = y - 32; 
+		}
+		
+		if (key == KeyEvent.VK_LEFT) {
+			x = x - 32; 
+		}
+		
+		if (key == KeyEvent.VK_DOWN) {
+			y = y + 32; 
+		}
+		
+		if (key == KeyEvent.VK_RIGHT) {
+			x = x + 32;
+		}
+		
 		if (key == KeyEvent.VK_ESCAPE) { 
 			System.out.println("Exiting.");
 			System.exit(0);
