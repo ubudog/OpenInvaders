@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -20,6 +21,8 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship2; 
 	private Ship ship3; 
 	private Ship ship4;
+	private Ship ship5; 
+	private Ship ship6;
 	private Map map;
 	private Timer time;
 	
@@ -33,14 +36,21 @@ public class Board extends JPanel implements ActionListener {
 	int ship4x;
 	int ship4y;
 	
-	static boolean win = false;
+	int ship5x;
+	int ship5y; 
 	
+	int ship6x;
+	int ship6y;
+	
+	static boolean win = false;
 	
 	public Board() {
 		ship = new Ship(); 
 		ship2 = new Ship();
 		ship3 = new Ship();
 		ship4 = new Ship();
+		ship5 = new Ship();
+		ship6 = new Ship();
 		map = new Map();
 		player = new Player(); 
 		addKeyListener(new AL()); 
@@ -55,6 +65,12 @@ public class Board extends JPanel implements ActionListener {
 		ship4x = ship.getX() + 150;
 		ship4x = ship.getY();
 		
+		ship5x = ship.getX() + 200;
+		ship5y = ship.getY();
+		
+		ship6x = ship.getX() + 250;
+		ship6y = ship.getY();
+		
 		time = new Timer(25, this);
 		time.start();
 	}
@@ -65,6 +81,10 @@ public class Board extends JPanel implements ActionListener {
 	
 	public boolean getWin() {
 		return win; 
+	}
+	
+	public ArrayList bullets() {
+		return player.bullets;
 	}
 	
 	public void paint(Graphics g) {
@@ -90,6 +110,21 @@ public class Board extends JPanel implements ActionListener {
 				g.drawImage(ship2.getShip(), ship2x, ship2y, null);
 				g.drawImage(ship3.getShip(), ship3x, ship3y, null);
 				g.drawImage(ship4.getShip(), ship4x, ship4y, null);	
+				g.drawImage(ship5.getShip(), ship5x, ship5y, null);
+				g.drawImage(ship6.getShip(), ship6x, ship6y, null);
+				
+				
+				
+				if (player.ammo > 0) {
+					g.setFont(font);
+					g.setColor(Color.WHITE);
+					g.drawString("Remaining ammo: " + player.ammo, 0, 500);
+				} else if (player.ammo == 0) {
+					g.setFont(font);
+					g.setColor(Color.WHITE);
+					g.drawString("Reload! (R)", 0, 500);
+				}
+				
 			}
 		}
 	}

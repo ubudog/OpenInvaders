@@ -2,6 +2,7 @@ package net.ubudog.openinvaders;
 
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
@@ -9,15 +10,21 @@ public class Player {
 	
 	Image img;
 	
+	static int ammo;
+	
 	static int x; 
 	static int y; 
 	
 	static String HOME_DIR = System.getProperty("user.home");
 	static String MAIN_DIR = HOME_DIR + "/.openinvaders";
 	
+	static ArrayList bullets;
+	
 	public Player() {
 		x = 44; 
 		y = 456;
+		
+		ammo = 20;
 		
 		ImageIcon i = new ImageIcon(MAIN_DIR + "/player.gif");
 		img = i.getImage();
@@ -40,6 +47,14 @@ public class Player {
 		return y; 
 	}
 	
+	public void fireBullet() {
+		if (ammo > 0) {
+			ammo--;
+			Bullet z = new Bullet(getX() + 10, getY());
+			bullets.add(z);
+		}
+	}
+	
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_W) {
@@ -59,7 +74,7 @@ public class Player {
 		}
 		
 		if (key == KeyEvent.VK_UP) {
-			y = y - 32; 
+			//y = y - 32; 
 		}
 		
 		if (key == KeyEvent.VK_LEFT) {
@@ -67,11 +82,19 @@ public class Player {
 		}
 		
 		if (key == KeyEvent.VK_DOWN) {
-			y = y + 32; 
+			//y = y + 32; 
 		}
 		
 		if (key == KeyEvent.VK_RIGHT) {
 			x = x + 32;
+		}
+		
+		if (key == KeyEvent.VK_R) {
+			ammo = 20;
+		}
+		
+		if (key == KeyEvent.VK_SPACE) { 
+			fireBullet();
 		}
 		
 		if (key == KeyEvent.VK_ESCAPE) { 
