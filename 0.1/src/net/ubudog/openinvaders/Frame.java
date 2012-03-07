@@ -1,13 +1,32 @@
 package net.ubudog.openinvaders;
 
+import java.io.File;
+
 import javax.swing.JFrame;
 
 public class Frame {
-	public static void main(String[] args) {
+	
+	static File firstDir;
+	
+	static String USER_HOME = System.getProperty("user.home");
+	static String MAIN_DIR = USER_HOME + "/.openinvaders";
+	
+	public static void main(String[] args) {		
+		firstDir = new File(MAIN_DIR);
+		
+		if (firstDir.exists()) {
+			System.out.println("Not first run.");
+		} else {
+			System.out.println("First run.");
+			firstDir.mkdir();
+		}
+		
+		System.out.println("New game starting."); 
+		System.out.println("Home directory detected as: " + USER_HOME);
 		JFrame frame = new JFrame("OpenInvaders");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800, 600);
-		//frame.add(new Board());
+		frame.add(new Board());
 		frame.setVisible(true);
 	}
 }
