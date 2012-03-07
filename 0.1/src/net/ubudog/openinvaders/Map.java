@@ -12,15 +12,9 @@ public class Map {
 	private Scanner scanner; 
 	
 	private String map[] = new String[32];
-	
-	private Image grass; 
+	 
 	private Image wall; 
-	private Image stone; 
-	private Image wood; 
-	private Image lava; 
-	private Image brick; 
-	private Image tree;
-	private Image portal; 
+	private Image space;
 	
 	static String USER_HOME = System.getProperty("user.home"); 
 	static String MAIN_DIR = USER_HOME + "/.openinvaders"; 
@@ -29,6 +23,9 @@ public class Map {
 		ImageIcon img = new ImageIcon(MAIN_DIR + "/wall.png"); 
 		wall = img.getImage(); 
 		
+		img = new ImageIcon(MAIN_DIR + "/space.gif");
+		space = img.getImage();
+		
 		openFile(); 
 		readFile();
 		closeFile(); 
@@ -36,6 +33,10 @@ public class Map {
 	
 	public Image getWall() {
 		return wall;
+	}
+	
+	public Image getSpace() {
+		return space;
 	}
 	
 	public String getMap(int x, int y) {

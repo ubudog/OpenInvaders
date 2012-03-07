@@ -16,10 +16,10 @@ public class Player {
 	static String MAIN_DIR = HOME_DIR + "/.openinvaders";
 	
 	public Player() {
-		x = 300; 
-		y = 200;
+		x = 44; 
+		y = 456;
 		
-		ImageIcon i = new ImageIcon(MAIN_DIR + "/player.png");
+		ImageIcon i = new ImageIcon(MAIN_DIR + "/player.gif");
 		img = i.getImage();
 	}
 	
@@ -43,7 +43,7 @@ public class Player {
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_W) {
-			y = y - 32;
+			//y = y - 32;
 		}
 		
 		if (key == KeyEvent.VK_A) { 
@@ -51,7 +51,7 @@ public class Player {
 		}
 		
 		if (key == KeyEvent.VK_S) {
-			y = y + 32;
+			//y = y + 32;
 		}
 		
 		if (key == KeyEvent.VK_D) {

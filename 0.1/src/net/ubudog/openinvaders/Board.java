@@ -79,13 +79,17 @@ public class Board extends JPanel implements ActionListener {
 					if(map.getMap(x, y).equals("w")) {
 						g.drawImage(map.getWall(), x*32, y*32, null);
 					}
+					
+					if(map.getMap(x, y).equals("s")) {
+						g.drawImage(map.getSpace(), x*32, y*32, null);
+					}
 				}
 				
 				g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
 				g.drawImage(ship.getShip(), ship.getX(), ship.getY(), null);
 				g.drawImage(ship2.getShip(), ship2x, ship2y, null);
 				g.drawImage(ship3.getShip(), ship3x, ship3y, null);
-				g.drawImage(ship4.getShip(), ship4x, ship4y, null);			
+				g.drawImage(ship4.getShip(), ship4x, ship4y, null);	
 			}
 		}
 	}
