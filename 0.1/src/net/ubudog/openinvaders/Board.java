@@ -113,7 +113,42 @@ public class Board extends JPanel implements ActionListener {
 				g.drawImage(ship5.getShip(), ship5x, ship5y, null);
 				g.drawImage(ship6.getShip(), ship6x, ship6y, null);
 				
+				// Simple collision detection for the ships and the player
+				if (ship.getX() == player.getX() && ship.getY() == player.getY()) {
+					g.setFont(font);
+					g.setColor(Color.RED);
+					g.drawString("YOU LOSE!  :(", 50, 200);
+				}
 				
+				if (ship2.getX() == player.getX() && ship2.getY() == player.getY()) {
+					g.setFont(font);
+					g.setColor(Color.RED);
+					g.drawString("YOU LOSE!  :(", 50, 200);
+				}
+				
+				if (ship3.getX() == player.getX() && ship3.getY() == player.getY()) {
+					g.setFont(font);
+					g.setColor(Color.RED);
+					g.drawString("YOU LOSE!  :(", 50, 200);
+				}
+				
+				if (ship4.getX() == player.getX() && ship4.getY() == player.getY()) {
+					g.setFont(font);
+					g.setColor(Color.RED);
+					g.drawString("YOU LOSE!  :(", 50, 200);
+				}
+				
+				if (ship5.getX() == player.getX() && ship5.getY() == player.getY()) {
+					g.setFont(font);
+					g.setColor(Color.RED);
+					g.drawString("YOU LOSE!  :(", 50, 200);
+				}
+				
+				if (ship6.getX() == player.getX() && ship6.getY() == player.getY()) {
+					g.setFont(font);
+					g.setColor(Color.RED);
+					g.drawString("YOU LOSE!  :(", 50, 200);
+				}
 				
 				if (player.ammo > 0) {
 					g.setFont(font);
