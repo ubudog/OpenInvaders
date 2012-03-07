@@ -122,8 +122,10 @@ public class Board extends JPanel implements ActionListener {
 				g.drawImage(ship6.getShip(), ship6x, ship6y, null);
 				
 				// Ship movement
+				System.out.println("Ship alive status: " + ship2.getAlive());
+				
 				if (getShip2X() == 300) {
-					
+					//ship.alive = false;
 				} else {
 					ship2x++;
 				}

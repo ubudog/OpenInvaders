@@ -12,12 +12,20 @@ public class Ship {
 	Image img; 
 	Image death;
 	
+	static boolean alive;
+	
+	public static boolean getAlive() {
+		return alive;
+	}
+	
 	String USER_HOME = System.getProperty("user.home");
 	String MAIN_DIR = USER_HOME + "/.openinvaders";
 	
 	public Ship() {
 		ImageIcon i = new ImageIcon(MAIN_DIR + "/ship.png");
 		img = i.getImage();
+		
+		alive = true;
 		
 		i = new ImageIcon(MAIN_DIR + "/explode.gif");
 		death = i.getImage();
@@ -37,10 +45,10 @@ public class Ship {
 	}
 	
 	public Image getShip() {
-		return img;
-	}
-	
-	public Image getDeath() {
-		return death;
+		if (getAlive() == true) {
+			return img;
+		} else {
+			return death;
+		}
 	}
 }
