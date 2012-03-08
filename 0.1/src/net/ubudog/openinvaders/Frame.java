@@ -1,8 +1,12 @@
 package net.ubudog.openinvaders;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 import javax.swing.JFrame;
+
+import org.newdawn.easyogg.OggClip;
 
 public class Frame {
 	
@@ -11,6 +15,7 @@ public class Frame {
 	static String USER_HOME = System.getProperty("user.home");
 	static String MAIN_DIR = USER_HOME + "/.openinvaders";
 	static String GAME_VERSION = "0.1";
+	static String MUSIC_LOCATION = MAIN_DIR + "/song.ogg";
 	static boolean firstRun;
 	
 	public boolean getFirstRun() {
@@ -28,6 +33,15 @@ public class Frame {
 			firstRun = true;
 			firstDir.mkdir();
 		}
+		
+		// Start the music
+		try {
+			FileInputStream fis = new FileInputStream(MUSIC_LOCATION);
+			OggClip clip = new OggClip(fis);
+			clip.loop();
+			} catch (IOException e) {
+			e.printStackTrace();
+			}
 		
 		System.out.println("New game starting."); 
 		System.out.println("Game version: " + GAME_VERSION);
