@@ -135,31 +135,31 @@ public class Board extends JPanel implements ActionListener {
 					g.drawString("YOU LOSE!  :(", 50, 200);
 				}
 				
-				if (ship2.getX() == player.getX() && ship2.getY() == player.getY()) {
+				if (ship2x == player.getX() && ship2y == player.getY()) {
 					g.setFont(font);
 					g.setColor(Color.RED);
 					g.drawString("YOU LOSE!  :(", 50, 200);
 				}
 				
-				if (ship3.getX() == player.getX() && ship3.getY() == player.getY()) {
+				if (ship3x == player.getX() && ship3y == player.getY()) {
 					g.setFont(font);
 					g.setColor(Color.RED);
 					g.drawString("YOU LOSE!  :(", 50, 200);
 				}
 				
-				if (ship4.getX() == player.getX() && ship4.getY() == player.getY()) {
+				if (ship4x == player.getX() && ship4y == player.getY()) {
 					g.setFont(font);
 					g.setColor(Color.RED);
 					g.drawString("YOU LOSE!  :(", 50, 200);
 				}
 				
-				if (ship5.getX() == player.getX() && ship5.getY() == player.getY()) {
+				if (ship5x == player.getX() && ship5y == player.getY()) {
 					g.setFont(font);
 					g.setColor(Color.RED);
 					g.drawString("YOU LOSE!  :(", 50, 200);
 				}
 				
-				if (ship6.getX() == player.getX() && ship6.getY() == player.getY()) {
+				if (ship6x == player.getX() && ship6y == player.getY()) {
 					g.setFont(font);
 					g.setColor(Color.RED);
 					g.drawString("YOU LOSE!  :(", 50, 200);
