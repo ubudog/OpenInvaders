@@ -168,7 +168,7 @@ public class Board extends JPanel implements ActionListener {
 				if (player.ammo > 0) {
 					g.setFont(font);
 					g.setColor(Color.WHITE);
-					g.drawString("Remaining ammo: " + player.ammo, 0, 500);
+					g.drawString("Remaining Ammo: " + player.ammo, 0, 500);
 				} else if (player.ammo == 0) {
 					g.setFont(font);
 					g.setColor(Color.WHITE);

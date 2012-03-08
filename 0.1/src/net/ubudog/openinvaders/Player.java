@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 public class Player {
 	
 	Image img;
+	Image shootingimage;
 	
 	static int ammo;
 	
@@ -30,6 +31,9 @@ public class Player {
 		
 		ImageIcon i = new ImageIcon(MAIN_DIR + "/player.gif");
 		img = i.getImage();
+		
+		i = new ImageIcon(MAIN_DIR + "/playershooting.gif");
+		shootingimage = i.getImage();
 	}
 	
 	public void move(int dx, int dy) {
