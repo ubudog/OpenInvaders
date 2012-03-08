@@ -102,7 +102,8 @@ public class Player {
 			}
 			
 			if (key == KeyEvent.VK_SPACE) { 
-				fireBullet();
+				new Ship().alive = false;
+				//fireBullet();
 			}
 		} else {
 			System.out.println("I can't move.  I'm out of bounds!");

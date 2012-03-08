@@ -11,14 +11,21 @@ public class Frame {
 	static String USER_HOME = System.getProperty("user.home");
 	static String MAIN_DIR = USER_HOME + "/.openinvaders";
 	static String GAME_VERSION = "0.1";
+	static boolean firstRun;
+	
+	public boolean getFirstRun() {
+		return firstRun; 
+	}
 	
 	public static void main(String[] args) {		
 		firstDir = new File(MAIN_DIR);
 		
 		if (firstDir.exists()) {
 			System.out.println("Not first run.");
+			firstRun = false;
 		} else {
 			System.out.println("First run.");
+			firstRun = true;
 			firstDir.mkdir();
 		}
 		
