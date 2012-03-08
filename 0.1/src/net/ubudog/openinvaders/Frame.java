@@ -130,7 +130,7 @@ public class Frame {
 						
 						System.out.println("Connected!"); 
 						System.out.println("Reading 150KB blocks at a time.  This might take a while depending on your connection.");
-						System.out.println("You only have to do this once. (well, unless you delete $HOME/.clash...)");
+						System.out.println("You only have to do this once. (well, unless you delete $HOME/.openinvaders...)");
 						System.out.println("");
 						while ((bytesRead = reader.read(buffer)) > 0) {
 							writer.write(buffer, 0, bytesRead);

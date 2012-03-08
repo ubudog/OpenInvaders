@@ -29,7 +29,7 @@ public class Player {
 		
 		ammo = 20;
 		
-		ImageIcon i = new ImageIcon(MAIN_DIR + "/player.gif");
+		ImageIcon i = new ImageIcon(MAIN_DIR + "/player.png");
 		img = i.getImage();
 		
 		i = new ImageIcon(MAIN_DIR + "/playershooting.gif");
