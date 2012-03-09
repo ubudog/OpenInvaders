@@ -21,7 +21,7 @@ public class Player {
 	static String HOME_DIR = System.getProperty("user.home");
 	static String MAIN_DIR = HOME_DIR + "/.openinvaders";
 	
-	static ArrayList bullets;
+	static ArrayList<Bullet> bullets;
 	
 	public Player() {
 		x = 44; 
