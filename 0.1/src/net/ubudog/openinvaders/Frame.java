@@ -37,7 +37,7 @@ public class Frame {
 	static InputStream inputStream; 
 	static OutputStream outputStream;
 	
-	public boolean getFirstRun() {
+	public static boolean getFirstRun() {
 		return firstRun; 
 	}
 	
@@ -161,6 +161,16 @@ public class Frame {
 		System.out.println("New game starting."); 
 		System.out.println("Game version: " + GAME_VERSION);
 		System.out.println("Home directory detected as: " + USER_HOME);
+		
+		if (getFirstRun() == true) {
+			// Tell the player the controls
+			System.out.println("Here are the controls:"); 
+			System.out.println("A/Left - Move Left");
+			System.out.println("D/Right - Move Right");
+			System.out.println("Space - Shoot");
+			System.out.println("H - List these controls");
+		}
+		
 		JFrame frame = new JFrame("OpenInvaders - Work-in-progress");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(515, 543);

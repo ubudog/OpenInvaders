@@ -109,6 +109,17 @@ public class Player {
 				//new Ship().alive = false;
 				fireBullet();
 			}
+			
+			if (key == KeyEvent.VK_H) { 
+				// Tell the player the controls
+				System.out.println("Here are the controls:"); 
+				System.out.println("A/Left - Move Left");
+				System.out.println("D/Right - Move Right");
+				System.out.println("Space - Shoot");
+				System.out.println("H - List these controls");
+				
+			}
+			
 		} else {
 			System.out.println("I can't move.  I'm out of bounds!");
 		}
