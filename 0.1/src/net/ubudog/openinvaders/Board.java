@@ -23,6 +23,7 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship4;
 	private Ship ship5; 
 	private Ship ship6;
+	private Ship ship7;
 	private Map map;
 	private Timer time;
 	
@@ -42,7 +43,11 @@ public class Board extends JPanel implements ActionListener {
 	int ship6x;
 	int ship6y;
 	
+	int ship7x; 
+	int ship7y;
+	
 	static boolean win = false;
+	static boolean fail = false;
 	
 	public Board() {
 		ship = new Ship(); 
@@ -51,6 +56,7 @@ public class Board extends JPanel implements ActionListener {
 		ship4 = new Ship();
 		ship5 = new Ship();
 		ship6 = new Ship();
+		ship7 = new Ship();
 		map = new Map();
 		player = new Player(); 
 		addKeyListener(new AL()); 
@@ -71,6 +77,9 @@ public class Board extends JPanel implements ActionListener {
 		ship6x = ship.getX() + 250;
 		ship6y = ship.getY();
 		
+		ship7x = ship.getX() + 300;
+		ship7y = ship.getY();
+		
 		time = new Timer(25, this);
 		time.start();
 	}
@@ -81,6 +90,10 @@ public class Board extends JPanel implements ActionListener {
 	
 	public boolean getWin() {
 		return win; 
+	}
+	
+	public boolean getFail() {
+		return fail;
 	}
 	
 	public ArrayList bullets() {
@@ -97,7 +110,7 @@ public class Board extends JPanel implements ActionListener {
 	
 	public void paint(Graphics g) {
 		
-		if (getWin() == true) {
+		if (getWin() == true && getFail() == false) {
 			g.setFont(font);
 			g.setColor(Color.ORANGE);
 			g.drawString("WINNER WOOHOO", 100, 200);
@@ -120,9 +133,10 @@ public class Board extends JPanel implements ActionListener {
 				g.drawImage(ship4.getShip(), ship4x, ship4y, null);	
 				g.drawImage(ship5.getShip(), ship5x, ship5y, null);
 				g.drawImage(ship6.getShip(), ship6x, ship6y, null);
+				g.drawImage(ship7.getShip(), ship7x, ship7y, null);
 				
 				// Ship movement				
-				if (getShip2X() == 300) {
+				if (getShip2X() == 400) {
 					//ship.alive = false;
 				} else {
 					ship2x++;
