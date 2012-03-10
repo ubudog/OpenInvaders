@@ -26,6 +26,7 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship7;
 	private Map map;
 	private Timer time;
+	int level = 1; 
 	
 
 	int ship2x;
@@ -100,6 +101,10 @@ public class Board extends JPanel implements ActionListener {
 		return player.bullets;
 	}
 	
+	public int getLevel() {
+		return level;
+	}
+	
 	public int getShip2X() {
 		return ship2x;
 	}
@@ -109,87 +114,106 @@ public class Board extends JPanel implements ActionListener {
 	}
 	
 	public void paint(Graphics g) {
-		
-		if (getWin() == true && getFail() == false) {
-			g.setFont(font);
-			g.setColor(Color.ORANGE);
-			g.drawString("WINNER WOOHOO", 100, 200);
-		} else {
-			for (int y = 0; y < 16; y++) {
-				for (int x = 0; x < 16; x++) {				
-					if(map.getMap(x, y).equals("w")) {
-						g.drawImage(map.getWall(), x*32, y*32, null);
+		if (getLevel() == 1) {
+			if (getWin() == true && getFail() == false) {
+				g.setFont(font);
+				g.setColor(Color.ORANGE);
+				g.drawString("Level 1 Passed, WOO!", 100, 200);
+			} else {
+				for (int y = 0; y < 16; y++) {
+					for (int x = 0; x < 16; x++) {				
+						if(map.getMap(x, y).equals("w")) {
+							g.drawImage(map.getWall(), x*32, y*32, null);
+						}
+						
+						if(map.getMap(x, y).equals("s")) {
+							g.drawImage(map.getSpace(), x*32, y*32, null);
+						}
 					}
 					
-					if(map.getMap(x, y).equals("s")) {
-						g.drawImage(map.getSpace(), x*32, y*32, null);
+					g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
+					g.drawImage(ship.getShip(), ship.getX(), ship.getY(), null);
+					g.drawImage(ship2.getShip(), ship2x, ship2y, null);
+					g.drawImage(ship3.getShip(), ship3x, ship3y, null);
+					g.drawImage(ship4.getShip(), ship4x, ship4y, null);	
+					g.drawImage(ship5.getShip(), ship5x, ship5y, null);
+					g.drawImage(ship6.getShip(), ship6x, ship6y, null);
+					g.drawImage(ship7.getShip(), ship7x, ship7y, null);
+					
+					// Ship movement				
+					if (getShip2X() == 400) {
+						//ship.alive = false;
+						level = 2; 
+					} else {
+						ship2x++;
+					}
+					
+					// Simple collision detection for the ships and the player
+					if (ship.getX() == player.getX() && ship.getY() == player.getY()) {
+						g.setFont(font);
+						g.setColor(Color.RED);
+						g.drawString("You lost Level 1.  :(", 50, 200);
+						level = 1; 
+					}
+					
+					if (ship2x == player.getX() && ship2y == player.getY()) {
+						g.setFont(font);
+						g.setColor(Color.RED);
+						g.drawString("You lost Level 1.  :(", 50, 200);
+						level = 1;
+					}
+					
+					if (ship3x == player.getX() && ship3y == player.getY()) {
+						g.setFont(font);
+						g.setColor(Color.RED);
+						g.drawString("You lost Level 1.  :(", 50, 200);
+						level = 1;
+					}
+					
+					if (ship4x == player.getX() && ship4y == player.getY()) {
+						g.setFont(font);
+						g.setColor(Color.RED);
+						g.drawString("You lost Level 1.  :(", 50, 200);
+						level = 1;
+					}
+					
+					if (ship5x == player.getX() && ship5y == player.getY()) {
+						g.setFont(font);
+						g.setColor(Color.RED);
+						g.drawString("You lost Level 1.  :(", 50, 200);
+						level = 1; 
+					}
+					
+					if (ship6x == player.getX() && ship6y == player.getY()) {
+						g.setFont(font);
+						g.setColor(Color.RED);
+						g.drawString("You lost Level 1.  :(", 50, 200);
+						level = 1;
+					}
+					
+					if (player.ammo > 0) {
+						g.setFont(font);
+						g.setColor(Color.WHITE);
+						g.drawString("Remaining Ammo: " + player.ammo, 0, 500);
+					} else if (player.ammo == 0) {
+						g.setFont(font);
+						g.setColor(Color.WHITE);
+						g.drawString("Reload! (R)", 0, 500);
 					}
 				}
-				
-				g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
-				g.drawImage(ship.getShip(), ship.getX(), ship.getY(), null);
-				g.drawImage(ship2.getShip(), ship2x, ship2y, null);
-				g.drawImage(ship3.getShip(), ship3x, ship3y, null);
-				g.drawImage(ship4.getShip(), ship4x, ship4y, null);	
-				g.drawImage(ship5.getShip(), ship5x, ship5y, null);
-				g.drawImage(ship6.getShip(), ship6x, ship6y, null);
-				g.drawImage(ship7.getShip(), ship7x, ship7y, null);
-				
-				// Ship movement				
-				if (getShip2X() == 400) {
-					//ship.alive = false;
-				} else {
-					ship2x++;
-				}
-				
-				// Simple collision detection for the ships and the player
-				if (ship.getX() == player.getX() && ship.getY() == player.getY()) {
-					g.setFont(font);
-					g.setColor(Color.RED);
-					g.drawString("YOU LOSE!  :(", 50, 200);
-				}
-				
-				if (ship2x == player.getX() && ship2y == player.getY()) {
-					g.setFont(font);
-					g.setColor(Color.RED);
-					g.drawString("YOU LOSE!  :(", 50, 200);
-				}
-				
-				if (ship3x == player.getX() && ship3y == player.getY()) {
-					g.setFont(font);
-					g.setColor(Color.RED);
-					g.drawString("YOU LOSE!  :(", 50, 200);
-				}
-				
-				if (ship4x == player.getX() && ship4y == player.getY()) {
-					g.setFont(font);
-					g.setColor(Color.RED);
-					g.drawString("YOU LOSE!  :(", 50, 200);
-				}
-				
-				if (ship5x == player.getX() && ship5y == player.getY()) {
-					g.setFont(font);
-					g.setColor(Color.RED);
-					g.drawString("YOU LOSE!  :(", 50, 200);
-				}
-				
-				if (ship6x == player.getX() && ship6y == player.getY()) {
-					g.setFont(font);
-					g.setColor(Color.RED);
-					g.drawString("YOU LOSE!  :(", 50, 200);
-				}
-				
-				if (player.ammo > 0) {
-					g.setFont(font);
-					g.setColor(Color.WHITE);
-					g.drawString("Remaining Ammo: " + player.ammo, 0, 500);
-				} else if (player.ammo == 0) {
-					g.setFont(font);
-					g.setColor(Color.WHITE);
-					g.drawString("Reload! (R)", 0, 500);
-				}
 			}
+		
+	    } else if (getLevel() == 2) {
+			System.out.println("Level 2");
+		} else if (getLevel() == 3) {
+			System.out.println("Level 3");
+		} else if (getLevel() == 4) {
+			System.out.println("Level 4");
+		} else if(getLevel() == 5) {
+			System.out.println("Level 5");
 		}
+		
+		
 	}
 	
 	public class AL extends KeyAdapter {
