@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=OpenInvaders
+Exec=OpenInvaders.jar
+Icon=openinvaders
+Categories=Games
+GenericName=An open-source Space Invaders type game.
+Terminal=false
+Type=Application
+StartupNotify=true
