@@ -319,6 +319,10 @@ public class Board extends JPanel implements ActionListener {
 				g.setColor(Color.WHITE);
 				g.drawString("Reload! (R)", 0, 500);
 			}
+		} else if (getLevel() == 3) {
+			g.setFont(italics);
+			g.setColor(Color.BLACK);
+			g.drawString("Coming soon!", 50, 250);
 		}
 	}
 	

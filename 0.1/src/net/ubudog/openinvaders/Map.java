@@ -51,6 +51,7 @@ public class Map {
 		return space;
 	}
 	
+	// Goo is only used in Level 2, atm.
 	public Image getGoo() {
 		return goo;
 	}
