@@ -16,6 +16,7 @@ import javax.swing.Timer;
 public class Board extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	static Font font = new Font("SanSerif", Font.BOLD, 25);
+	static Font italics = new Font("SanSerif", Font.ITALIC, 25);
 	
 	private Player player; 
 	private Ship ship;
@@ -219,11 +220,6 @@ public class Board extends JPanel implements ActionListener {
 				}
 			}
 		} else if (getLevel() == 2) {
-			g.setFont(font);
-			g.setColor(Color.ORANGE);
-			g.drawString("You've made it to Level 2!", 50, 250);
-			g.drawString("We're still working on this...", 50, 300);
-			
 			for (int y = 0; y < 16; y++) {
 				for (int x = 0; x < 16; x++) {				
 					if(map.getMap(x, y).equals("w")) {
@@ -237,6 +233,14 @@ public class Board extends JPanel implements ActionListener {
 			}
 			g.drawImage(ship8.getShip(), ship8x, ship8y, null);
 			g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
+
+			g.setFont(font);
+			g.setColor(Color.ORANGE);
+			g.drawString("You've made it to Level 2!", 50, 250);
+			g.drawString("We're still working on this...", 50, 300);
+			g.setFont(italics);
+			g.setColor(Color.WHITE);
+			g.drawString("Italics test!", 50, 350);
 			
 			if (player.ammo > 0) {
 				g.setFont(font);
@@ -253,6 +257,18 @@ public class Board extends JPanel implements ActionListener {
 	public class AL extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			player.keyPressed(e);
+			int key = e.getKeyCode(); 
+			
+			if (key == KeyEvent.VK_J) {
+				// Cheat key to get to level 2
+				// Mainly for testing.. :) 
+				if (level == 1) {
+					level = 2; 
+				} else if (level == 2) {
+					System.out.println("Can't do that.  Already at Level 2.");
+				}
+			}
+			
 		}
 		
 		public void keyReleased(KeyEvent e) {

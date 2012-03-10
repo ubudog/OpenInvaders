@@ -28,9 +28,10 @@ public class Frame {
 	
 	static String USER_HOME = System.getProperty("user.home");
 	static String MAIN_DIR = USER_HOME + "/.openinvaders";
+	static String GAME_NAME = "OpenInvaders - Work-in-progress";
 	static String GAME_VERSION = "0.1";
 	static String LEVEL1_MUSIC = MAIN_DIR + "/songlevel1.ogg";
-	static String LEVEL2_MUSIC = MAIN_DIR + "/songlevel2.ogg";
+	//static String LEVEL2_MUSIC = MAIN_DIR + "/songlevel2.ogg";
 	int errors = 0;
 	static boolean firstRun;
 	
@@ -165,6 +166,7 @@ public class Frame {
 				e.printStackTrace();
 				}
 		} else if (getLevel() == 2) {
+			/**
 			try {
 				FileInputStream fis = new FileInputStream(LEVEL2_MUSIC);
 				OggClip clip = new OggClip(fis);
@@ -172,6 +174,7 @@ public class Frame {
 				} catch (IOException e) {
 				e.printStackTrace();
 				}
+				*/
 		}
 		
 		System.out.println("New game starting."); 
@@ -187,7 +190,7 @@ public class Frame {
 			System.out.println("H - List these controls");
 		}
 		
-		JFrame frame = new JFrame("OpenInvaders - Work-in-progress");
+		JFrame frame = new JFrame(GAME_NAME);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(515, 543);
 		frame.setLocationRelativeTo(null);
