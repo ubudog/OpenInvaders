@@ -26,7 +26,7 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship7;
 	private Map map;
 	private Timer time;
-	int level = 1; 
+	int level = 1;
 	
 
 	int ship2x;
@@ -143,7 +143,6 @@ public class Board extends JPanel implements ActionListener {
 					// Ship movement				
 					if (getShip2X() == 400) {
 						//ship.alive = false;
-						level = 2; 
 					} else {
 						ship2x++;
 					}
@@ -202,18 +201,12 @@ public class Board extends JPanel implements ActionListener {
 					}
 				}
 			}
-		
-	    } else if (getLevel() == 2) {
-			System.out.println("Level 2");
-		} else if (getLevel() == 3) {
-			System.out.println("Level 3");
-		} else if (getLevel() == 4) {
-			System.out.println("Level 4");
-		} else if(getLevel() == 5) {
-			System.out.println("Level 5");
+		} else if (getLevel() == 2) {
+			g.setFont(font);
+			g.setColor(Color.ORANGE);
+			g.drawString("You've made it to Level 2!", 50, 250);
+			g.drawString("We're still working on this...", 50, 300);
 		}
-		
-		
 	}
 	
 	public class AL extends KeyAdapter {
