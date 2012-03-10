@@ -29,7 +29,9 @@ public class Frame {
 	static String USER_HOME = System.getProperty("user.home");
 	static String MAIN_DIR = USER_HOME + "/.openinvaders";
 	static String GAME_VERSION = "0.1";
-	static String MUSIC_LOCATION = MAIN_DIR + "/song.ogg";
+	static String LEVEL1_MUSIC = MAIN_DIR + "/songlevel1.ogg";
+	static String LEVEL2_MUSIC = MAIN_DIR + "/songlevel2.ogg";
+	int errors = 0;
 	static boolean firstRun;
 	
 	static String serverName = "ubudog.net"; 
@@ -105,6 +107,10 @@ public class Frame {
 	    }
 	}
 	
+	public static int getLevel() { 
+		return Board.level;
+	}
+	
 	public static void main(String[] args) throws IOException, MalformedURLException {		
 		firstDir = new File(MAIN_DIR);
 		
@@ -150,13 +156,23 @@ public class Frame {
 		}
 		
 		// Start the music
-		try {
-			FileInputStream fis = new FileInputStream(MUSIC_LOCATION);
-			OggClip clip = new OggClip(fis);
-			clip.loop();
-			} catch (IOException e) {
-			e.printStackTrace();
-			}
+		if (getLevel() == 1) {
+			try {
+				FileInputStream fis = new FileInputStream(LEVEL1_MUSIC);
+				OggClip clip = new OggClip(fis);
+				clip.loop();
+				} catch (IOException e) {
+				e.printStackTrace();
+				}
+		} else if (getLevel() == 2) {
+			try {
+				FileInputStream fis = new FileInputStream(LEVEL2_MUSIC);
+				OggClip clip = new OggClip(fis);
+				clip.loop();
+				} catch (IOException e) {
+				e.printStackTrace();
+				}
+		}
 		
 		System.out.println("New game starting."); 
 		System.out.println("Game version: " + GAME_VERSION);

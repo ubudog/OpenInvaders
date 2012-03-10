@@ -24,9 +24,10 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship5; 
 	private Ship ship6;
 	private Ship ship7;
+	private Ship ship8;
 	private Map map;
 	private Timer time;
-	int level = 1;
+	static int level = 1;
 	
 
 	int ship2x;
@@ -47,6 +48,9 @@ public class Board extends JPanel implements ActionListener {
 	int ship7x; 
 	int ship7y;
 	
+	int ship8x;
+	int ship8y;
+	
 	static boolean win = false;
 	static boolean fail = false;
 	
@@ -58,11 +62,13 @@ public class Board extends JPanel implements ActionListener {
 		ship5 = new Ship();
 		ship6 = new Ship();
 		ship7 = new Ship();
+		ship8 = new Ship();
 		map = new Map();
 		player = new Player(); 
 		addKeyListener(new AL()); 
 		setFocusable(true);
 		
+		// Level 1 ships
 		ship2x = ship.getX() + 50;
 		ship2y = ship.getY();
 		
@@ -80,6 +86,10 @@ public class Board extends JPanel implements ActionListener {
 		
 		ship7x = ship.getX() + 300;
 		ship7y = ship.getY();
+		
+		// Level 2 ships
+		ship8x = ship.getX() + 50;
+		ship8y = ship.getY();
 		
 		time = new Timer(25, this);
 		time.start();
@@ -206,6 +216,30 @@ public class Board extends JPanel implements ActionListener {
 			g.setColor(Color.ORANGE);
 			g.drawString("You've made it to Level 2!", 50, 250);
 			g.drawString("We're still working on this...", 50, 300);
+			
+			for (int y = 0; y < 16; y++) {
+				for (int x = 0; x < 16; x++) {				
+					if(map.getMap(x, y).equals("w")) {
+						g.drawImage(map.getWall(), x*32, y*32, null);
+					}
+					
+					if(map.getMap(x, y).equals("s")) {
+						g.drawImage(map.getSpace(), x*32, y*32, null);
+					}
+				}
+			}
+			g.drawImage(ship8.getShip(), ship8x, ship8y, null);
+			g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
+			
+			if (player.ammo > 0) {
+				g.setFont(font);
+				g.setColor(Color.WHITE);
+				g.drawString("Remaining Ammo: " + player.ammo, 0, 500);
+			} else if (player.ammo == 0) {
+				g.setFont(font);
+				g.setColor(Color.WHITE);
+				g.drawString("Reload! (R)", 0, 500);
+			}
 		}
 	}
 	

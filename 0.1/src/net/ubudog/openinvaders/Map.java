@@ -18,8 +18,16 @@ public class Map {
 	
 	static String USER_HOME = System.getProperty("user.home"); 
 	static String MAIN_DIR = USER_HOME + "/.openinvaders"; 
+	static String MAP_LOCATION;
 	
 	public Map() {		
+		
+		if (getLevel() == 1) {
+			MAP_LOCATION = MAIN_DIR + "/level1.txt";
+		} else if (getLevel() == 2) {
+			MAP_LOCATION = MAIN_DIR + "/level2.txt";
+		}
+		
 		ImageIcon img = new ImageIcon(MAIN_DIR + "/wall.png"); 
 		wall = img.getImage(); 
 		
@@ -46,7 +54,7 @@ public class Map {
 	
 	public void openFile() {
 		try {
-			scanner = new Scanner(new File(MAIN_DIR + "/map.txt"));
+			scanner = new Scanner(new File(MAP_LOCATION));
 		} catch (IOException e) {
 			e.printStackTrace(); 
 		}
@@ -59,6 +67,10 @@ public class Map {
 				
 			}
 		}
+	}
+	
+	public int getLevel() {
+		return Board.level;
 	}
 	
 	public void closeFile() {
