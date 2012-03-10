@@ -288,6 +288,10 @@ public class Board extends JPanel implements ActionListener {
 					if(map.getMap(x, y).equals("s")) {
 						g.drawImage(map.getSpace(), x*32, y*32, null);
 					}
+					
+					if (map.getMap(x, y).equals("g")) {
+						g.drawImage(map.getGoo(), x*32, y*32, null);
+					}
 				}
 			}
 			g.drawImage(ship8.getShip(), ship8x, ship8y, null);
@@ -327,9 +331,21 @@ public class Board extends JPanel implements ActionListener {
 				// Cheat key to get to level 2
 				// Mainly for testing.. :) 
 				if (level == 1) {
-					level = 2; 
+					level++;
 				} else if (level == 2) {
-					System.out.println("Can't do that.  Already at Level 2.");
+					level++;
+				}
+			}
+			
+			if (key == KeyEvent.VK_B) { 
+				// Cheat to get to the previous level 
+				// Also for testing :) 
+				if (level == 1) {
+					System.out.println("At the first level, can't go back.");
+				} else if (level == 2) {
+					level--;
+				} else if (level == 3) {
+					level--;
 				}
 			}
 			

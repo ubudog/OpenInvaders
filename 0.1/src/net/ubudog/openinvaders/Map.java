@@ -15,6 +15,7 @@ public class Map {
 	 
 	private Image wall; 
 	private Image space;
+	private Image goo;
 	
 	static String USER_HOME = System.getProperty("user.home"); 
 	static String MAIN_DIR = USER_HOME + "/.openinvaders"; 
@@ -34,17 +35,24 @@ public class Map {
 		img = new ImageIcon(MAIN_DIR + "/space.gif");
 		space = img.getImage();
 		
+		img = new ImageIcon(MAIN_DIR + "/goo.gif");
+		goo = img.getImage();
+		
 		openFile(); 
 		readFile();
 		closeFile(); 
 	}
-	
+
 	public Image getWall() {
 		return wall;
 	}
 	
 	public Image getSpace() {
 		return space;
+	}
+	
+	public Image getGoo() {
+		return goo;
 	}
 	
 	public String getMap(int x, int y) {
