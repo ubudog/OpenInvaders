@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -158,45 +159,51 @@ public class Board extends JPanel implements ActionListener {
 					}
 					
 					// Simple collision detection for the ships and the player
+					
+					// Get a random fail message :P
+					Random r = new Random();
+					String[] failmsg = {"YOU FAIL.  :(", "Failness.", "Wow, fail.", "'Ouch', you say, as you look at the ruins of your ship."};
+					
+					
 					if (ship.getX() == player.getX() && ship.getY() == player.getY()) {
 						g.setFont(font);
 						g.setColor(Color.RED);
-						g.drawString("You lost Level 1.  :(", 50, 200);
+						g.drawString(failmsg[r.nextInt(failmsg.length)], 50, 200);
 						level = 1; 
 					}
 					
 					if (ship2x == player.getX() && ship2y == player.getY()) {
 						g.setFont(font);
 						g.setColor(Color.RED);
-						g.drawString("You lost Level 1.  :(", 50, 200);
+						g.drawString(failmsg[r.nextInt(failmsg.length)], 50, 200);
 						level = 1;
 					}
 					
 					if (ship3x == player.getX() && ship3y == player.getY()) {
 						g.setFont(font);
 						g.setColor(Color.RED);
-						g.drawString("You lost Level 1.  :(", 50, 200);
+						g.drawString(failmsg[r.nextInt(failmsg.length)], 50, 200);
 						level = 1;
 					}
 					
 					if (ship4x == player.getX() && ship4y == player.getY()) {
 						g.setFont(font);
 						g.setColor(Color.RED);
-						g.drawString("You lost Level 1.  :(", 50, 200);
+						g.drawString(failmsg[r.nextInt(failmsg.length)], 50, 200);
 						level = 1;
 					}
 					
 					if (ship5x == player.getX() && ship5y == player.getY()) {
 						g.setFont(font);
 						g.setColor(Color.RED);
-						g.drawString("You lost Level 1.  :(", 50, 200);
+						g.drawString(failmsg[r.nextInt(failmsg.length)], 50, 200);
 						level = 1; 
 					}
 					
 					if (ship6x == player.getX() && ship6y == player.getY()) {
 						g.setFont(font);
 						g.setColor(Color.RED);
-						g.drawString("You lost Level 1.  :(", 50, 200);
+						g.drawString(failmsg[r.nextInt(failmsg.length)], 50, 200);
 						level = 1;
 					}
 					
