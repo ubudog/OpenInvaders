@@ -42,6 +42,10 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship21;
 	private Ship ship22;
 	private Ship ship23;
+	private Ship ship24;
+	private Ship ship25;
+	private Ship ship26;
+	private Ship ship27;
 	private Portal portal;
 	private Portal portal2;
 	private Portal portal3;
@@ -120,6 +124,18 @@ public class Board extends JPanel implements ActionListener {
 	int ship23x;
 	int ship23y;
 	
+	int ship24x;
+	int ship24y;
+	
+	int ship25x; 
+	int ship25y;
+	
+	int ship26x;
+	int ship26y;
+	
+	int ship27x;
+	int ship27y;
+	
 	int portal2x;
 	int portal2y;
 	
@@ -153,6 +169,10 @@ public class Board extends JPanel implements ActionListener {
 		ship21 = new Ship();
 		ship22 = new Ship();
 		ship23 = new Ship();
+		ship24 = new Ship();
+		ship25 = new Ship();
+		ship26 = new Ship();
+		ship27 = new Ship();
 		portal = new Portal();
 		portal2 = new Portal();
 		portal3 = new Portal();
@@ -237,6 +257,19 @@ public class Board extends JPanel implements ActionListener {
 		
 		ship23x = ship.getX() + 100;
 		ship23y = ship.getY() + 40;
+		
+		// Block of ships
+		ship24x = ship.getX() + 200;
+		ship24y = ship.getY();
+		
+		ship25x = ship.getX() + 250;
+		ship25y = ship.getY(); 
+		
+		ship26x = ship.getX() + 200; 
+		ship26y = ship.getY() + 40;
+		
+		ship27x = ship.getX() + 250;
+		ship27y = ship.getY() + 40;
 		
 		portal2x = 172;
 		portal2y = 8;
@@ -473,7 +506,6 @@ public class Board extends JPanel implements ActionListener {
 			}
 			
 		} else if (getLevel() == 3) {
-			
 			if (getWin() == true) {
 				g.setFont(font);
 				g.setColor(Color.ORANGE);
@@ -494,34 +526,39 @@ public class Board extends JPanel implements ActionListener {
 							g.drawImage(map.getGoo(), x * 32, y * 32, null);
 						}
 					}
-				}
 
-				g.setFont(italics);
-				g.setColor(Color.WHITE);
-				g.drawString("Level 3 coming soon!", 50, 300);
-
-				g.drawImage(player.getPlayer(), player.getX(), player.getY(),
-						null);
-
-				g.drawImage(ship20.getShip(), ship20x, ship20y, null);
-				g.drawImage(ship21.getShip(), ship21x, ship21y, null);
-				g.drawImage(ship22.getShip(), ship22x, ship22y, null);
-				g.drawImage(ship23.getShip(), ship23x, ship23y, null);
-
-				g.drawImage(portal3.getPortal(), portal3x, portal3y, null);
-
-				if (player.ammo > 0) {
-					g.setFont(font);
+					g.setFont(italics);
 					g.setColor(Color.WHITE);
-					g.drawString("Remaining Ammo: " + player.ammo, 0, 500);
-				} else if (player.ammo == 0) {
-					g.setFont(font);
-					g.setColor(Color.WHITE);
-					g.drawString("Reload! (R)", 0, 500);
-				}
+					g.drawString("Level 3 coming soon!", 50, 300);
 
-				if (player.getX() == portal3x && player.getY() == portal3y) {
-					win = true;
+					g.drawImage(player.getPlayer(), player.getX(),
+							player.getY(), null);
+
+					g.drawImage(ship20.getShip(), ship20x, ship20y, null);
+					g.drawImage(ship21.getShip(), ship21x, ship21y, null);
+					g.drawImage(ship22.getShip(), ship22x, ship22y, null);
+					g.drawImage(ship23.getShip(), ship23x, ship23y, null);
+					
+					g.drawImage(ship24.getShip(), ship24x, ship24y, null);
+					g.drawImage(ship25.getShip(), ship25x, ship25y, null);
+					g.drawImage(ship26.getShip(), ship26x, ship26y, null);
+					g.drawImage(ship27.getShip(), ship27x, ship27y, null);
+					
+					g.drawImage(portal3.getPortal(), portal3x, portal3y, null);
+
+					if (player.ammo > 0) {
+						g.setFont(font);
+						g.setColor(Color.WHITE);
+						g.drawString("Remaining Ammo: " + player.ammo, 0, 500);
+					} else if (player.ammo == 0) {
+						g.setFont(font);
+						g.setColor(Color.WHITE);
+						g.drawString("Reload! (R)", 0, 500);
+					}
+
+					if (player.getX() == portal3x && player.getY() == portal3y) {
+						win = true;
+				}
 				}
 			}
 		}
@@ -555,11 +592,9 @@ public class Board extends JPanel implements ActionListener {
 					level--;
 				}
 			}
-			
 		}
-		
+	}
 		public void keyReleased(KeyEvent e) {
 			player.keyReleased(e);
 		}
-	}
 }
