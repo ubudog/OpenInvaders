@@ -45,6 +45,7 @@ public class Board extends JPanel implements ActionListener {
 	private Map map;
 	private Timer time;
 	static int level = 1;  
+	static boolean leveltwonew = true;
 	
 
 	int ship2x;
@@ -238,6 +239,10 @@ public class Board extends JPanel implements ActionListener {
 		return fail;
 	}
 	
+	public boolean getLevelTwoNew() {
+		return leveltwonew;
+	}
+	
 	public ArrayList bullets() {
 		return player.bullets;
 	}
@@ -383,8 +388,11 @@ public class Board extends JPanel implements ActionListener {
 			
 			g.setFont(font);
 			g.setColor(Color.ORANGE);
-			g.drawString("You've made it to Level 2!", 50, 250);
-			g.drawString("We're still working on this...", 50, 300);
+
+			if (getLevelTwoNew() == true) {
+				g.drawString("You've made it to Level 2!", 50, 250);
+				g.drawString("We're still working on this...", 50, 300);
+			}
 			
 			if (player.ammo > 0) {
 				g.setFont(font);
@@ -395,6 +403,11 @@ public class Board extends JPanel implements ActionListener {
 				g.setColor(Color.WHITE);
 				g.drawString("Reload! (R)", 0, 500);
 			}
+			
+			if (player.ammo == 17) {
+				leveltwonew = false;
+			}
+			
 		} else if (getLevel() == 3) {
 			for (int y = 0; y < 16; y++) {
 				for (int x = 0; x < 16; x++) {				

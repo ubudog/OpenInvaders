@@ -179,6 +179,16 @@ public class Frame {
 				e.printStackTrace();
 				}
 				*/
+		} else if (getLevel() == 3) {
+			/**
+			try {
+				FileInputStream fis = new FileInputStream(LEVEL3_MUSIC);
+				OggClip clip = new OggClip(fis);
+				clip.loop();
+				} catch (IOException e) {
+				e.printStackTrace();
+				}
+				*/
 		}
 		
 		System.out.println("New game starting."); 

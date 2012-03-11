@@ -69,6 +69,7 @@ public class Player {
 		int key = e.getKeyCode();
 		
 		if (getCanMove() == true) {
+			
 			if (key == KeyEvent.VK_W) {
 				//y = y - 32;
 			}
