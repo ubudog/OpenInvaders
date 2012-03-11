@@ -43,6 +43,7 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship22;
 	private Ship ship23;
 	private Portal portal;
+	private Portal portal2;
 	private Map map;
 	private Timer time;
 	static int level = 1;  
@@ -116,6 +117,9 @@ public class Board extends JPanel implements ActionListener {
 	int ship23x;
 	int ship23y;
 	
+	int portal2x;
+	int portal2y;
+	
 	static boolean win = false;
 	static boolean fail = false;
 	
@@ -144,6 +148,7 @@ public class Board extends JPanel implements ActionListener {
 		ship22 = new Ship();
 		ship23 = new Ship();
 		portal = new Portal();
+		portal2 = new Portal();
 		map = new Map();
 		player = new Player(); 
 		addKeyListener(new AL()); 
@@ -225,6 +230,9 @@ public class Board extends JPanel implements ActionListener {
 		
 		ship23x = ship.getX() + 100;
 		ship23y = ship.getY() + 40;
+		
+		portal2x = 172;
+		portal2y = 8;
 		
 		time = new Timer(25, this);
 		time.start();
@@ -413,6 +421,8 @@ public class Board extends JPanel implements ActionListener {
 			
 			g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
 			
+			g.drawImage(portal2.getPortal(), portal2x, portal2y, null); 
+			
 			g.setFont(font);
 			g.setColor(Color.ORANGE);
 
@@ -433,6 +443,10 @@ public class Board extends JPanel implements ActionListener {
 			
 			if (player.ammo == 17) {
 				leveltwonew = false;
+			}
+						
+			if (player.getX() == portal2x && player.getY() == portal2y) {
+				level = 3;
 			}
 			
 		} else if (getLevel() == 3) {
