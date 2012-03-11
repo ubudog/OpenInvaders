@@ -38,6 +38,10 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship17;
 	private Ship ship18;
 	private Ship ship19;
+	private Ship ship20;
+	private Ship ship21;
+	private Ship ship22;
+	private Ship ship23;
 	private Map map;
 	private Timer time;
 	static int level = 1;  
@@ -97,6 +101,18 @@ public class Board extends JPanel implements ActionListener {
 	int ship19x;
 	int ship19y;
 	
+	int ship20x; 
+	int ship20y;
+	
+	int ship21x;
+	int ship21y;
+	
+	int ship22x;
+	int ship22y;
+	
+	int ship23x;
+	int ship23y;
+	
 	static boolean win = false;
 	static boolean fail = false;
 	
@@ -120,6 +136,10 @@ public class Board extends JPanel implements ActionListener {
 		ship17 = new Ship();
 		ship18 = new Ship();
 		ship19 = new Ship();
+		ship20 = new Ship();
+		ship21 = new Ship();
+		ship22 = new Ship();
+		ship23 = new Ship();
 		map = new Map();
 		player = new Player(); 
 		addKeyListener(new AL()); 
@@ -173,19 +193,34 @@ public class Board extends JPanel implements ActionListener {
 		ship15y = ship.getY() + 40;
 	
 		// 'Nother block of ships
-		ship16x = ship.getX() + 399 + 1; 
+		ship16x = ship.getX() + 400; 
 		ship16y = ship.getY();
 		
 		ship17x = ship.getX() + 399 + 51; 
 		ship17y = ship.getY();
 		
 		ship18x = ship17x; 
-		ship18y = ship.getY() + 39 + 1; 
+		ship18y = ship.getY() + 40; 
 		
-		ship19x = ship.getX() + 399 + 1; 
-		ship19y = ship.getY() + 39 + 1; 
+		ship19x = ship.getX() + 400; 
+		ship19y = ship.getY() + 40; 
 		
 		//ship17x = ship
+		
+		// Level 3
+		// Block of ships
+		
+		ship20x = ship.getX() + 50;
+		ship20y = ship.getY();
+		
+		ship21x = ship.getX() + 100;
+		ship21y = ship.getY();
+		
+		ship22x = ship.getX() + 50;
+		ship22y = ship.getY() + 40;
+		
+		ship23x = ship.getX() + 100;
+		ship23y = ship.getY() + 40;
 		
 		time = new Timer(25, this);
 		time.start();
@@ -309,8 +344,7 @@ public class Board extends JPanel implements ActionListener {
 					} else if (player.ammo == 0) {
 						g.setFont(font);
 						g.setColor(Color.WHITE);
-						g.drawString("Reload! (R)", 0, 500);
-						win = true;
+						g.drawString("Reload! (R)", 0, 500); 
 					}
 				}
 			}
@@ -329,8 +363,8 @@ public class Board extends JPanel implements ActionListener {
 						g.drawImage(map.getGoo(), x*32, y*32, null);
 					}
 				}
-			}
-				
+			}				
+			
 			g.drawImage(ship8.getShip(), ship8x, ship8y, null);
 			g.drawImage(ship9.getShip(), ship9x, ship9y, null);
 			g.drawImage(ship10.getShip(), ship10x, ship10y, null);
@@ -346,7 +380,7 @@ public class Board extends JPanel implements ActionListener {
 			//g.drawImage(ship20.getShip(), ship20x, ship20y, null);
 			
 			g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
-
+			
 			g.setFont(font);
 			g.setColor(Color.ORANGE);
 			g.drawString("You've made it to Level 2!", 50, 250);
@@ -371,6 +405,10 @@ public class Board extends JPanel implements ActionListener {
 					if(map.getMap(x, y).equals("s")) {
 						g.drawImage(map.getSpace(), x*32, y*32, null);
 					}
+					
+					if(map.getMap(x, y).equals("g")) {
+						g.drawImage(map.getGoo(), x*32, y*32, null);
+					}
 				}
 		}
 			
@@ -380,7 +418,10 @@ public class Board extends JPanel implements ActionListener {
 			
 			g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
 			
-			
+			g.drawImage(ship20.getShip(), ship20x, ship20y, null);
+			g.drawImage(ship21.getShip(), ship21x, ship21y, null);
+			g.drawImage(ship22.getShip(), ship22x, ship22y, null);
+			g.drawImage(ship23.getShip(), ship23x, ship23y, null);
 			
 			if (player.ammo > 0) {
 				g.setFont(font);
