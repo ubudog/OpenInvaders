@@ -36,7 +36,7 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship15;
 	private Map map;
 	private Timer time;
-	static int level = 1;
+	static int level = 1;  
 	
 
 	int ship2x;
@@ -320,9 +320,21 @@ public class Board extends JPanel implements ActionListener {
 				g.drawString("Reload! (R)", 0, 500);
 			}
 		} else if (getLevel() == 3) {
+			for (int y = 0; y < 16; y++) {
+				for (int x = 0; x < 16; x++) {				
+					if(map.getMap(x, y).equals("w")) {
+						g.drawImage(map.getWall(), x*32, y*32, null);
+					}
+					
+					if(map.getMap(x, y).equals("s")) {
+						g.drawImage(map.getSpace(), x*32, y*32, null);
+					}
+				}
+		}
+			
 			g.setFont(italics);
-			g.setColor(Color.BLACK);
-			g.drawString("Coming soon!", 50, 250);
+			g.setColor(Color.WHITE);
+			g.drawString("Level 3 coming soon!", 50, 300);
 		}
 	}
 	
@@ -338,6 +350,8 @@ public class Board extends JPanel implements ActionListener {
 					level++;
 				} else if (level == 2) {
 					level++;
+				} else if (level == 3) {
+					System.out.println("At the last level, can't go forward.");
 				}
 			}
 			

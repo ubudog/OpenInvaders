@@ -24,6 +24,9 @@ import org.newdawn.easyogg.OggClip;
 
 public class Frame {
 	
+	// OpenInvaders
+	// A game by ubudog for everyone :)
+	
 	static File firstDir;
 	
 	static String USER_HOME = System.getProperty("user.home");
@@ -32,6 +35,7 @@ public class Frame {
 	static String GAME_VERSION = "0.1";
 	static String LEVEL1_MUSIC = MAIN_DIR + "/songlevel1.ogg";
 	//static String LEVEL2_MUSIC = MAIN_DIR + "/songlevel2.ogg";
+	//static String LEVEL3_MUSIC = MAIN_DIR + "/songlevel3.ogg";
 	int errors = 0;
 	static boolean firstRun;
 	
