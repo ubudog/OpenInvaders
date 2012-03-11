@@ -21,11 +21,14 @@ public class Player {
 	static String HOME_DIR = System.getProperty("user.home");
 	static String MAIN_DIR = HOME_DIR + "/.openinvaders";
 	
+	Map map;
+	
 	static ArrayList<Bullet> bullets;
 	
 	public Player() {
 		x = 44; 
 		y = 456;
+		map = new Map();
 		
 		ammo = 20;
 		
@@ -71,14 +74,14 @@ public class Player {
 		if (getCanMove() == true) {
 			
 			if (key == KeyEvent.VK_W) {
-				//y = y - 32;
+				y = y - 32;
 			}
-			if (key == KeyEvent.VK_A) { 
+			if (key == KeyEvent.VK_A) {
 				x = x - 32; 
 			}
 			
 			if (key == KeyEvent.VK_S) {
-				//y = y + 32;
+				y = y + 32;
 			}
 			
 			if (key == KeyEvent.VK_D) {

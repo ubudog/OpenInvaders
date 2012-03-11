@@ -16,6 +16,7 @@ public class Map {
 	private Image wall; 
 	private Image space;
 	private Image goo;
+	private Image portal;
 	
 	static String USER_HOME = System.getProperty("user.home"); 
 	static String MAIN_DIR = USER_HOME + "/.openinvaders"; 
@@ -38,6 +39,9 @@ public class Map {
 		img = new ImageIcon(MAIN_DIR + "/goo.gif");
 		goo = img.getImage();
 		
+		img = new ImageIcon(MAIN_DIR + "/portal.png");
+		portal = img.getImage();
+		
 		openFile(); 
 		readFile();
 		closeFile(); 
@@ -54,6 +58,10 @@ public class Map {
 	// Goo is only used in Level 2, atm.
 	public Image getGoo() {
 		return goo;
+	}
+	
+	public Image getPortal() {
+		return portal;
 	}
 	
 	public String getMap(int x, int y) {

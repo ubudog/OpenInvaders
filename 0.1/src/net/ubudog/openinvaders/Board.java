@@ -42,9 +42,11 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship21;
 	private Ship ship22;
 	private Ship ship23;
+	private Portal portal;
 	private Map map;
 	private Timer time;
 	static int level = 1;  
+	static boolean levelonenew = true;
 	static boolean leveltwonew = true;
 	
 
@@ -141,6 +143,7 @@ public class Board extends JPanel implements ActionListener {
 		ship21 = new Ship();
 		ship22 = new Ship();
 		ship23 = new Ship();
+		portal = new Portal();
 		map = new Map();
 		player = new Player(); 
 		addKeyListener(new AL()); 
@@ -239,6 +242,10 @@ public class Board extends JPanel implements ActionListener {
 		return fail;
 	}
 	
+	public boolean getLevelOneNew() {
+		return levelonenew;
+	}
+	
 	public boolean getLevelTwoNew() {
 		return leveltwonew;
 	}
@@ -275,6 +282,15 @@ public class Board extends JPanel implements ActionListener {
 						if(map.getMap(x, y).equals("s")) {
 							g.drawImage(map.getSpace(), x*32, y*32, null);
 						}
+						
+						if (map.getMap(x, y).equals("p")) {
+							g.drawImage(map.getPortal(), x*32, y*32, null);
+						}
+					}
+					
+					if (getLevelOneNew() == true) {
+						g.drawString("Defend the area!", 30, 200);
+						g.drawString("Then get to the portal!", 30, 220);
 					}
 					
 					g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
@@ -285,6 +301,8 @@ public class Board extends JPanel implements ActionListener {
 					g.drawImage(ship5.getShip(), ship5x, ship5y, null);
 					g.drawImage(ship6.getShip(), ship6x, ship6y, null);
 					g.drawImage(ship7.getShip(), ship7x, ship7y, null);
+					
+					g.drawImage(portal.getPortal(), portal.getX(), portal.getY(), null);
 					
 					// Ship movement				
 					if (getShip2X() == 400) {
@@ -351,6 +369,15 @@ public class Board extends JPanel implements ActionListener {
 						g.setColor(Color.WHITE);
 						g.drawString("Reload! (R)", 0, 500); 
 					}
+					
+					if (player.ammo == 17) {
+						levelonenew = false;
+					}
+										
+					if (player.getX() == portal.getX() && player.getY() == portal.getY()) { 
+						level = 2;
+					}
+					
 				}
 			}
 		} else if (getLevel() == 2) {
