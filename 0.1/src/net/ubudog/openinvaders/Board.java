@@ -34,6 +34,10 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship13;
 	private Ship ship14;
 	private Ship ship15;
+	private Ship ship16;
+	private Ship ship17;
+	private Ship ship18;
+	private Ship ship19;
 	private Map map;
 	private Timer time;
 	static int level = 1;  
@@ -81,6 +85,18 @@ public class Board extends JPanel implements ActionListener {
 	int ship15x;
 	int ship15y;
 	
+	int ship16x;
+	int ship16y;
+	
+	int ship17x; 
+	int ship17y;
+	
+	int ship18x; 
+	int ship18y;
+	
+	int ship19x;
+	int ship19y;
+	
 	static boolean win = false;
 	static boolean fail = false;
 	
@@ -100,6 +116,10 @@ public class Board extends JPanel implements ActionListener {
 		ship13 = new Ship();
 		ship14 = new Ship();
 		ship15 = new Ship();
+		ship16 = new Ship();
+		ship17 = new Ship();
+		ship18 = new Ship();
+		ship19 = new Ship();
 		map = new Map();
 		player = new Player(); 
 		addKeyListener(new AL()); 
@@ -151,6 +171,21 @@ public class Board extends JPanel implements ActionListener {
 		
 		ship15x = ship13x;
 		ship15y = ship.getY() + 40;
+	
+		// 'Nother block of ships
+		ship16x = ship.getX() + 399 + 1; 
+		ship16y = ship.getY();
+		
+		ship17x = ship.getX() + 399 + 51; 
+		ship17y = ship.getY();
+		
+		ship18x = ship17x; 
+		ship18y = ship.getY() + 39 + 1; 
+		
+		ship19x = ship.getX() + 399 + 1; 
+		ship19y = ship.getY() + 39 + 1; 
+		
+		//ship17x = ship
 		
 		time = new Timer(25, this);
 		time.start();
@@ -275,6 +310,7 @@ public class Board extends JPanel implements ActionListener {
 						g.setFont(font);
 						g.setColor(Color.WHITE);
 						g.drawString("Reload! (R)", 0, 500);
+						win = true;
 					}
 				}
 			}
@@ -294,6 +330,7 @@ public class Board extends JPanel implements ActionListener {
 					}
 				}
 			}
+				
 			g.drawImage(ship8.getShip(), ship8x, ship8y, null);
 			g.drawImage(ship9.getShip(), ship9x, ship9y, null);
 			g.drawImage(ship10.getShip(), ship10x, ship10y, null);
@@ -302,6 +339,11 @@ public class Board extends JPanel implements ActionListener {
 			g.drawImage(ship13.getShip(), ship13x, ship13y, null);
 			g.drawImage(ship14.getShip(), ship14x, ship14y, null);
 			g.drawImage(ship15.getShip(), ship15x, ship15y, null);
+			g.drawImage(ship16.getShip(), ship16x, ship16y, null);
+			g.drawImage(ship17.getShip(), ship17x, ship17y, null);
+			g.drawImage(ship18.getShip(), ship18x, ship18y, null);
+			g.drawImage(ship19.getShip(), ship19x, ship19y, null);
+			//g.drawImage(ship20.getShip(), ship20x, ship20y, null);
 			
 			g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
 
@@ -337,6 +379,8 @@ public class Board extends JPanel implements ActionListener {
 			g.drawString("Level 3 coming soon!", 50, 300);
 			
 			g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
+			
+			
 			
 			if (player.ammo > 0) {
 				g.setFont(font);
