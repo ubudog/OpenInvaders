@@ -98,7 +98,7 @@ public class Player {
 			}
 			
 			if (key == KeyEvent.VK_UP) {
-				//y = y - 32; 
+				y = y - 32; 
 			}
 			
 			if (key == KeyEvent.VK_LEFT) {
@@ -106,7 +106,7 @@ public class Player {
 			}
 			
 			if (key == KeyEvent.VK_DOWN) {
-				//y = y + 32; 
+				y = y + 32; 
 			}
 			
 			if (key == KeyEvent.VK_RIGHT) {
