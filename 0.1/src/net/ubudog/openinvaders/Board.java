@@ -335,6 +335,18 @@ public class Board extends JPanel implements ActionListener {
 			g.setFont(italics);
 			g.setColor(Color.WHITE);
 			g.drawString("Level 3 coming soon!", 50, 300);
+			
+			g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
+			
+			if (player.ammo > 0) {
+				g.setFont(font);
+				g.setColor(Color.WHITE);
+				g.drawString("Remaining Ammo: " + player.ammo, 0, 500);
+			} else if (player.ammo == 0) {
+				g.setFont(font);
+				g.setColor(Color.WHITE);
+				g.drawString("Reload! (R)", 0, 500);
+			}
 		}
 	}
 	
