@@ -74,14 +74,22 @@ public class Player {
 		if (getCanMove() == true) {
 			
 			if (key == KeyEvent.VK_W) {
-				y = y - 32;
+				if (new Board().getPlayerCanMoveUp() == true) {
+					y = y - 32;
+				} else {
+					System.out.println("Secure the area first!");
+				}
 			}
 			if (key == KeyEvent.VK_A) {
 				x = x - 32; 
 			}
 			
 			if (key == KeyEvent.VK_S) {
-				y = y + 32;
+				if (new Board().getPlayerCanMoveDown() == true) {
+					y = y + 32; 
+				} else {
+					System.out.println("Secure the area first!");
+				}
 			}
 			
 			if (key == KeyEvent.VK_D) {

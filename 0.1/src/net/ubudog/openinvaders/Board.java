@@ -49,6 +49,8 @@ public class Board extends JPanel implements ActionListener {
 	static int level = 1;  
 	static boolean levelonenew = true;
 	static boolean leveltwonew = true;
+	static boolean playercanmoveup = false;
+	static boolean playercanmovedown = false;
 	
 
 	int ship2x;
@@ -258,6 +260,14 @@ public class Board extends JPanel implements ActionListener {
 		return leveltwonew;
 	}
 	
+	public boolean getPlayerCanMoveUp() {
+		return playercanmoveup;
+	}
+	
+	public boolean getPlayerCanMoveDown() {
+		return playercanmovedown;
+	}
+	
 	public ArrayList bullets() {
 		return player.bullets;
 	}
@@ -381,7 +391,12 @@ public class Board extends JPanel implements ActionListener {
 					if (player.ammo == 17) {
 						levelonenew = false;
 					}
-										
+					
+					if (ship.getAlive() == false) {
+						playercanmoveup = true;
+						playercanmovedown = true;
+					}
+					
 					if (player.getX() == portal.getX() && player.getY() == portal.getY()) { 
 						level = 2;
 					}
