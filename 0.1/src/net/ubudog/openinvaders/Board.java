@@ -50,6 +50,16 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship29;
 	private Ship ship30;
 	private Ship ship31;
+	private Ship ship32;
+	private Ship ship33;
+	private Ship ship34;
+	private Ship ship35;
+	private Ship ship36;
+	private Ship ship37;
+	private Ship ship38;
+	private Ship ship39;
+	private Ship ship40;
+	private Ship ship41;
 	private Portal portal;
 	private Portal portal2;
 	private Portal portal3;
@@ -152,6 +162,36 @@ public class Board extends JPanel implements ActionListener {
 	int ship31x;
 	int ship31y;
 	
+	int ship32x;
+	int ship32y;
+	
+	int ship33x; 
+	int ship33y;
+	
+	int ship34x;
+	int ship34y;
+	
+	int ship35x;
+	int ship35y;
+	
+	int ship36x; 
+	int ship36y;
+	
+	int ship37x;
+	int ship37y;
+	
+	int ship38x; 
+	int ship38y;
+	
+	int ship39x;
+	int ship39y;
+	
+	int ship40x;
+	int ship40y;
+	
+	int ship41x;
+	int ship41y;
+	
 	int portal2x;
 	int portal2y;
 	
@@ -193,6 +233,16 @@ public class Board extends JPanel implements ActionListener {
 		ship29 = new Ship();
 		ship30 = new Ship();
 		ship31 = new Ship();
+		ship32 = new Ship();
+		ship33 = new Ship();
+		ship34 = new Ship();
+		ship35 = new Ship();
+		ship36 = new Ship();
+		ship37 = new Ship();
+		ship38 = new Ship();
+		ship39 = new Ship();
+		ship40 = new Ship();
+		ship41 = new Ship();
 		portal = new Portal();
 		portal2 = new Portal();
 		portal3 = new Portal();
@@ -304,6 +354,37 @@ public class Board extends JPanel implements ActionListener {
 		ship31x = ship.getX() + 450;
 		ship31y = ship.getY() + 40;
 		
+		// Some filler ships, this is the last level
+		ship32x = ship.getX() + 350;
+		ship32y = ship.getY();
+		
+		ship33x = ship.getX() + 300;
+		ship33y = ship.getY();
+		
+		ship34x = ship.getX() + 350;
+		ship34y = ship.getY() + 40;
+		
+		ship35x = ship.getX() + 300;
+		ship35y = ship.getY() + 40;
+		
+		ship36x = ship.getX() + 150;
+		ship36y = ship.getY();
+		
+		ship37x = ship.getX() + 150;
+		ship37y = ship.getY() + 40;
+		
+		ship38x = ship.getX() + 10;
+		ship38y = ship.getY();
+		
+		ship39x = ship.getX() + 10;
+		ship39y = ship.getY() + 40;
+		/**
+		ship40x = ship.getX() + 500;
+		ship40y = ship.getY();
+		
+		ship41x = ship.getX() + 500;
+		ship41y = ship.getY() + 40;
+		*/
 		portal2x = 172;
 		portal2y = 8;
 		
@@ -524,6 +605,18 @@ public class Board extends JPanel implements ActionListener {
 				g.drawString("We're still working on this...", 50, 300);
 			}
 			
+			if (getWin() == true) {
+				g.setFont(font);
+				g.setColor(Color.GREEN);
+				g.drawString("You have failed!  :(", 0, 200);
+			}
+			
+			if (getFail() == true) {
+				g.setFont(font);
+				g.setColor(Color.CYAN);
+				g.drawString("You have won! :)", 0, 200);
+			}
+			
 			if (player.ammo > 0) {
 				g.setFont(font);
 				g.setColor(Color.WHITE);
@@ -586,8 +679,25 @@ public class Board extends JPanel implements ActionListener {
 					g.drawImage(ship30.getShip(), ship30x, ship30y, null);
 					g.drawImage(ship31.getShip(), ship31x, ship31y, null);
 					
+					g.drawImage(ship32.getShip(), ship32x, ship32y, null);
+					g.drawImage(ship33.getShip(), ship33x, ship33y, null);
+					g.drawImage(ship34.getShip(), ship34x, ship34y, null);
+					g.drawImage(ship35.getShip(), ship35x, ship35y, null);
+					g.drawImage(ship36.getShip(), ship36x, ship36y, null);
+					g.drawImage(ship37.getShip(), ship37x, ship37y, null);
+					g.drawImage(ship38.getShip(), ship38x, ship38y, null);
+					g.drawImage(ship39.getShip(), ship39x, ship39y, null);
+				//	g.drawImage(ship40.getShip(), ship40x, ship40y, null);
+				//	g.drawImage(ship41.getShip(), ship41x, ship41y, null);
+					
 					g.drawImage(portal3.getPortal(), portal3x, portal3y, null);
 
+					if (getFail() == true) { 
+						g.setFont(italics);
+						g.setColor(Color.GREEN);
+						g.drawString("You have failed level 3.  So close!", 10, 200);
+					}
+					
 					if (player.ammo > 0) {
 						g.setFont(font);
 						g.setColor(Color.WHITE);
