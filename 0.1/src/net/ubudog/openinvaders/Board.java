@@ -470,7 +470,12 @@ public class Board extends JPanel implements ActionListener {
 						g.drawString("Then get to the portal!", 30, 220);
 					}
 					
-					g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
+					if (player.getAlive() == true) {
+						g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
+					} else if (player.getAlive() == false) {
+						g.drawImage(player.getDead(), player.getX(), player.getY(), null);
+					}
+					
 					g.drawImage(ship.getShip(), ship.getX(), ship.getY(), null);
 					g.drawImage(ship2.getShip(), ship2x, ship2y, null);
 					g.drawImage(ship3.getShip(), ship3x, ship3y, null);
@@ -593,7 +598,11 @@ public class Board extends JPanel implements ActionListener {
 			g.drawImage(ship19.getShip(), ship19x, ship19y, null);
 			//g.drawImage(ship20.getShip(), ship20x, ship20y, null);
 			
-			g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
+			if (player.getAlive() == true) {
+				g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
+			} else if (player.getAlive() == false) {
+				g.drawImage(player.getDead(), player.getX(), player.getY(), null);
+			}
 			
 			g.drawImage(portal2.getPortal(), portal2x, portal2y, null); 
 			
@@ -657,13 +666,12 @@ public class Board extends JPanel implements ActionListener {
 						}
 					}
 
-					g.setFont(italics);
-					g.setColor(Color.WHITE);
-					g.drawString("Level 3 coming soon!", 50, 300);
-
-					g.drawImage(player.getPlayer(), player.getX(),
-							player.getY(), null);
-
+					if (player.getAlive() == true) {
+						g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
+					} else if (player.getAlive() == false) {
+						g.drawImage(player.getDead(), player.getX(), player.getY(), null);
+					}
+					
 					g.drawImage(ship20.getShip(), ship20x, ship20y, null);
 					g.drawImage(ship21.getShip(), ship21x, ship21y, null);
 					g.drawImage(ship22.getShip(), ship22x, ship22y, null);

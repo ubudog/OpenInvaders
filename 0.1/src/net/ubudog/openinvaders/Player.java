@@ -9,11 +9,12 @@ import javax.swing.ImageIcon;
 public class Player {
 	
 	Image img;
-	Image shootingimage;
+	Image deathimg;
 	
 	static int ammo;
 	
 	static boolean canMove = true;
+	static boolean isAlive = true;
 	
 	static int x; 
 	static int y; 
@@ -35,8 +36,8 @@ public class Player {
 		ImageIcon i = new ImageIcon(MAIN_DIR + "/player.png");
 		img = i.getImage();
 		
-		i = new ImageIcon(MAIN_DIR + "/playershooting.gif");
-		shootingimage = i.getImage();
+		i = new ImageIcon(MAIN_DIR + "/explosion.gif");
+		deathimg = i.getImage();
 	}
 	
 	public void move(int dx, int dy) {
@@ -44,8 +45,16 @@ public class Player {
 		y = dy;
 	}
 	
+	public boolean getAlive() {
+		return isAlive;
+	}
+	
 	public Image getPlayer() {
 		return img; 
+	}
+	
+	public Image getDead() {
+		return deathimg;
 	}
 	
 	public int getX() {
