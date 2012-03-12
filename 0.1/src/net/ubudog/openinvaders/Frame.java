@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import org.newdawn.easyogg.OggClip;
@@ -34,6 +35,7 @@ public class Frame {
 	static String GAME_NAME = "OpenInvaders - Work-in-progress";
 	static String GAME_VERSION = "0.1";
 	static String LEVEL1_MUSIC = MAIN_DIR + "/songlevel1.ogg";
+	static String ICON_LOCATION = MAIN_DIR + "/player.png";
 	//static String LEVEL2_MUSIC = MAIN_DIR + "/songlevel2.ogg";
 	//static String LEVEL3_MUSIC = MAIN_DIR + "/songlevel3.ogg";
 	int errors = 0;
@@ -203,12 +205,13 @@ public class Frame {
 			System.out.println("Space - Shoot");
 			System.out.println("H - List these controls");
 		}
-		
+
 		JFrame frame = new JFrame(GAME_NAME);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(515, 543);
 		frame.setLocationRelativeTo(null);
 		frame.add(new Board());
+		frame.setIconImage(new ImageIcon(ICON_LOCATION).getImage());
 		frame.setVisible(true);
 	}
 }
