@@ -46,6 +46,10 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship25;
 	private Ship ship26;
 	private Ship ship27;
+	private Ship ship28;
+	private Ship ship29;
+	private Ship ship30;
+	private Ship ship31;
 	private Portal portal;
 	private Portal portal2;
 	private Portal portal3;
@@ -136,6 +140,18 @@ public class Board extends JPanel implements ActionListener {
 	int ship27x;
 	int ship27y;
 	
+	int ship28x;
+	int ship28y;
+	
+	int ship29x;
+	int ship29y;
+	
+	int ship30x;
+	int ship30y;
+	
+	int ship31x;
+	int ship31y;
+	
 	int portal2x;
 	int portal2y;
 	
@@ -173,6 +189,10 @@ public class Board extends JPanel implements ActionListener {
 		ship25 = new Ship();
 		ship26 = new Ship();
 		ship27 = new Ship();
+		ship28 = new Ship();
+		ship29 = new Ship();
+		ship30 = new Ship();
+		ship31 = new Ship();
 		portal = new Portal();
 		portal2 = new Portal();
 		portal3 = new Portal();
@@ -271,6 +291,19 @@ public class Board extends JPanel implements ActionListener {
 		ship27x = ship.getX() + 250;
 		ship27y = ship.getY() + 40;
 		
+		// Block of ships
+		ship28x = ship.getX() + 400;
+		ship28y = ship.getY();
+		
+		ship29x = ship.getX() + 450;
+		ship29y = ship.getY();
+		
+		ship30x = ship.getX() + 400;
+		ship30y = ship.getY() + 40;
+		
+		ship31x = ship.getX() + 450;
+		ship31y = ship.getY() + 40;
+		
 		portal2x = 172;
 		portal2y = 8;
 		
@@ -340,6 +373,10 @@ public class Board extends JPanel implements ActionListener {
 						
 						if(map.getMap(x, y).equals("s")) {
 							g.drawImage(map.getSpace(), x*32, y*32, null);
+						}
+						
+						if (map.getMap(x, y).equals("g")) {
+							g.drawImage(map.getGoo(), x*32, y*32, null);
 						}
 						
 						if (map.getMap(x, y).equals("p")) {
@@ -543,6 +580,11 @@ public class Board extends JPanel implements ActionListener {
 					g.drawImage(ship25.getShip(), ship25x, ship25y, null);
 					g.drawImage(ship26.getShip(), ship26x, ship26y, null);
 					g.drawImage(ship27.getShip(), ship27x, ship27y, null);
+					
+					g.drawImage(ship28.getShip(), ship28x, ship28y, null);
+					g.drawImage(ship29.getShip(), ship29x, ship29y, null);
+					g.drawImage(ship30.getShip(), ship30x, ship30y, null);
+					g.drawImage(ship31.getShip(), ship31x, ship31y, null);
 					
 					g.drawImage(portal3.getPortal(), portal3x, portal3y, null);
 
