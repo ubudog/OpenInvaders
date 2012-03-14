@@ -61,6 +61,8 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship39;
 	private Ship ship40;
 	private Ship ship41;
+	private Ship ship42;
+	private Ship ship43;
 	private Portal portal;
 	private Portal portal2;
 	private Portal portal3;
@@ -193,6 +195,12 @@ public class Board extends JPanel implements ActionListener {
 	int ship41x;
 	int ship41y;
 	
+	int ship42x;
+	int ship42y; 
+	
+	int ship43x; 
+	int ship43y; 
+	
 	int portal2x;
 	int portal2y;
 	
@@ -244,6 +252,8 @@ public class Board extends JPanel implements ActionListener {
 		ship39 = new Ship();
 		ship40 = new Ship();
 		ship41 = new Ship();
+		ship42 = new Ship();
+		ship43 = new Ship();
 		portal = new Portal();
 		portal2 = new Portal();
 		portal3 = new Portal();
@@ -386,6 +396,13 @@ public class Board extends JPanel implements ActionListener {
 		ship41x = ship.getX() + 500;
 		ship41y = ship.getY() + 40;
 		*/
+		
+		ship42x = ship.getX() + 10; 
+		ship42y = ship.getY() + 80;
+		
+		ship43x = ship.getX() + 50; 
+		ship43y = ship.getY() + 80;
+		
 		portal2x = 172;
 		portal2y = 8;
 		
@@ -501,8 +518,7 @@ public class Board extends JPanel implements ActionListener {
 						//ship.alive = false;
 					} else {
 						ship2x++;
-					}
-					
+					}					
 					// Simple collision detection for the ships, the player, and bullets
 					
 					// Get a random fail message :P
@@ -726,6 +742,8 @@ public class Board extends JPanel implements ActionListener {
 					g.drawImage(ship39.getShip(), ship39x, ship39y, null);
 				//	g.drawImage(ship40.getShip(), ship40x, ship40y, null);
 				//	g.drawImage(ship41.getShip(), ship41x, ship41y, null);
+					g.drawImage(ship42.getShip(), ship42x, ship42y, null);
+					g.drawImage(ship43.getShip(), ship43x, ship43y, null);
 					
 					g.drawImage(portal3.getPortal(), portal3x, portal3y, null);
 

@@ -80,6 +80,7 @@ public class Player {
 	public void fireBullet() {
 		if (ammo > 0) {
 			ammo--; 
+			new SoundManager(MAIN_DIR + "/bullet.wav").start();
 			Bullet b = new Bullet(getX() + 2, getY());
 			bullets.add(b);
 		}
