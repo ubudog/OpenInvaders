@@ -23,8 +23,8 @@ public class Player {
 	static String MAIN_DIR = HOME_DIR + "/.openinvaders";
 	
 	Map map;
-	
-	static ArrayList<Bullet> bullets;
+
+	static ArrayList bullets; 
 	
 	public Player() {
 		x = 44; 
@@ -38,6 +38,8 @@ public class Player {
 		
 		i = new ImageIcon(MAIN_DIR + "/explosion.gif");
 		deathimg = i.getImage();
+		
+		bullets = new ArrayList();
 	}
 	
 	public void move(int dx, int dy) {
@@ -69,11 +71,15 @@ public class Player {
 		return canMove;
 	}
 	
+	public static ArrayList getBullets() {
+		return bullets;
+	}
+	
 	public void fireBullet() {
 		if (ammo > 0) {
-			ammo--;
-			Bullet z = new Bullet(getX() + 10, getY());
-			bullets.add(z);
+			ammo--; 
+			Bullet b = new Bullet(getX() + 13, getY());
+			bullets.add(b);
 		}
 	}
 	
@@ -127,7 +133,7 @@ public class Player {
 				}
 				
 				if (key == KeyEvent.VK_SPACE) { 
-					//new Ship().alive = false;
+				//	new Ship().alive = false;
 					fireBullet();
 				}
 				

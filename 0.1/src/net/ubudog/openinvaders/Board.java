@@ -396,6 +396,16 @@ public class Board extends JPanel implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		ArrayList bullets = player.getBullets();
+		for (int w = 0; w < bullets.size(); w++) {
+			Bullet m = (Bullet) bullets.get(w);
+			if (m.getVisible() == true) {
+				m.move();
+			} else {
+				bullets.remove(w);
+			}
+		}
+		
 		repaint();
 	}
 	
@@ -564,7 +574,11 @@ public class Board extends JPanel implements ActionListener {
 					if (player.getX() == portal.getX() && player.getY() == portal.getY()) { 
 						level = 2;
 					}
-					
+					ArrayList bullets = player.getBullets();
+					for (int w = 0; w < bullets.size(); w++) {
+						Bullet m = (Bullet) bullets.get(w);
+						g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
+					}
 				}
 			}
 		} else if (getLevel() == 2) {
