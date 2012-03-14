@@ -658,6 +658,12 @@ public class Board extends JPanel implements ActionListener {
 				level = 3;
 			}
 			
+			ArrayList bullets = player.getBullets();
+			for (int w = 0; w < bullets.size(); w++) {
+				Bullet m = (Bullet) bullets.get(w);
+				g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
+			}
+			
 		} else if (getLevel() == 3) {
 			if (getWin() == true) {
 				g.setFont(font);
@@ -733,6 +739,12 @@ public class Board extends JPanel implements ActionListener {
 					if (player.getX() == portal3x && player.getY() == portal3y) {
 						win = true;
 				}
+					
+					ArrayList bullets = player.getBullets();
+					for (int w = 0; w < bullets.size(); w++) {
+						Bullet m = (Bullet) bullets.get(w);
+						g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
+					}
 				}
 			}
 		}

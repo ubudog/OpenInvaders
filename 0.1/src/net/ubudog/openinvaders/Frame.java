@@ -34,7 +34,7 @@ public class Frame {
 	static String MAIN_DIR = USER_HOME + "/.openinvaders";
 	static String GAME_NAME = "OpenInvaders - Work-in-progress";
 	static String GAME_VERSION = "0.1";
-	static String LEVEL1_MUSIC = MAIN_DIR + "/songlevel1.ogg";
+	static String LEVEL1_MUSIC = MAIN_DIR + "/song.ogg";
 	static String ICON_LOCATION = MAIN_DIR + "/player.png";
 	//static String LEVEL2_MUSIC = MAIN_DIR + "/songlevel2.ogg";
 	//static String LEVEL3_MUSIC = MAIN_DIR + "/songlevel3.ogg";

@@ -78,7 +78,7 @@ public class Player {
 	public void fireBullet() {
 		if (ammo > 0) {
 			ammo--; 
-			Bullet b = new Bullet(getX() + 13, getY());
+			Bullet b = new Bullet(getX() + 2, getY());
 			bullets.add(b);
 		}
 	}
@@ -87,7 +87,6 @@ public class Player {
 		int key = e.getKeyCode();
 		if (getAlive() == true) {
 			if (getCanMove() == true) {
-				
 				if (key == KeyEvent.VK_W) {
 					if (new Board().getPlayerCanMoveUp() == true) {
 						y = y - 32;
