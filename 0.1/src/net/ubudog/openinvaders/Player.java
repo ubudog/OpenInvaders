@@ -12,6 +12,7 @@ public class Player {
 	Image deathimg;
 	
 	static int ammo;
+	static int reloads; 
 	
 	static boolean canMove = true;
 	static boolean isAlive = true;
@@ -32,6 +33,7 @@ public class Player {
 		map = new Map();
 		
 		ammo = 20;
+		reloads = 5; 
 		
 		ImageIcon i = new ImageIcon(MAIN_DIR + "/player.png");
 		img = i.getImage();
@@ -88,22 +90,26 @@ public class Player {
 		if (getAlive() == true) {
 			if (getCanMove() == true) {
 				if (key == KeyEvent.VK_W) {
+					/**
 					if (new Board().getPlayerCanMoveUp() == true) {
 						y = y - 32;
 					} else {
 						System.out.println("Secure the area first!");
 					}
+					*/
 				}
 				if (key == KeyEvent.VK_A) {
 					x = x - 32; 
 				}
 				
 				if (key == KeyEvent.VK_S) {
+					/**
 					if (new Board().getPlayerCanMoveDown() == true) {
 						y = y + 32; 
 					} else {
 						System.out.println("Secure the area first!");
 					}
+					*/
 				}
 				
 				if (key == KeyEvent.VK_D) {
@@ -128,7 +134,14 @@ public class Player {
 				}
 				
 				if (key == KeyEvent.VK_R) {
-					ammo = 20;
+					if (reloads > 0 && ammo == 0) { 
+						ammo = 20;
+						reloads--; 
+					}
+					
+					if (reloads == 0 && ammo == 0) {
+						isAlive = false;
+					}
 				}
 				
 				if (key == KeyEvent.VK_SPACE) { 

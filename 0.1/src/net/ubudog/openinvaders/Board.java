@@ -19,6 +19,7 @@ public class Board extends JPanel implements ActionListener {
 	static Font italics = new Font("SanSerif", Font.ITALIC, 25);
 	
 	private Player player; 
+	private Bullet bullet;
 	private Ship ship;
 	private Ship ship2; 
 	private Ship ship3; 
@@ -405,7 +406,6 @@ public class Board extends JPanel implements ActionListener {
 				bullets.remove(w);
 			}
 		}
-		
 		repaint();
 	}
 	
@@ -503,12 +503,11 @@ public class Board extends JPanel implements ActionListener {
 						ship2x++;
 					}
 					
-					// Simple collision detection for the ships and the player
+					// Simple collision detection for the ships, the player, and bullets
 					
 					// Get a random fail message :P
 					Random r = new Random();
 					String[] failmsg = {"YOU FAIL.  :(", "Failness.", "Wow, fail.", "'Ouch', you say, as you look at the ruins of your ship."};
-					
 					
 					if (ship.getX() == player.getX() && ship.getY() == player.getY()) {
 						g.setFont(font);
@@ -560,6 +559,16 @@ public class Board extends JPanel implements ActionListener {
 						g.setFont(font);
 						g.setColor(Color.WHITE);
 						g.drawString("Reload! (R)", 0, 500); 
+					}
+					
+					if (player.reloads > 0) {
+						g.setFont(italics);
+						g.setColor(Color.WHITE);
+						g.drawString("Reloads: " + player.reloads, 350, 500);
+					} else if (player.reloads == 0) {
+						g.setFont(italics);
+						g.setColor(Color.WHITE);
+						g.drawString("Out!", 450, 500);
 					}
 					
 					if (player.ammo == 17) {
