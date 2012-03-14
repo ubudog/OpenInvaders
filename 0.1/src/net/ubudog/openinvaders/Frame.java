@@ -214,6 +214,7 @@ public class Frame {
 		frame.setLocationRelativeTo(null);
 		frame.add(new Board());
 		frame.setIconImage(new ImageIcon(ICON_LOCATION).getImage());
+		frame.setResizable(false);
 		frame.setVisible(true);
 	}
 }

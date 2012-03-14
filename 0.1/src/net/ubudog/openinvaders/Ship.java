@@ -1,6 +1,7 @@
 package net.ubudog.openinvaders;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
@@ -29,6 +30,10 @@ public class Ship {
 		
 		i = new ImageIcon(MAIN_DIR + "/explode.gif");
 		death = i.getImage();
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, 32, 32);
 	}
 	
 	public void move(int dx, int dy) {

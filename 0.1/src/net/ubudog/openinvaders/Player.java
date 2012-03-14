@@ -1,6 +1,7 @@
 package net.ubudog.openinvaders;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ public class Player {
 	
 	static int ammo;
 	static int reloads; 
+	static int score;
 	
 	static boolean canMove = true;
 	static boolean isAlive = true;
@@ -34,6 +36,7 @@ public class Player {
 		
 		ammo = 20;
 		reloads = 5; 
+		score = 0;
 		
 		ImageIcon i = new ImageIcon(MAIN_DIR + "/player.png");
 		img = i.getImage();
@@ -42,6 +45,10 @@ public class Player {
 		deathimg = i.getImage();
 		
 		bullets = new ArrayList();
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, 32, 32);
 	}
 	
 	public void move(int dx, int dy) {

@@ -3,6 +3,7 @@ package net.ubudog.openinvaders;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -19,7 +20,7 @@ public class Board extends JPanel implements ActionListener {
 	static Font italics = new Font("SanSerif", Font.ITALIC, 25);
 	
 	private Player player; 
-	private Bullet bullet;
+	private Bullet bullet; 
 	private Ship ship;
 	private Ship ship2; 
 	private Ship ship3; 
@@ -63,6 +64,7 @@ public class Board extends JPanel implements ActionListener {
 	private Ship ship41;
 	private Ship ship42;
 	private Ship ship43;
+	private Ship ship44;
 	private Portal portal;
 	private Portal portal2;
 	private Portal portal3;
@@ -201,6 +203,9 @@ public class Board extends JPanel implements ActionListener {
 	int ship43x; 
 	int ship43y; 
 	
+	int ship44x;
+	int ship44y; 
+	
 	int portal2x;
 	int portal2y;
 	
@@ -254,6 +259,7 @@ public class Board extends JPanel implements ActionListener {
 		ship41 = new Ship();
 		ship42 = new Ship();
 		ship43 = new Ship();
+		ship44 = new Ship();
 		portal = new Portal();
 		portal2 = new Portal();
 		portal3 = new Portal();
@@ -403,6 +409,9 @@ public class Board extends JPanel implements ActionListener {
 		ship43x = ship.getX() + 50; 
 		ship43y = ship.getY() + 80;
 		
+		ship44x = ship.getX() + 90; 
+		ship44y = ship.getY() + 80;
+		
 		portal2x = 172;
 		portal2y = 8;
 		
@@ -414,6 +423,7 @@ public class Board extends JPanel implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		checkCollisions();
 		ArrayList bullets = player.getBullets();
 		for (int w = 0; w < bullets.size(); w++) {
 			Bullet m = (Bullet) bullets.get(w);
@@ -424,6 +434,41 @@ public class Board extends JPanel implements ActionListener {
 			}
 		}
 		repaint();
+	}
+	
+	public void checkCollisions() {
+		Rectangle r1 = ship.getBounds();
+		Rectangle r2 = ship2.getBounds();
+		Rectangle r3 = ship3.getBounds();
+		Rectangle r4 = ship4.getBounds();
+		Rectangle r5 = ship5.getBounds();
+		Rectangle r6 = ship6.getBounds();
+		Rectangle r7 = ship7.getBounds();
+		ArrayList bullets = player.getBullets();
+		for (int w = 0; w < bullets.size(); w++) {
+			Bullet m = (Bullet) bullets.get(w);
+			Rectangle m1 = m.getBounds();
+			if (r1.intersects(m1)) {
+				ship.alive = false;
+			} else if (r2.intersects(m1)) {
+				ship2.alive = false; 
+			} else if (r3.intersects(m1)) {
+				ship3.alive = false;
+			} else if (r4.intersects(m1)) {
+				ship4.alive = false;
+			} else if (r5.intersects(m1)) {
+				ship5.alive = false;
+			} else if (r6.intersects(m1)) {
+				ship6.alive = false;
+			} else if (r7.intersects(m1)) {
+				ship7.alive = false;
+			}
+		}
+		
+		Rectangle d = player.getBounds();
+		if (d.intersects(r1) || d.intersects(r2)) {
+			player.isAlive = false;
+		}
 	}
 	
 	public boolean getWin() {
@@ -519,63 +564,22 @@ public class Board extends JPanel implements ActionListener {
 					} else {
 						ship2x++;
 					}					
-					// Simple collision detection for the ships, the player, and bullets
-					
-					// Get a random fail message :P
 					Random r = new Random();
 					String[] failmsg = {"YOU FAIL.  :(", "Failness.", "Wow, fail.", "'Ouch', you say, as you look at the ruins of your ship."};
 					
-					if (ship.getX() == player.getX() && ship.getY() == player.getY()) {
-						g.setFont(font);
-						g.setColor(Color.RED);
-						g.drawString(failmsg[r.nextInt(failmsg.length)], 50, 200);
-						level = 1; 
-					}
-					
-					if (ship2x == player.getX() && ship2y == player.getY()) {
-						g.setFont(font);
-						g.setColor(Color.RED);
-						g.drawString(failmsg[r.nextInt(failmsg.length)], 50, 200);
-						level = 1;
-					}
-					
-					if (ship3x == player.getX() && ship3y == player.getY()) {
-						g.setFont(font);
-						g.setColor(Color.RED);
-						g.drawString(failmsg[r.nextInt(failmsg.length)], 50, 200);
-						level = 1;
-					}
-					
-					if (ship4x == player.getX() && ship4y == player.getY()) {
-						g.setFont(font);
-						g.setColor(Color.RED);
-						g.drawString(failmsg[r.nextInt(failmsg.length)], 50, 200);
-						level = 1;
-					}
-					
-					if (ship5x == player.getX() && ship5y == player.getY()) {
-						g.setFont(font);
-						g.setColor(Color.RED);
-						g.drawString(failmsg[r.nextInt(failmsg.length)], 50, 200);
-						level = 1; 
-					}
-					
-					if (ship6x == player.getX() && ship6y == player.getY()) {
-						g.setFont(font);
-						g.setColor(Color.RED);
-						g.drawString(failmsg[r.nextInt(failmsg.length)], 50, 200);
-						level = 1;
-					}
 					
 					if (player.ammo > 0) {
 						g.setFont(font);
 						g.setColor(Color.WHITE);
 						g.drawString("Remaining Ammo: " + player.ammo, 0, 500);
 					} else if (player.ammo == 0) {
+						fail = true;
 						g.setFont(font);
 						g.setColor(Color.WHITE);
 						g.drawString("Reload! (R)", 0, 500); 
 					}
+					
+					g.drawString("Score: " + player.score, 0 , 480);
 					
 					if (player.reloads > 0) {
 						g.setFont(italics);
@@ -664,7 +668,6 @@ public class Board extends JPanel implements ActionListener {
 				g.setColor(Color.CYAN);
 				g.drawString("You have won! :)", 0, 200);
 			}
-			
 			if (player.ammo > 0) {
 				g.setFont(font);
 				g.setColor(Color.WHITE);
@@ -672,7 +675,17 @@ public class Board extends JPanel implements ActionListener {
 			} else if (player.ammo == 0) {
 				g.setFont(font);
 				g.setColor(Color.WHITE);
-				g.drawString("Reload! (R)", 0, 500);
+				g.drawString("Reload! (R)", 0, 500); 
+			}
+			
+			if (player.reloads > 0) {
+				g.setFont(italics);
+				g.setColor(Color.WHITE);
+				g.drawString("Reloads: " + player.reloads, 350, 500);
+			} else if (player.reloads == 0) {
+				g.setFont(italics);
+				g.setColor(Color.WHITE);
+				g.drawString("Out!", 450, 500);
 			}
 			
 			if (player.ammo == 17) {
@@ -744,6 +757,7 @@ public class Board extends JPanel implements ActionListener {
 				//	g.drawImage(ship41.getShip(), ship41x, ship41y, null);
 					g.drawImage(ship42.getShip(), ship42x, ship42y, null);
 					g.drawImage(ship43.getShip(), ship43x, ship43y, null);
+					g.drawImage(ship44.getShip(), ship44x, ship44y, null); 
 					
 					g.drawImage(portal3.getPortal(), portal3x, portal3y, null);
 
@@ -760,7 +774,17 @@ public class Board extends JPanel implements ActionListener {
 					} else if (player.ammo == 0) {
 						g.setFont(font);
 						g.setColor(Color.WHITE);
-						g.drawString("Reload! (R)", 0, 500);
+						g.drawString("Reload! (R)", 0, 500); 
+					}
+					
+					if (player.reloads > 0) {
+						g.setFont(italics);
+						g.setColor(Color.WHITE);
+						g.drawString("Reloads: " + player.reloads, 350, 500);
+					} else if (player.reloads == 0) {
+						g.setFont(italics);
+						g.setColor(Color.WHITE);
+						g.drawString("Out!", 450, 500);
 					}
 
 					if (player.getX() == portal3x && player.getY() == portal3y) {

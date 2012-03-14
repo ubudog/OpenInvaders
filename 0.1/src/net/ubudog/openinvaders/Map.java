@@ -28,6 +28,8 @@ public class Map {
 			MAP_LOCATION = MAIN_DIR + "/level1.txt";
 		} else if (getLevel() == 2) {
 			MAP_LOCATION = MAIN_DIR + "/level2.txt";
+		} else if (getLevel() == 3) {
+			MAP_LOCATION = MAIN_DIR + "/level3.txt";
 		}
 		
 		ImageIcon img = new ImageIcon(MAIN_DIR + "/wall.png"); 
@@ -46,6 +48,15 @@ public class Map {
 		readFile();
 		closeFile(); 
 	}
+	/**
+	public void levelChecker() {
+		while(true) {
+			if (new Board().getLevel() == 1) { 
+				MAP_LOCATION = MAIN_DIR + ""
+			}
+		}
+	}
+	*/
 
 	public Image getWall() {
 		return wall;
