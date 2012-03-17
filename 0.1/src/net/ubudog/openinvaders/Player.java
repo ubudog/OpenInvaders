@@ -18,6 +18,7 @@ public class Player {
 	
 	static boolean canMove = true;
 	static boolean isAlive = true;
+	static boolean cangoportal = false; 
 	
 	static int x; 
 	static int y; 
@@ -93,31 +94,27 @@ public class Player {
 		}
 	}
 	
+	public boolean getCanGoPortal() { 
+		return cangoportal;
+	}
+	
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if (getAlive() == true) {
 			if (getCanMove() == true) {
 				if (key == KeyEvent.VK_W) {
-					/**
-					if (new Board().getPlayerCanMoveUp() == true) {
-						y = y - 32;
-					} else {
-						System.out.println("Secure the area first!");
+					if (getCanGoPortal() == true) {
+						y = y - 32; 
 					}
-					*/
 				}
 				if (key == KeyEvent.VK_A) {
 					x = x - 32; 
 				}
 				
 				if (key == KeyEvent.VK_S) {
-					/**
-					if (new Board().getPlayerCanMoveDown() == true) {
+					if (getCanGoPortal() == true) { 
 						y = y + 32; 
-					} else {
-						System.out.println("Secure the area first!");
 					}
-					*/
 				}
 				
 				if (key == KeyEvent.VK_D) {
