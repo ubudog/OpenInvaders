@@ -3,7 +3,6 @@ package net.ubudog.openinvaders;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,8 +19,6 @@ import java.util.zip.ZipFile;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-
-import org.newdawn.easyogg.OggClip;
 
 public class Frame {
 	

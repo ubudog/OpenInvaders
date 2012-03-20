@@ -607,7 +607,9 @@ public class Board extends JPanel implements ActionListener {
 					if (getFail() == true) {
 						g.setFont(font);
 						g.setColor(Color.GREEN); 
-						g.drawString("Sorry, you just failed.", 100, 200);
+						g.drawString("Don't hit the - ...", 100, 200);
+						
+						g.drawString("... portal.", 100, 220); 
 					}
 					
 					if (player.ammo == 17) {
