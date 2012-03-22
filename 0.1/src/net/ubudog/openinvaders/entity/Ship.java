@@ -1,4 +1,4 @@
-package net.ubudog.openinvaders;
+package net.ubudog.openinvaders.entity;
 
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -13,7 +13,7 @@ public class Ship {
 	Image img; 
 	Image death;
 	
-	static boolean alive;
+	public static boolean alive;
 	
 	public static boolean getAlive() {
 		return alive;

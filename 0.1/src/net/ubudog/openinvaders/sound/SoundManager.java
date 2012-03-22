@@ -1,4 +1,4 @@
-package net.ubudog.openinvaders; 
+package net.ubudog.openinvaders.sound; 
 
 import java.io.File; 
 import java.io.IOException; 

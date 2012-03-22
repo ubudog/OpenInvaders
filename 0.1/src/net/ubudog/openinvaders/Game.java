@@ -31,6 +31,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import net.ubudog.openinvaders.entity.Bullet;
+import net.ubudog.openinvaders.entity.Player;
+import net.ubudog.openinvaders.entity.Portal;
+import net.ubudog.openinvaders.entity.Ship;
+import net.ubudog.openinvaders.map.Map;
+
 public class Game extends JPanel implements ActionListener, KeyListener {
 
 	// I know my coding is sub-par
@@ -91,7 +97,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 	private Portal portal3;
 	private Map map;
 	private Timer time;
-	static int level = 1;
+	public static int level = 1;
 	static boolean levelonenew = true;
 	static boolean leveltwonew = true;
 	static boolean playercanmoveup = false;
@@ -642,9 +648,10 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 					if (getFail() == true && portal.getAlive() == false) {
 						g.setFont(font);
 						g.setColor(Color.GREEN);
-						g.drawString("Don't hit the - ...", 100, 200);
-
-						g.drawString("... portal.", 100, 220);
+						g.drawString("Don't hit the - ...", 100, 300);
+						
+						g.setColor(Color.RED);
+						g.drawString("... portal.", 100, 320);
 					}
 
 					if (getFail() == true) {

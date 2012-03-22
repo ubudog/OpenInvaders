@@ -1,4 +1,4 @@
-package net.ubudog.openinvaders;
+package net.ubudog.openinvaders.entity;
 
 import java.awt.Image;
 import java.awt.Rectangle;

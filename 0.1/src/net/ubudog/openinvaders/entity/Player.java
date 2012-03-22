@@ -1,4 +1,4 @@
-package net.ubudog.openinvaders;
+package net.ubudog.openinvaders.entity;
 
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -7,18 +7,21 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import net.ubudog.openinvaders.map.Map;
+import net.ubudog.openinvaders.sound.SoundManager;
+
 public class Player {
 	
 	Image img;
 	Image deathimg;
 	
-	static int ammo;
-	static int reloads; 
-	static int score;
+	public static int ammo;
+	public static int reloads; 
+	public static int score;
 	
 	static boolean canMove = true;
-	static boolean isAlive = true;
-	static boolean cangoportal = false; 
+	public static boolean isAlive = true;
+	public static boolean cangoportal = false; 
 	
 	static int x; 
 	static int y; 
@@ -28,7 +31,7 @@ public class Player {
 	
 	Map map;
 
-	static ArrayList bullets; 
+	public static ArrayList bullets; 
 	
 	public Player() {
 		x = 44; 

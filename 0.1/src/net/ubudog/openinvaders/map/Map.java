@@ -1,4 +1,4 @@
-package net.ubudog.openinvaders;
+package net.ubudog.openinvaders.map;
 
 import java.awt.Image;
 import java.io.File;
@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import javax.swing.ImageIcon;
+
+import net.ubudog.openinvaders.Game;
 
 public class Map {
 	

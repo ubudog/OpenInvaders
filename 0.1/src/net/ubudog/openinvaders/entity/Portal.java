@@ -1,4 +1,4 @@
-package net.ubudog.openinvaders;
+package net.ubudog.openinvaders.entity;
 
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -11,7 +11,7 @@ public class Portal {
 	int x = 460;
 	int y = 8;
 	
-	static boolean alive;
+	public static boolean alive;
 	
 	private String USER_HOME = System.getProperty("user.home");
 	private String MAIN_DIR = USER_HOME + "/.openinvaders";
