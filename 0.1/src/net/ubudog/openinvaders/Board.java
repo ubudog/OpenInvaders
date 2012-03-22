@@ -604,12 +604,18 @@ public class Board extends JPanel implements ActionListener {
 						g.drawString("Out!", 450, 500);
 					}
 					
-					if (getFail() == true) {
+					if (getFail() == true && portal.getAlive() == false) {
 						g.setFont(font);
 						g.setColor(Color.GREEN); 
 						g.drawString("Don't hit the - ...", 100, 200);
 						
 						g.drawString("... portal.", 100, 220); 
+					}
+					
+					if (getFail() == true) { 
+						g.setFont(font);
+						g.setColor(Color.GREEN);
+						g.drawString("Failed!", 100, 200);
 					}
 					
 					if (player.ammo == 17) {
@@ -619,6 +625,10 @@ public class Board extends JPanel implements ActionListener {
 					if (ship.getAlive() == false) {
 						playercanmoveup = true;
 						playercanmovedown = true;
+						
+						win = true;
+						level = 2; 
+						ship.alive = true;
 					}
 					
 					if (player.getX() == portal.getX() && player.getY() == portal.getY()) { 
