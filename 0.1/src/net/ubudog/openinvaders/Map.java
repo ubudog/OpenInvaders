@@ -98,7 +98,7 @@ public class Map {
 	}
 	
 	public int getLevel() {
-		return Board.level;
+		return Game.level;
 	}
 	
 	public void closeFile() {

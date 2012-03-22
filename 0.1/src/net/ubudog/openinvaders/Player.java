@@ -179,7 +179,11 @@ public class Player {
 	}
 	
 	public void keyReleased(KeyEvent e) {
-		int key = e.getKeyCode();
+		
+	}
+	
+	public void keyTyped(KeyEvent e) {
+		
 	}
 	
 }
