@@ -493,14 +493,14 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 		for (int w = 0; w < bullets.size(); w++) {
 			Bullet m = (Bullet) bullets.get(w);
 			Rectangle m1 = m.getBounds();
-			// Level 1 
-			if (r1.intersects(m1)) {
+			// Level 1
+			if (r1.intersects(m1) && ship.getAlive() == true) {
 				ship.alive = false;
-			} else if (r2.intersects(m1)) {
+			} else if (r2.intersects(m1) && ship2.getAlive() == true) {
 				ship2.alive = false;
-			} else if (r3.intersects(m1)) {
+			} else if (r3.intersects(m1) && ship3.getAlive() == true) {
 				ship3.alive = false;
-			} else if (r4.intersects(m1)) {
+			} else if (r4.intersects(m1) && ship4.getAlive() == true) {
 				ship4.alive = false;
 			} else if (r5.intersects(m1)) {
 				ship5.alive = false;
@@ -511,15 +511,15 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 			} else if (r8.intersects(m1)) {
 				portal.alive = false;
 				player.cangoportal = false;
-			} else { 
-			//	player.cangoportal = true; 
+			} else {
+				// player.cangoportal = true;
 			}
 			// Level 2
-			if (r9.intersects(m1)) { 
-				portal2.alive = false; 
+			if (r9.intersects(m1)) {
+				portal2.alive = false;
 				player.cangoportal = false;
-			} else { 
-			//	player.cangoportal = true;
+			} else {
+				// player.cangoportal = true;
 			}
 		}
 
@@ -571,132 +571,128 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 
 	public void paint(Graphics g) {
 		if (getLevel() == 1) {
-			if (getWin() == true && getFail() == false) {
-				g.setFont(font);
-				g.setColor(Color.ORANGE);
-				g.drawString("Level 1 Passed, WOO!", 100, 200);
-			} else {
-				for (int y = 0; y < 16; y++) {
-					for (int x = 0; x < 16; x++) {
-						if (map.getMap(x, y).equals("w")) {
-							g.drawImage(map.getWall(), x * 32, y * 32, null);
-						}
-
-						if (map.getMap(x, y).equals("s")) {
-							g.drawImage(map.getSpace(), x * 32, y * 32, null);
-						}
-
-						if (map.getMap(x, y).equals("g")) {
-							g.drawImage(map.getGoo(), x * 32, y * 32, null);
-						}
-
-						if (map.getMap(x, y).equals("p")) {
-							g.drawImage(map.getPortal(), x * 32, y * 32, null);
-						}
+			for (int y = 0; y < 16; y++) {
+				for (int x = 0; x < 16; x++) {
+					if (map.getMap(x, y).equals("w")) {
+						g.drawImage(map.getWall(), x * 32, y * 32, null);
 					}
 
-					if (getLevelOneNew() == true) {
-						g.drawString("Defend the area!", 30, 200);
-						g.drawString("Then get to the portal!", 30, 220);
+					if (map.getMap(x, y).equals("s")) {
+						g.drawImage(map.getSpace(), x * 32, y * 32, null);
 					}
 
-					if (player.getAlive() == true) {
-						g.drawImage(player.getPlayer(), player.getX(),
-								player.getY(), null);
-					} else if (player.getAlive() == false) {
-						g.drawImage(player.getDead(), player.getX(),
-								player.getY(), null);
+					if (map.getMap(x, y).equals("g")) {
+						g.drawImage(map.getGoo(), x * 32, y * 32, null);
 					}
 
-					g.drawImage(ship.getShip(), ship.getX(), ship.getY(), null);
-					g.drawImage(ship2.getShip(), ship2x, ship2y, null);
-					g.drawImage(ship3.getShip(), ship3x, ship3y, null);
-					g.drawImage(ship4.getShip(), ship4x, ship4y, null);
-					g.drawImage(ship5.getShip(), ship5x, ship5y, null);
-					g.drawImage(ship6.getShip(), ship6x, ship6y, null);
-					g.drawImage(ship7.getShip(), ship7x, ship7y, null);
-
-					if (portal.getAlive() == true) {
-						g.drawImage(portal.getPortal(), portal.getX(),
-								portal.getY(), null);
-					} else if (portal.getAlive() == false) {
-						fail = true;
-					}
-
-					// Ship movement
-					if (getShip2X() == 400) {
-						// ship.alive = false;
-					} else {
-						ship2x++;
-					}
-
-					Random r = new Random();
-					String[] failmsg = { "YOU FAIL.  :(", "Failness.",
-							"Wow, fail.",
-							"'Ouch', you say, as you look at the ruins of your ship." };
-
-					if (player.ammo > 0) {
-						g.setFont(font);
-						g.setColor(Color.WHITE);
-						g.drawString("Remaining Ammo: " + player.ammo, 0, 500);
-					} else if (player.ammo == 0) {
-						g.setFont(font);
-						g.setColor(Color.WHITE);
-						g.drawString("Reload! (R)", 0, 500);
-					}
-
-					g.drawString("Score: " + player.score, 0, 480);
-
-					if (player.reloads > 0) {
-						g.setFont(italics);
-						g.setColor(Color.WHITE);
-						g.drawString("Reloads: " + player.reloads, 350, 500);
-					} else if (player.reloads == 0) {
-						g.setFont(italics);
-						g.setColor(Color.WHITE);
-						g.drawString("Out!", 450, 500);
-					}
-
-					if (getFail() == true && portal.getAlive() == false) {
-						g.setFont(font);
-						g.setColor(Color.GREEN);
-						g.drawString("Don't hit the - ...", 100, 300);
-						
-						g.setColor(Color.RED);
-						g.drawString("... portal.", 100, 320);
-					}
-
-					if (getFail() == true) {
-						g.setFont(font);
-						g.setColor(Color.GREEN);
-						g.drawString("Failed!", 100, 200);
-					}
-
-					if (player.ammo == 17) {
-						levelonenew = false;
-					}
-
-					if (ship.getAlive() == false) {
-						playercanmoveup = true;
-						playercanmovedown = true;
-
-						win = true;
-						level = 2; 
-						ship.alive = true;
-					}
-
-					if (player.getX() == portal.getX()
-							&& player.getY() == portal.getY()) {
-						level = 2;
-					}
-					ArrayList bullets = player.getBullets();
-					for (int w = 0; w < bullets.size(); w++) {
-						Bullet m = (Bullet) bullets.get(w);
-						g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
+					if (map.getMap(x, y).equals("p")) {
+						g.drawImage(map.getPortal(), x * 32, y * 32, null);
 					}
 				}
+
+				if (getLevelOneNew() == true) {
+					g.drawString("Defend the area!", 30, 200);
+					g.drawString("Then get to the portal!", 30, 220);
+				}
+
+				if (player.getAlive() == true) {
+					g.drawImage(player.getPlayer(), player.getX(),
+							player.getY(), null);
+				} else if (player.getAlive() == false) {
+					g.drawImage(player.getDead(), player.getX(), player.getY(),
+							null);
+				}
+
+				g.drawImage(ship.getShip(), ship.getX(), ship.getY(), null);
+				g.drawImage(ship2.getShip(), ship2x, ship2y, null);
+				g.drawImage(ship3.getShip(), ship3x, ship3y, null);
+				g.drawImage(ship4.getShip(), ship4x, ship4y, null);
+				g.drawImage(ship5.getShip(), ship5x, ship5y, null);
+				g.drawImage(ship6.getShip(), ship6x, ship6y, null);
+				g.drawImage(ship7.getShip(), ship7x, ship7y, null);
+
+				if (portal.getAlive() == true) {
+					g.drawImage(portal.getPortal(), portal.getX(),
+							portal.getY(), null);
+				} else if (portal.getAlive() == false) {
+					fail = true;
+				}
+
+				// Ship movement
+				if (getShip2X() == 400) {
+					// ship.alive = false;
+				} else {
+					ship2x++;
+				}
+
+				Random r = new Random();
+				String[] failmsg = { "YOU FAIL.  :(", "Failness.",
+						"Wow, fail.",
+						"'Ouch', you say, as you look at the ruins of your ship." };
+
+				if (player.ammo > 0) {
+					g.setFont(font);
+					g.setColor(Color.WHITE);
+					g.drawString("Remaining Ammo: " + player.ammo, 0, 500);
+				} else if (player.ammo == 0) {
+					g.setFont(font);
+					g.setColor(Color.WHITE);
+					g.drawString("Reload! (R)", 0, 500);
+				}
+
+				g.drawString("Score: " + player.score, 0, 480);
+
+				if (player.reloads > 0) {
+					g.setFont(italics);
+					g.setColor(Color.WHITE);
+					g.drawString("Reloads: " + player.reloads, 350, 500);
+				} else if (player.reloads == 0) {
+					g.setFont(italics);
+					g.setColor(Color.WHITE);
+					g.drawString("Out!", 450, 500);
+				}
+
+				if (getFail() == true && portal.getAlive() == false) {
+					g.setFont(font);
+					g.setColor(Color.GREEN);
+					g.drawString("Don't hit the - ...", 100, 300);
+
+					g.setColor(Color.RED);
+					g.drawString("... portal.", 100, 320);
+				}
+
+				if (getFail() == true) {
+					g.setFont(font);
+					g.setColor(Color.GREEN);
+					g.drawString("Failed!", 100, 200);
+				}
+
+				if (player.ammo == 17) {
+					levelonenew = false;
+				}
+
+				if (ship.getAlive() == false) {
+					playercanmoveup = true;
+					playercanmovedown = true;
+
+					win = true;
+					level = 2;
+					ship.alive = true;
+				}
+
+				if (player.getX() == portal.getX()
+						&& player.getY() == portal.getY()) {
+					level = 2;
+				}
+				ArrayList bullets = player.getBullets();
+				for (int w = 0; w < bullets.size(); w++) {
+					Bullet m = (Bullet) bullets.get(w);
+					g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
+				}
 			}
-		} else if (getLevel() == 2) {
+		}
+
+		if (getLevel() == 2) {
 			for (int y = 0; y < 16; y++) {
 				for (int x = 0; x < 16; x++) {
 					if (map.getMap(x, y).equals("w")) {
@@ -749,7 +745,8 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 				g.setFont(font);
 				g.setColor(Color.GREEN);
 				g.drawString("You have won!  :)", 0, 200);
-				
+			}
+
 				if (getFail() == true) {
 					g.setFont(font);
 					g.setColor(Color.GREEN);
@@ -788,116 +785,105 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 					Bullet m = (Bullet) bullets.get(w);
 					g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
 				}
+			}
 
-			} else if (getLevel() == 3) {
-				if (getWin() == true) {
-					g.setFont(font);
-					g.setColor(Color.ORANGE);
-					g.drawString("YOU WIN WOOHOO", 30, 200);
-				} else if (getWin() == false) {
-
-					for (int y = 0; y < 16; y++) {
-						for (int x = 0; x < 16; x++) {
-							if (map.getMap(x, y).equals("w")) {
-								g.drawImage(map.getWall(), x * 32, y * 32, null);
-							}
-
-							if (map.getMap(x, y).equals("s")) {
-								g.drawImage(map.getSpace(), x * 32, y * 32,
-										null);
-							}
-
-							if (map.getMap(x, y).equals("g")) {
-								g.drawImage(map.getGoo(), x * 32, y * 32, null);
-							}
+			if (getLevel() == 3) {
+				for (int y = 0; y < 16; y++) {
+					for (int x = 0; x < 16; x++) {
+						if (map.getMap(x, y).equals("w")) {
+							g.drawImage(map.getWall(), x * 32, y * 32, null);
 						}
 
-						if (player.getAlive() == true) {
-							g.drawImage(player.getPlayer(), player.getX(),
-									player.getY(), null);
-						} else if (player.getAlive() == false) {
-							g.drawImage(player.getDead(), player.getX(),
-									player.getY(), null);
+						if (map.getMap(x, y).equals("s")) {
+							g.drawImage(map.getSpace(), x * 32, y * 32, null);
 						}
 
-						g.drawImage(ship20.getShip(), ship20x, ship20y, null);
-						g.drawImage(ship21.getShip(), ship21x, ship21y, null);
-						g.drawImage(ship22.getShip(), ship22x, ship22y, null);
-						g.drawImage(ship23.getShip(), ship23x, ship23y, null);
-
-						g.drawImage(ship24.getShip(), ship24x, ship24y, null);
-						g.drawImage(ship25.getShip(), ship25x, ship25y, null);
-						g.drawImage(ship26.getShip(), ship26x, ship26y, null);
-						g.drawImage(ship27.getShip(), ship27x, ship27y, null);
-
-						g.drawImage(ship28.getShip(), ship28x, ship28y, null);
-						g.drawImage(ship29.getShip(), ship29x, ship29y, null);
-						g.drawImage(ship30.getShip(), ship30x, ship30y, null);
-						g.drawImage(ship31.getShip(), ship31x, ship31y, null);
-
-						g.drawImage(ship32.getShip(), ship32x, ship32y, null);
-						g.drawImage(ship33.getShip(), ship33x, ship33y, null);
-						g.drawImage(ship34.getShip(), ship34x, ship34y, null);
-						g.drawImage(ship35.getShip(), ship35x, ship35y, null);
-						g.drawImage(ship36.getShip(), ship36x, ship36y, null);
-						g.drawImage(ship37.getShip(), ship37x, ship37y, null);
-						g.drawImage(ship38.getShip(), ship38x, ship38y, null);
-						g.drawImage(ship39.getShip(), ship39x, ship39y, null);
-						// g.drawImage(ship40.getShip(), ship40x, ship40y,
-						// null);
-						// g.drawImage(ship41.getShip(), ship41x, ship41y,
-						// null);
-						g.drawImage(ship42.getShip(), ship42x, ship42y, null);
-						g.drawImage(ship43.getShip(), ship43x, ship43y, null);
-						g.drawImage(ship44.getShip(), ship44x, ship44y, null);
-
-						g.drawImage(portal3.getPortal(), portal3x, portal3y,
-								null);
-
-						if (getFail() == true) {
-							g.setFont(italics);
-							g.setColor(Color.GREEN);
-							g.drawString("You have failed level 3.  So close!",
-									10, 200);
+						if (map.getMap(x, y).equals("g")) {
+							g.drawImage(map.getGoo(), x * 32, y * 32, null);
 						}
+					}
 
-						if (player.ammo > 0) {
-							g.setFont(font);
-							g.setColor(Color.WHITE);
-							g.drawString("Remaining Ammo: " + player.ammo, 0,
-									500);
-						} else if (player.ammo == 0) {
-							g.setFont(font);
-							g.setColor(Color.WHITE);
-							g.drawString("Reload! (R)", 0, 500);
-						}
+					if (player.getAlive() == true) {
+						g.drawImage(player.getPlayer(), player.getX(),
+								player.getY(), null);
+					} else if (player.getAlive() == false) {
+						g.drawImage(player.getDead(), player.getX(),
+								player.getY(), null);
+					}
 
-						if (player.reloads > 0) {
-							g.setFont(italics);
-							g.setColor(Color.WHITE);
-							g.drawString("Reloads: " + player.reloads, 350, 500);
-						} else if (player.reloads == 0) {
-							g.setFont(italics);
-							g.setColor(Color.WHITE);
-							g.drawString("Out!", 450, 500);
-						}
+					g.drawImage(ship20.getShip(), ship20x, ship20y, null);
+					g.drawImage(ship21.getShip(), ship21x, ship21y, null);
+					g.drawImage(ship22.getShip(), ship22x, ship22y, null);
+					g.drawImage(ship23.getShip(), ship23x, ship23y, null);
 
-						if (player.getX() == portal3x
-								&& player.getY() == portal3y) {
-							win = true;
-						}
+					g.drawImage(ship24.getShip(), ship24x, ship24y, null);
+					g.drawImage(ship25.getShip(), ship25x, ship25y, null);
+					g.drawImage(ship26.getShip(), ship26x, ship26y, null);
+					g.drawImage(ship27.getShip(), ship27x, ship27y, null);
 
-						ArrayList bullets = player.getBullets();
-						for (int w = 0; w < bullets.size(); w++) {
-							Bullet m = (Bullet) bullets.get(w);
-							g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
-						}
+					g.drawImage(ship28.getShip(), ship28x, ship28y, null);
+					g.drawImage(ship29.getShip(), ship29x, ship29y, null);
+					g.drawImage(ship30.getShip(), ship30x, ship30y, null);
+					g.drawImage(ship31.getShip(), ship31x, ship31y, null);
+
+					g.drawImage(ship32.getShip(), ship32x, ship32y, null);
+					g.drawImage(ship33.getShip(), ship33x, ship33y, null);
+					g.drawImage(ship34.getShip(), ship34x, ship34y, null);
+					g.drawImage(ship35.getShip(), ship35x, ship35y, null);
+					g.drawImage(ship36.getShip(), ship36x, ship36y, null);
+					g.drawImage(ship37.getShip(), ship37x, ship37y, null);
+					g.drawImage(ship38.getShip(), ship38x, ship38y, null);
+					g.drawImage(ship39.getShip(), ship39x, ship39y, null);
+					// g.drawImage(ship40.getShip(), ship40x, ship40y,
+					// null);
+					// g.drawImage(ship41.getShip(), ship41x, ship41y,
+					// null);
+					g.drawImage(ship42.getShip(), ship42x, ship42y, null);
+					g.drawImage(ship43.getShip(), ship43x, ship43y, null);
+					g.drawImage(ship44.getShip(), ship44x, ship44y, null);
+
+					g.drawImage(portal3.getPortal(), portal3x, portal3y, null);
+
+					if (getFail() == true) {
+						g.setFont(italics);
+						g.setColor(Color.GREEN);
+						g.drawString("You have failed level 3.  So close!", 10,
+								200);
+					}
+
+					if (player.ammo > 0) {
+						g.setFont(font);
+						g.setColor(Color.WHITE);
+						g.drawString("Remaining Ammo: " + player.ammo, 0, 500);
+					} else if (player.ammo == 0) {
+						g.setFont(font);
+						g.setColor(Color.WHITE);
+						g.drawString("Reload! (R)", 0, 500);
+					}
+
+					if (player.reloads > 0) {
+						g.setFont(italics);
+						g.setColor(Color.WHITE);
+						g.drawString("Reloads: " + player.reloads, 350, 500);
+					} else if (player.reloads == 0) {
+						g.setFont(italics);
+						g.setColor(Color.WHITE);
+						g.drawString("Out!", 450, 500);
+					}
+
+					if (player.getX() == portal3x && player.getY() == portal3y) {
+						win = true;
+					}
+
+					ArrayList bullets = player.getBullets();
+					for (int w = 0; w < bullets.size(); w++) {
+						Bullet m = (Bullet) bullets.get(w);
+						g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
 					}
 				}
 			}
-		}
 	}
-
+	
 	public static boolean getFirstRun() {
 		return firstRun;
 	}
@@ -1046,7 +1032,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 		}
 
 		System.out.println("Start errors: " + startErrors);
-		Game game = new Game(); 
+		Game game = new Game();
 		JFrame frame = new JFrame(GAME_NAME);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(515, 543);
@@ -1089,8 +1075,8 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		player.keyReleased(e);
 	}
-	
+
 	public void keyTyped(KeyEvent e) {
-		player.keyTyped(e);	
+		player.keyTyped(e);
 	}
 }
