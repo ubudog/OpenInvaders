@@ -487,10 +487,13 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 		Rectangle r6 = ship6.getBounds();
 		Rectangle r7 = ship7.getBounds();
 		Rectangle r8 = portal.getBounds();
+		// Level 2 rects
+		Rectangle r9 = portal2.getBounds();
 		ArrayList bullets = player.getBullets();
 		for (int w = 0; w < bullets.size(); w++) {
 			Bullet m = (Bullet) bullets.get(w);
 			Rectangle m1 = m.getBounds();
+			// Level 1 
 			if (r1.intersects(m1)) {
 				ship.alive = false;
 			} else if (r2.intersects(m1)) {
@@ -508,6 +511,15 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 			} else if (r8.intersects(m1)) {
 				portal.alive = false;
 				player.cangoportal = false;
+			} else { 
+			//	player.cangoportal = true; 
+			}
+			// Level 2
+			if (r9.intersects(m1)) { 
+				portal2.alive = false; 
+				player.cangoportal = false;
+			} else { 
+			//	player.cangoportal = true;
 			}
 		}
 
@@ -669,7 +681,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 						playercanmovedown = true;
 
 						win = true;
-						level = 2;
+						level = 2; 
 						ship.alive = true;
 					}
 
@@ -737,7 +749,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 				g.setFont(font);
 				g.setColor(Color.GREEN);
 				g.drawString("You have won!  :)", 0, 200);
-
+				
 				if (getFail() == true) {
 					g.setFont(font);
 					g.setColor(Color.GREEN);
