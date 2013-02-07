@@ -39,9 +39,6 @@ import net.ubudog.openinvaders.map.Map;
 
 public class Game extends JPanel implements ActionListener, KeyListener {
 
-	// I know my coding is sub-par
-	// I am still learning :D
-
 	private static final long serialVersionUID = 1L;
 	static Font font = new Font("SanSerif", Font.BOLD, 25);
 	static Font italics = new Font("SanSerif", Font.ITALIC, 25);
@@ -72,141 +69,6 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 	static Socket socket;
 	static InputStream inputStream;
 	static OutputStream outputStream;
-
-	int ship2x;
-	int ship2y;
-
-	int ship3x;
-	int ship3y;
-
-	int ship4x;
-	int ship4y;
-
-	int ship5x;
-	int ship5y;
-
-	int ship6x;
-	int ship6y;
-
-	int ship7x;
-	int ship7y;
-
-	int ship8x;
-	int ship8y;
-
-	int ship9x;
-	int ship9y;
-
-	int ship10x;
-	int ship10y;
-
-	int ship11x;
-	int ship11y;
-
-	int ship12x;
-	int ship12y;
-
-	int ship13x;
-	int ship13y;
-
-	int ship14x;
-	int ship14y;
-
-	int ship15x;
-	int ship15y;
-
-	int ship16x;
-	int ship16y;
-
-	int ship17x;
-	int ship17y;
-
-	int ship18x;
-	int ship18y;
-
-	int ship19x;
-	int ship19y;
-
-	int ship20x;
-	int ship20y;
-
-	int ship21x;
-	int ship21y;
-
-	int ship22x;
-	int ship22y;
-
-	int ship23x;
-	int ship23y;
-
-	int ship24x;
-	int ship24y;
-
-	int ship25x;
-	int ship25y;
-
-	int ship26x;
-	int ship26y;
-
-	int ship27x;
-	int ship27y;
-
-	int ship28x;
-	int ship28y;
-
-	int ship29x;
-	int ship29y;
-
-	int ship30x;
-	int ship30y;
-
-	int ship31x;
-	int ship31y;
-
-	int ship32x;
-	int ship32y;
-
-	int ship33x;
-	int ship33y;
-
-	int ship34x;
-	int ship34y;
-
-	int ship35x;
-	int ship35y;
-
-	int ship36x;
-	int ship36y;
-
-	int ship37x;
-	int ship37y;
-
-	int ship38x;
-	int ship38y;
-
-	int ship39x;
-	int ship39y;
-
-	int ship40x;
-	int ship40y;
-
-	int ship41x;
-	int ship41y;
-
-	int ship42x;
-	int ship42y;
-
-	int ship43x;
-	int ship43y;
-
-	int ship44x;
-	int ship44y;
-
-	int portal2x;
-	int portal2y;
-
-	int portal3x;
-	int portal3y;
 
 	static boolean win = false;
 	static boolean fail = false;
@@ -275,14 +137,6 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 
 	public static int getLevel() {
 		return level;
-	}
-
-	public int getShip2X() {
-		return ship2x;
-	}
-
-	public int getShip2Y() {
-		return ship2y;
 	}
 
 	public void paint(Graphics g) {
@@ -431,10 +285,6 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 					leveltwonew = false;
 				}
 
-				if (player.getX() == portal2x && player.getY() == portal2y) {
-					level = 3;
-				}
-
 				ArrayList bullets = player.getBullets();
 				for (int w = 0; w < bullets.size(); w++) {
 					Bullet m = (Bullet) bullets.get(w);
@@ -490,10 +340,6 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 						g.setFont(italics);
 						g.setColor(Color.WHITE);
 						g.drawString("Out!", 450, 500);
-					}
-
-					if (player.getX() == portal3x && player.getY() == portal3y) {
-						win = true;
 					}
 
 					ArrayList bullets = player.getBullets();
