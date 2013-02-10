@@ -91,7 +91,7 @@ public class Player {
 	public void fireBullet() {
 		if (ammo > 0) {
 			ammo--; 
-			new SoundManager(MAIN_DIR + "/bullet.wav").start();
+			new SoundManager("res/sounds/bullet.wav").start();
 			Bullet b = new Bullet(getX() + 2, getY());
 			bullets.add(b);
 		}
@@ -153,7 +153,6 @@ public class Player {
 				}
 				
 				if (key == KeyEvent.VK_SPACE) { 
-				//	new Ship().alive = false;
 					fireBullet();
 				}
 				

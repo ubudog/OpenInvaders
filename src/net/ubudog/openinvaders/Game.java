@@ -8,23 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.Socket;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -35,7 +23,7 @@ import net.ubudog.openinvaders.entity.Bullet;
 import net.ubudog.openinvaders.entity.Player;
 import net.ubudog.openinvaders.map.Map;
 
-public class Game extends JPanel implements ActionListener, KeyListener {
+public class Game extends JPanel implements ActionListener, KeyListener, MouseListener {
 
 	private static final long serialVersionUID = 1L;
 	static Font font = new Font("SanSerif", Font.BOLD, 25);
@@ -45,7 +33,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 	private Bullet bullet;
 	private Map map;
 	private Timer time;
-	public static int level = 1;
+	public static int level = 0;
 	static boolean levelonenew = true;
 	static boolean leveltwonew = true;
 	static boolean playercanmoveup = false;
@@ -54,45 +42,54 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 
 	static String USER_HOME = System.getProperty("user.home");
 	static String MAIN_DIR = USER_HOME + "/.openinvaders";
-	static String GAME_NAME = "OpenInvaders - Work-in-progress";
+	static String GAME_NAME = "OpenInvaders - Alpha 0.1";
 	static String GAME_VERSION = "0.1";
 	static String LEVEL1_MUSIC = MAIN_DIR + "/songlevel1.ogg";
 	static String ICON_LOCATION = MAIN_DIR + "/player.png";
+	
+	static JFrame frame;
+	
 	// static String LEVEL2_MUSIC = MAIN_DIR + "/songlevel2.ogg";
 	// static String LEVEL3_MUSIC = MAIN_DIR + "/songlevel3.ogg";
 	static int startErrors = 0;
 	static boolean firstRun;
 
-	static String serverName = "ubudog.net";
-	static Socket socket;
-	static InputStream inputStream;
-	static OutputStream outputStream;
-
 	static boolean win = false;
 	static boolean fail = false;
+	
+	Font menuFont; 
+	Font infoFont; 
 
 	public Game() {
-		map = new Map();
-		player = new Player();
+	//	map = new Map();
+	//  player = new Player();
 		addKeyListener(this);
+		addMouseListener(this); 
+		
 		setFocusable(true);
 
+		menuFont = new Font("SansSerif", Font.BOLD, 25); 
+		infoFont = new Font("SansSerif", Font.ITALIC, 10); 
+		
 		time = new Timer(25, this);
 		time.start();
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		checkCollisions();
-		ArrayList bullets = player.getBullets();
-		for (int w = 0; w < bullets.size(); w++) {
-			Bullet m = (Bullet) bullets.get(w);
-			if (m.getVisible() == true) {
-				m.move();
-			} else {
-				bullets.remove(w);
+		if (level == 0) { 
+		} else { 
+			checkCollisions();
+			ArrayList bullets = player.getBullets();
+			for (int w = 0; w < bullets.size(); w++) {
+				Bullet m = (Bullet) bullets.get(w);
+				if (m.getVisible() == true) {
+					m.move();
+				} else {
+					bullets.remove(w);
+				}
 			}
+			repaint();
 		}
-		repaint();
 	}
 
 	public void checkCollisions() {
@@ -138,7 +135,30 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void paint(Graphics g) {
+		if (getLevel() == 0) { 
+			// Menu level
+			frame.setBackground(Color.BLACK);
+			
+			g.draw3DRect(150, 150, 200, 50, false); 
+			g.draw3DRect(150, 225, 200, 50, false);
+			g.draw3DRect(150, 300, 200, 50, false);
+			g.draw3DRect(150, 375, 200, 50, false);
+			g.draw3DRect(150, 450, 200, 50, false); 
+			
+			g.setFont(menuFont);
+			g.setColor(Color.WHITE); 
+			g.drawString("OpenInvaders", 150, 75); 
+			g.drawString("New Game", 175, 180); 
+			g.drawString("Load Game", 175, 255);
+			g.drawString("N/A", 175, 330);
+			g.drawString("N/A", 175, 405);
+			g.drawString("Exit", 175, 480);
+			
+			g.setFont(infoFont); 
+			g.drawString("Version: Alpha 0.1", 425, 535); 
+		}
 		if (getLevel() == 1) {
+			// Level 1
 			for (int y = 0; y < 16; y++) {
 				for (int x = 0; x < 16; x++) {
 					if (map.getMap(x, y).equals("w")) {
@@ -230,7 +250,8 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 					}
 				}
 			}
-
+			
+			/**
 			if (player.getAlive() == true) {
 				g.drawImage(player.getPlayer(), player.getX(), player.getY(),
 						null);
@@ -238,8 +259,8 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 				g.drawImage(player.getDead(), player.getX(), player.getY(),
 						null);
 			}
-
-
+			*/
+			
 			g.setFont(font);
 			g.setColor(Color.ORANGE);
 
@@ -353,68 +374,8 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 		return firstRun;
 	}
 
-	public static void doUnzip(String inputZip, String destinationDirectory)
-			throws IOException {
-		int BUFFER = 2048;
-		List zipFiles = new ArrayList();
-		File sourceZipFile = new File(inputZip);
-		File unzipDestinationDirectory = new File(destinationDirectory);
-		unzipDestinationDirectory.mkdir();
 
-		ZipFile zipFile;
-		zipFile = new ZipFile(sourceZipFile, ZipFile.OPEN_READ);
-
-		Enumeration zipFileEntries = zipFile.entries();
-
-		while (zipFileEntries.hasMoreElements()) {
-			ZipEntry entry = (ZipEntry) zipFileEntries.nextElement();
-
-			String currentEntry = entry.getName();
-
-			File destFile = new File(unzipDestinationDirectory, currentEntry);
-			destFile = new File(unzipDestinationDirectory, destFile.getName());
-
-			if (currentEntry.endsWith(".zip")) {
-				zipFiles.add(destFile.getAbsolutePath());
-			}
-
-			File destinationParent = destFile.getParentFile();
-
-			destinationParent.mkdirs();
-
-			try {
-				if (!entry.isDirectory()) {
-					BufferedInputStream is = new BufferedInputStream(
-							zipFile.getInputStream(entry));
-					int currentByte;
-					byte data[] = new byte[BUFFER];
-
-					FileOutputStream fos = new FileOutputStream(destFile);
-					BufferedOutputStream dest = new BufferedOutputStream(fos,
-							BUFFER);
-
-					while ((currentByte = is.read(data, 0, BUFFER)) != -1) {
-						dest.write(data, 0, currentByte);
-					}
-					dest.flush();
-					dest.close();
-					is.close();
-				}
-			} catch (IOException ioe) {
-				ioe.printStackTrace();
-			}
-		}
-		zipFile.close();
-
-		for (Iterator iter = zipFiles.iterator(); iter.hasNext();) {
-			String zipName = (String) iter.next();
-			doUnzip(zipName, destinationDirectory + File.separatorChar
-					+ zipName.substring(0, zipName.lastIndexOf(".zip")));
-		}
-	}
-
-	public static void main(String[] args) throws IOException,
-			MalformedURLException {
+	public static void main(String[] args) {
 		firstDir = new File(MAIN_DIR);
 
 		if (firstDir.exists()) {
@@ -424,65 +385,23 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 			System.out.println("First run.");
 			firstRun = true;
 			firstDir.mkdir();
-
-			// Download sprites, music, etc.
-			// Will be gone soon
-			long startTime = System.currentTimeMillis();
-			System.out
-					.println("Connecting to ubudog.net to get needed files...");
-			URL url = new URL("http://ubudog.net/openinvadersdownload.zip");
-			url.openConnection();
-			InputStream reader = url.openStream();
-
-			FileOutputStream writer = new FileOutputStream(MAIN_DIR
-					+ "/openinvadersdownload.zip");
-			byte[] buffer = new byte[153600];
-			int totalBytesRead = 0;
-			int bytesRead = 0;
-
-			System.out.println("Connected!");
-			System.out
-					.println("Reading 150KB blocks at a time.  This might take a while depending on your connection.");
-			System.out
-					.println("You only have to do this once. (well, unless you delete $HOME/.openinvaders...)");
-			System.out.println("");
-			while ((bytesRead = reader.read(buffer)) > 0) {
-				writer.write(buffer, 0, bytesRead);
-				buffer = new byte[153600];
-				totalBytesRead += bytesRead;
-			}
-
-			long endTime = System.currentTimeMillis();
-
-			doUnzip(MAIN_DIR + "/openinvadersdownload.zip", MAIN_DIR);
-
-			System.out.println("Done with first run stuff woohoo");
-			System.out.println("");
-			writer.close();
-			reader.close();
-
 		}
 
-		// No music for now
+		/**
 		if (getLevel() == 1) {
-			/**
 			 * try { FileInputStream fis = new FileInputStream(LEVEL1_MUSIC);
 			 * OggClip clip = new OggClip(fis); clip.loop(); } catch
 			 * (IOException e) { e.printStackTrace(); }
-			 */
 		} else if (getLevel() == 2) {
-			/**
 			 * try { FileInputStream fis = new FileInputStream(LEVEL2_MUSIC);
 			 * OggClip clip = new OggClip(fis); clip.loop(); } catch
 			 * (IOException e) { e.printStackTrace(); }
-			 */
 		} else if (getLevel() == 3) {
-			/**
 			 * try { FileInputStream fis = new FileInputStream(LEVEL3_MUSIC);
 			 * OggClip clip = new OggClip(fis); clip.loop(); } catch
 			 * (IOException e) { e.printStackTrace(); }
-			 */
 		}
+		*/
 
 		System.out.println("New game starting.");
 		System.out.println("Game version: " + GAME_VERSION);
@@ -499,7 +418,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 
 		System.out.println("Start errors: " + startErrors);
 		Game game = new Game();
-		JFrame frame = new JFrame(GAME_NAME);
+		frame = new JFrame(GAME_NAME);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(515, 543);
 		frame.setLocationRelativeTo(null);
@@ -508,32 +427,24 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 		frame.setResizable(false);
 		frame.setVisible(true);
 	}
-
+	
 	public void keyPressed(KeyEvent e) {
 		player.keyPressed(e);
 		int key = e.getKeyCode();
 
 		if (key == KeyEvent.VK_J) {
-			// Cheat key to get to level 2
-			// Mainly for testing.. :)
-			if (level == 1) {
-				level++;
-			} else if (level == 2) {
-				level++;
-			} else if (level == 3) {
-				System.out.println("At the last level, can't go forward.");
+			// Go to next level
+			if (level == 3) { 
+			} else { 
+				level++; 
 			}
 		}
 
 		if (key == KeyEvent.VK_B) {
-			// Cheat to get to the previous level
-			// Also for testing :)
-			if (level == 1) {
-				System.out.println("At the first level, can't go back.");
-			} else if (level == 2) {
-				level--;
-			} else if (level == 3) {
-				level--;
+			// Go to previous level
+			if (level == 1) { 
+			} else { 
+				level--; 
 			}
 		}
 	}
@@ -544,5 +455,48 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 
 	public void keyTyped(KeyEvent e) {
 		player.keyTyped(e);
+	}
+
+	public void mouseClicked(MouseEvent arg0) {
+		if (level == 0) { 			
+			if (arg0.getX() >= 150 && arg0.getX() < 350 &&  arg0.getY() >= 150 && arg0.getY() < 200) {
+				System.out.println("Starting a new game..."); 
+			}
+			
+			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 225 && arg0.getY() < 275) { 
+				System.out.println("Load games..."); 
+			}
+			
+			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 300 && arg0.getY() < 350) { 
+				System.out.println("N/A"); 
+			}
+			
+			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 375 && arg0.getY() < 425) {
+				System.out.println("N/A"); 
+			}
+			
+			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 450 && arg0.getY() < 500) { 
+				System.out.println("Exiting!"); 
+				System.exit(0); 
+			}
+			
+		} else { 
+		}
+	}
+
+	public void mouseEntered(MouseEvent arg0) {
+		
+	}
+
+	public void mouseExited(MouseEvent arg0) {
+		
+	}
+
+	public void mouseReleased(MouseEvent arg0) {
+		
+	}
+
+	public void mousePressed(MouseEvent e) {
+		
 	}
 }
