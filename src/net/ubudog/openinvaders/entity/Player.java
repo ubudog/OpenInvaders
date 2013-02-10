@@ -25,10 +25,7 @@ public class Player {
 	
 	static int x; 
 	static int y; 
-	
-	static String HOME_DIR = System.getProperty("user.home");
-	static String MAIN_DIR = HOME_DIR + "/.openinvaders";
-	
+		
 	Map map;
 
 	public static ArrayList bullets; 
@@ -42,10 +39,10 @@ public class Player {
 		reloads = 5; 
 		score = 0;
 		
-		ImageIcon i = new ImageIcon(MAIN_DIR + "/player.png");
+		ImageIcon i = new ImageIcon("res/drawable/player.png");
 		img = i.getImage();
 		
-		i = new ImageIcon(MAIN_DIR + "/explosion.gif");
+		i = new ImageIcon("res/drawable/explosion.gif");
 		deathimg = i.getImage();
 		
 		bullets = new ArrayList();
@@ -96,28 +93,20 @@ public class Player {
 			bullets.add(b);
 		}
 	}
-	
-	public boolean getCanGoPortal() { 
-		return cangoportal;
-	}
-	
+		
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if (getAlive() == true) {
 			if (getCanMove() == true) {
 				if (key == KeyEvent.VK_W) {
-					if (getCanGoPortal() == true) {
-						y = y - 32; 
-					}
+					y = y - 32; 
 				}
 				if (key == KeyEvent.VK_A) {
 					x = x - 32; 
 				}
 				
 				if (key == KeyEvent.VK_S) {
-					if (getCanGoPortal() == true) { 
-						y = y + 32; 
-					}
+					y = y + 32; 
 				}
 				
 				if (key == KeyEvent.VK_D) {

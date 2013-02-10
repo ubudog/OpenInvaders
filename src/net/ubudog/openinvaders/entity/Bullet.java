@@ -10,8 +10,6 @@ public class Bullet {
 	int x; 
 	int y; 
 	Image img;
-	String HOME_DIR = System.getProperty("user.home");
-	String MAIN_DIR = HOME_DIR + "/.openinvaders";
 	
 	boolean visible;
 	
@@ -19,7 +17,7 @@ public class Bullet {
 		x = startX;
 		y = startY; 
 		
-		ImageIcon newBullet = new ImageIcon(MAIN_DIR + "/bullet.png");
+		ImageIcon newBullet = new ImageIcon("res/drawable/bullet.png");
 		img = newBullet.getImage();
 		
 		visible = true;

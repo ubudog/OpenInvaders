@@ -20,32 +20,22 @@ public class Map {
 	private Image goo;
 	private Image portal;
 	
-	static String USER_HOME = System.getProperty("user.home"); 
-	static String MAIN_DIR = USER_HOME + "/.openinvaders"; 
 	static String MAP_LOCATION;
 	
 	public Map() {		
 		
-		if (getLevel() == 1) {
-			MAP_LOCATION = MAIN_DIR + "/level1.txt";
+		if (getLevel() == 1) { 
+			MAP_LOCATION = "res/map/level1.txt";
 		} else if (getLevel() == 2) {
-			MAP_LOCATION = MAIN_DIR + "/level2.txt";
-		} else if (getLevel() == 3) {
-			MAP_LOCATION = MAIN_DIR + "/level3.txt";
+			MAP_LOCATION = "res/map/level2.txt"; 
 		}
 		
-		ImageIcon img = new ImageIcon(MAIN_DIR + "/wall.png"); 
+		ImageIcon img = new ImageIcon("res/drawable/barrier.png"); 
 		wall = img.getImage(); 
 		
-		img = new ImageIcon(MAIN_DIR + "/space.gif");
+		img = new ImageIcon("res/drawable/space.png");
 		space = img.getImage();
-		
-		img = new ImageIcon(MAIN_DIR + "/goo.gif");
-		goo = img.getImage();
-		
-		img = new ImageIcon(MAIN_DIR + "/portal.png");
-		portal = img.getImage();
-		
+						
 		openFile(); 
 		readFile();
 		closeFile(); 

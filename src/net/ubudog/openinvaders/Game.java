@@ -36,8 +36,6 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	public static int level = 0;
 	static boolean levelonenew = true;
 	static boolean leveltwonew = true;
-	static boolean playercanmoveup = false;
-	static boolean playercanmovedown = false;
 	static File firstDir;
 
 	static String USER_HOME = System.getProperty("user.home");
@@ -61,8 +59,6 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	Font infoFont; 
 
 	public Game() {
-	//	map = new Map();
-	//  player = new Player();
 		addKeyListener(this);
 		addMouseListener(this); 
 		
@@ -71,8 +67,9 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 		menuFont = new Font("SansSerif", Font.BOLD, 25); 
 		infoFont = new Font("SansSerif", Font.ITALIC, 10); 
 		
-		time = new Timer(25, this);
-		time.start();
+		if (level == 0) {
+		} else { 
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -116,14 +113,6 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 
 	public boolean getLevelTwoNew() {
 		return leveltwonew;
-	}
-
-	public boolean getPlayerCanMoveUp() {
-		return playercanmoveup;
-	}
-
-	public boolean getPlayerCanMoveDown() {
-		return playercanmovedown;
 	}
 
 	public ArrayList bullets() {
@@ -178,17 +167,11 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 					}
 				}
 
-				if (getLevelOneNew() == true) {
-					g.drawString("Defend the area!", 30, 200);
-					g.drawString("Then get to the portal!", 30, 220);
-				}
-
 				if (player.getAlive() == true) {
 					g.drawImage(player.getPlayer(), player.getX(),
 							player.getY(), null);
 				} else if (player.getAlive() == false) {
-					g.drawImage(player.getDead(), player.getX(), player.getY(),
-							null);
+					g.drawImage(player.getDead(), player.getX(), player.getY(), null);
 				}
 
 				Random r = new Random();
@@ -408,8 +391,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 		System.out.println("Home directory detected as: " + USER_HOME);
 
 		if (getFirstRun() == true) {
-			// Tell the player the controls
-			System.out.println("Here are the controls:");
+			System.out.println("Controls:");
 			System.out.println("A/Left - Move Left");
 			System.out.println("D/Right - Move Right");
 			System.out.println("Space - Shoot");
@@ -461,6 +443,11 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 		if (level == 0) { 			
 			if (arg0.getX() >= 150 && arg0.getX() < 350 &&  arg0.getY() >= 150 && arg0.getY() < 200) {
 				System.out.println("Starting a new game..."); 
+				level = 1; 
+				map = new Map();
+				player = new Player();
+				time = new Timer(25, this);
+				time.start();
 			}
 			
 			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 225 && arg0.getY() < 275) { 
