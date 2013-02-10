@@ -33,8 +33,6 @@ import javax.swing.Timer;
 
 import net.ubudog.openinvaders.entity.Bullet;
 import net.ubudog.openinvaders.entity.Player;
-import net.ubudog.openinvaders.entity.Portal;
-import net.ubudog.openinvaders.entity.Ship;
 import net.ubudog.openinvaders.map.Map;
 
 public class Game extends JPanel implements ActionListener, KeyListener {
