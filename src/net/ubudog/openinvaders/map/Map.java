@@ -17,14 +17,13 @@ public class Map {
 	 
 	private Image wall; 
 	private Image space;
-	private Image goo;
-	private Image portal;
 	
 	static String MAP_LOCATION;
 	
 	public Map() {		
 		
-		if (getLevel() == 1) { 
+		if (getLevel() == 0) {
+		} else if (getLevel() == 1) { 
 			MAP_LOCATION = "res/map/level1.txt";
 		} else if (getLevel() == 2) {
 			MAP_LOCATION = "res/map/level2.txt"; 
@@ -57,16 +56,7 @@ public class Map {
 	public Image getSpace() {
 		return space;
 	}
-	
-	// Goo is only used in Level 2, atm.
-	public Image getGoo() {
-		return goo;
-	}
-	
-	public Image getPortal() {
-		return portal;
-	}
-	
+		
 	public String getMap(int x, int y) {
 		String index = map[y].substring(x, x + 1);
 		return index; 

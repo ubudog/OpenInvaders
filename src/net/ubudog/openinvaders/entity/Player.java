@@ -159,7 +159,7 @@ public class Player {
 				System.out.println("I can't move.  I'm out of bounds!");
 			}
 			
-		} else if (getAlive() == false) {
+		} else {
 			
 		}
 		

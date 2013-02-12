@@ -47,8 +47,6 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	
 	static JFrame frame;
 	
-	// static String LEVEL2_MUSIC = MAIN_DIR + "/songlevel2.ogg";
-	// static String LEVEL3_MUSIC = MAIN_DIR + "/songlevel3.ogg";
 	static int startErrors = 0;
 	static boolean firstRun;
 
@@ -57,7 +55,10 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	
 	Font menuFont; 
 	Font infoFont; 
-
+	Font gameFont; 
+	
+	ArrayList enemies; 
+	
 	public Game() {
 		addKeyListener(this);
 		addMouseListener(this); 
@@ -66,6 +67,9 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 
 		menuFont = new Font("SansSerif", Font.BOLD, 25); 
 		infoFont = new Font("SansSerif", Font.ITALIC, 10); 
+		gameFont = new Font("SansSerif", Font.HANGING_BASELINE, 15);
+		
+		enemies = new ArrayList(); 
 		
 		if (level == 0) {
 		} else { 
@@ -93,26 +97,10 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 		ArrayList bullets = player.getBullets();
 		for (int w = 0; w < bullets.size(); w++) {
 			Bullet m = (Bullet) bullets.get(w);
-			Rectangle m1 = m.getBounds();
+			Rectangle m1 = m.getBounds();			
 		}
-
+		
 		Rectangle d = player.getBounds();
-	}
-
-	public boolean getWin() {
-		return win;
-	}
-
-	public boolean getFail() {
-		return fail;
-	}
-
-	public boolean getLevelOneNew() {
-		return levelonenew;
-	}
-
-	public boolean getLevelTwoNew() {
-		return leveltwonew;
 	}
 
 	public ArrayList bullets() {
@@ -147,6 +135,8 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			g.drawString("Version: Alpha 0.1", 425, 535); 
 		}
 		if (getLevel() == 1) {
+			g.setFont(gameFont); 
+			
 			// Level 1
 			for (int y = 0; y < 16; y++) {
 				for (int x = 0; x < 16; x++) {
@@ -157,14 +147,6 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 					if (map.getMap(x, y).equals("s")) {
 						g.drawImage(map.getSpace(), x * 32, y * 32, null);
 					}
-
-					if (map.getMap(x, y).equals("g")) {
-						g.drawImage(map.getGoo(), x * 32, y * 32, null);
-					}
-
-					if (map.getMap(x, y).equals("p")) {
-						g.drawImage(map.getPortal(), x * 32, y * 32, null);
-					}
 				}
 
 				if (player.getAlive() == true) {
@@ -173,33 +155,33 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 				} else if (player.getAlive() == false) {
 					g.drawImage(player.getDead(), player.getX(), player.getY(), null);
 				}
-
+				
 				Random r = new Random();
 				String[] failmsg = { "You have lost!" }; 
 
 				if (player.ammo > 0) {
-					g.setFont(font);
+					g.setFont(gameFont);
 					g.setColor(Color.WHITE);
 					g.drawString("Remaining Ammo: " + player.ammo, 0, 500);
 				} else if (player.ammo == 0) {
-					g.setFont(font);
+					g.setFont(gameFont);
 					g.setColor(Color.WHITE);
 					g.drawString("Reload! (R)", 0, 500);
 				}
-
+				
 				g.drawString("Score: " + player.score, 0, 480);
 
 				if (player.reloads > 0) {
-					g.setFont(italics);
+					g.setFont(gameFont);
 					g.setColor(Color.WHITE);
 					g.drawString("Reloads: " + player.reloads, 350, 500);
 				} else if (player.reloads == 0) {
-					g.setFont(italics);
+					g.setFont(gameFont);
 					g.setColor(Color.WHITE);
 					g.drawString("Out!", 450, 500);
 				}
 
-				if (getFail() == true) {
+				if (fail == true) {
 					g.setFont(font);
 					g.setColor(Color.GREEN);
 					g.drawString("Failed!", 100, 200);
@@ -227,10 +209,6 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 					if (map.getMap(x, y).equals("s")) {
 						g.drawImage(map.getSpace(), x * 32, y * 32, null);
 					}
-
-					if (map.getMap(x, y).equals("g")) {
-						g.drawImage(map.getGoo(), x * 32, y * 32, null);
-					}
 				}
 			}
 			
@@ -247,28 +225,28 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			g.setFont(font);
 			g.setColor(Color.ORANGE);
 
-			if (getLevelTwoNew() == true) {
+			if (leveltwonew == true) {
 				g.drawString("You've made it to Level 2!", 50, 250);
 				g.drawString("We're still working on this...", 50, 300);
 			}
 
-			if (getWin() == true) {
+			if (win == true) {
 				g.setFont(font);
 				g.setColor(Color.GREEN);
 				g.drawString("You have won!  :)", 0, 200);
 			}
 
-				if (getFail() == true) {
-					g.setFont(font);
+				if (fail == true) {
+					g.setFont(gameFont);
 					g.setColor(Color.GREEN);
 					g.drawString("You have failed!  :(", 0, 200);
 				}
 				if (player.ammo > 0) {
-					g.setFont(font);
+					g.setFont(gameFont);
 					g.setColor(Color.WHITE);
 					g.drawString("Remaining Ammo: " + player.ammo, 0, 500);
 				} else if (player.ammo == 0) {
-					g.setFont(font);
+					g.setFont(gameFont);
 					g.setColor(Color.WHITE);
 					g.drawString("Reload! (R)", 0, 500);
 				}
@@ -291,64 +269,6 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 				for (int w = 0; w < bullets.size(); w++) {
 					Bullet m = (Bullet) bullets.get(w);
 					g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
-				}
-			}
-
-			if (getLevel() == 3) {
-				for (int y = 0; y < 16; y++) {
-					for (int x = 0; x < 16; x++) {
-						if (map.getMap(x, y).equals("w")) {
-							g.drawImage(map.getWall(), x * 32, y * 32, null);
-						}
-
-						if (map.getMap(x, y).equals("s")) {
-							g.drawImage(map.getSpace(), x * 32, y * 32, null);
-						}
-
-						if (map.getMap(x, y).equals("g")) {
-							g.drawImage(map.getGoo(), x * 32, y * 32, null);
-						}
-					}
-
-					if (player.getAlive() == true) {
-						g.drawImage(player.getPlayer(), player.getX(),
-								player.getY(), null);
-					} else if (player.getAlive() == false) {
-						g.drawImage(player.getDead(), player.getX(),
-								player.getY(), null);
-					}
-
-					if (getFail() == true) {
-						g.setFont(italics);
-						g.setColor(Color.GREEN);
-						g.drawString("You have lost!", 10, 200);
-					}
-
-					if (player.ammo > 0) {
-						g.setFont(font);
-						g.setColor(Color.WHITE);
-						g.drawString("Remaining Ammo: " + player.ammo, 0, 500);
-					} else if (player.ammo == 0) {
-						g.setFont(font);
-						g.setColor(Color.WHITE);
-						g.drawString("Reload! (R)", 0, 500);
-					}
-
-					if (player.reloads > 0) {
-						g.setFont(italics);
-						g.setColor(Color.WHITE);
-						g.drawString("Reloads: " + player.reloads, 350, 500);
-					} else if (player.reloads == 0) {
-						g.setFont(italics);
-						g.setColor(Color.WHITE);
-						g.drawString("Out!", 450, 500);
-					}
-
-					ArrayList bullets = player.getBullets();
-					for (int w = 0; w < bullets.size(); w++) {
-						Bullet m = (Bullet) bullets.get(w);
-						g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
-					}
 				}
 			}
 	}
