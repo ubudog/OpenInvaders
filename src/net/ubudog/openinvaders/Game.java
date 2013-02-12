@@ -53,6 +53,8 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	static boolean win = false;
 	static boolean fail = false;
 	
+	public static String firingMode;
+	
 	Font menuFont; 
 	Font infoFont; 
 	Font gameFont; 
@@ -68,6 +70,8 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 		menuFont = new Font("SansSerif", Font.BOLD, 25); 
 		infoFont = new Font("SansSerif", Font.ITALIC, 10); 
 		gameFont = new Font("SansSerif", Font.HANGING_BASELINE, 15);
+		
+		firingMode = "single"; 
 		
 		enemies = new ArrayList(); 
 		
@@ -136,7 +140,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 		}
 		if (getLevel() == 1) {
 			g.setFont(gameFont); 
-			
+						
 			// Level 1
 			for (int y = 0; y < 16; y++) {
 				for (int x = 0; x < 16; x++) {
@@ -194,7 +198,12 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 				ArrayList bullets = player.getBullets();
 				for (int w = 0; w < bullets.size(); w++) {
 					Bullet m = (Bullet) bullets.get(w);
-					g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
+					if (firingMode.toString().equals("single")) { 
+						g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
+					} else { 
+						g.drawImage(m.getBullet(), m.getX() - 7, m.getY(), null); 
+						g.drawImage(m.getBullet(), m.getX() + 10, m.getY(), null); 
+					}
 				}
 			}
 		}

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import net.ubudog.openinvaders.Game;
 import net.ubudog.openinvaders.map.Map;
 import net.ubudog.openinvaders.sound.SoundManager;
 
@@ -87,7 +88,11 @@ public class Player {
 	
 	public void fireBullet() {
 		if (ammo > 0) {
-			ammo--; 
+			if (Game.firingMode.toString().equals("single")) { 
+				ammo--;
+			} else { 
+				ammo = ammo - 2; 
+			}
 			new SoundManager("res/sounds/bullet.wav").start();
 			Bullet b = new Bullet(getX() + 2, getY());
 			bullets.add(b);
@@ -98,6 +103,15 @@ public class Player {
 		int key = e.getKeyCode();
 		if (getAlive() == true) {
 			if (getCanMove() == true) {
+				if (key == KeyEvent.VK_F) { 
+					// Change firing mode
+					if (Game.firingMode.toString().equals("single")) { 
+						Game.firingMode = "double"; 
+					} else { 
+						Game.firingMode = "single";
+					}
+				}
+				
 				if (key == KeyEvent.VK_W) {
 					y = y - 32; 
 				}
