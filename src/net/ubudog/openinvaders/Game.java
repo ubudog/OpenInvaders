@@ -229,10 +229,10 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 					g.drawString("Failed!", 100, 200);
 				}
 
-				if (player.ammo == 17) {
+				if (player.ammo <= 17) {
 					levelonenew = false;
 				}
-
+								
 				ArrayList bullets = player.getBullets();
 				for (int w = 0; w < bullets.size(); w++) {
 					Bullet m = (Bullet) bullets.get(w);
@@ -384,8 +384,8 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 		}
 		
 		if (key == KeyEvent.VK_K) { 
-			// Kill the player
-			player.isAlive = false; 
+			// Deplete player ammo (test key)
+			player.ammo = 0; 
 		}
 
 		if (key == KeyEvent.VK_J) {
