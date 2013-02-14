@@ -39,6 +39,7 @@ import net.ubudog.openinvaders.entity.Bullet;
 import net.ubudog.openinvaders.entity.Explosion;
 import net.ubudog.openinvaders.entity.Player;
 import net.ubudog.openinvaders.map.Map;
+import net.ubudog.openinvaders.sound.SoundManager;
 
 public class Game extends JPanel implements ActionListener, KeyListener, MouseListener {
 
@@ -63,10 +64,10 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	static String ICON_LOCATION = MAIN_DIR + "/player.png";
 	
 	static String version; 
-	
-	Explosion explosion; 
-	
+		
 	static JFrame frame;
+	
+	Timer explosionTimer; 
 	
 	static int startErrors = 0;
 	static boolean firstRun;
@@ -82,14 +83,14 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	
 	ArrayList enemies;
 	
+	Explosion explosion; 
+	
 	public Game() {
 		version = "Alpha 0.1"; 
-		
-		explosion = new Explosion(0, 0); 
-		
+				
 		addKeyListener(this);
 		addMouseListener(this); 
-		
+				
 		setFocusable(true);
 
 		menuFont = new Font("SansSerif", Font.BOLD, 25); 
@@ -97,6 +98,18 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 		gameFont = new Font("SansSerif", Font.HANGING_BASELINE, 15);
 		
 		firingMode = "single"; 
+		
+		explosion = new Explosion(); 
+		
+		explosionTimer = new Timer(600, this); 
+		explosionTimer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                if (explosion.getVisible() == true) {
+                    explosion.visible = false;
+                    explosionTimer.stop();
+            }
+			}
+		}); 
 		
 		enemies = new ArrayList(); 
 		
@@ -139,7 +152,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	public static int getLevel() {
 		return level;
 	}
-
+	
 	public void paint(Graphics g) {
 		if (getLevel() == 0) { 
 			// Menu level
@@ -169,6 +182,18 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			g.setColor(Color.WHITE); 
 			g.drawString("Load Games", 150, 75); 
 			
+			g.setFont(infoFont); 
+			g.setColor(Color.WHITE); 
+			g.drawString("Version: " + version.toString(), 425, 535); 
+		}
+		if (getLevel() == 400) {
+			// End of game level
+			g.setFont(menuFont); 
+			g.setColor(Color.RED);
+			g.drawString("You have lost!", 200, 200); 
+			
+			g.setFont(infoFont); 
+			g.setColor(Color.WHITE); 
 			g.drawString("Version: " + version.toString(), 425, 535); 
 		}
 		if (getLevel() == 1) {
@@ -187,13 +212,12 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 				}
 				
 				if (player.getAlive() == true) {
-					g.drawImage(player.getPlayer(), player.getX(),
-							player.getY(), null);
-				} else if (player.getAlive() == false) {
-					ArrayList explosions = explosion.getExplosions();
-					for (int w = 0; w < explosions.size(); w++) {
-						Explosion e = (Explosion) explosions.get(w);
-						g.drawImage(e.getExplosion(), player.getX(), player.getY(), null);
+					g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
+				} else {
+					if (explosion.getVisible() == true) { 
+						g.drawImage(explosion.getExplosion(), player.getX(), player.getY(), null);
+						new SoundManager("res/sounds/explosion.wav").start();
+						explosionTimer.start(); 
 					}
 				}
 				
@@ -232,7 +256,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 				if (player.ammo <= 17) {
 					levelonenew = false;
 				}
-												
+																
 				ArrayList bullets = player.getBullets();
 				for (int w = 0; w < bullets.size(); w++) {
 					Bullet m = (Bullet) bullets.get(w);
@@ -240,7 +264,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 					// Remove bullets from screen if they have passed the north boundary
 					if (m.getY() <= 0) { 
 						bullets.remove(m); 
-					}
+					}					
 				}
 			}
 		}
