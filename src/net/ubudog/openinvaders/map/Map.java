@@ -19,6 +19,7 @@ along with OpenInvaders.  If not, see <http://www.gnu.org/licenses/>.
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Scanner;
 
 import javax.swing.ImageIcon;
@@ -34,7 +35,7 @@ public class Map {
 	private Image wall; 
 	private Image space;
 	
-	static String MAP_LOCATION;
+	String MAP_LOCATION;
 	
 	public Map() {		
 		

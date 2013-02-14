@@ -36,6 +36,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import net.ubudog.openinvaders.entity.Bullet;
+import net.ubudog.openinvaders.entity.Explosion;
 import net.ubudog.openinvaders.entity.Player;
 import net.ubudog.openinvaders.map.Map;
 
@@ -63,6 +64,8 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	
 	static String version; 
 	
+	Explosion explosion; 
+	
 	static JFrame frame;
 	
 	static int startErrors = 0;
@@ -77,10 +80,12 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	Font infoFont; 
 	Font gameFont; 
 	
-	ArrayList enemies; 
+	ArrayList enemies;
 	
 	public Game() {
 		version = "Alpha 0.1"; 
+		
+		explosion = new Explosion(0, 0); 
 		
 		addKeyListener(this);
 		addMouseListener(this); 
@@ -185,7 +190,11 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 					g.drawImage(player.getPlayer(), player.getX(),
 							player.getY(), null);
 				} else if (player.getAlive() == false) {
-					g.drawImage(player.getDead(), player.getX(), player.getY(), null);
+					ArrayList explosions = explosion.getExplosions();
+					for (int w = 0; w < explosions.size(); w++) {
+						Explosion e = (Explosion) explosions.get(w);
+						g.drawImage(e.getExplosion(), player.getX(), player.getY(), null);
+					}
 				}
 				
 				Random r = new Random();
@@ -365,6 +374,18 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	public void keyPressed(KeyEvent e) {
 		player.keyPressed(e);
 		int key = e.getKeyCode();
+		
+		if (key == KeyEvent.VK_ESCAPE && level > 0) { 
+			level = 0; 
+		} else { 
+			System.out.println("Exiting!"); 
+			System.exit(0); 
+		}
+		
+		if (key == KeyEvent.VK_K) { 
+			// Kill the player
+			player.isAlive = false; 
+		}
 
 		if (key == KeyEvent.VK_J) {
 			// Go to next level

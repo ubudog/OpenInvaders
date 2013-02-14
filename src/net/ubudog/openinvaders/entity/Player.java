@@ -30,7 +30,6 @@ import net.ubudog.openinvaders.sound.SoundManager;
 public class Player {
 	
 	Image img;
-	Image deathimg;
 	
 	public static int ammo;
 	public static int reloads; 
@@ -59,9 +58,6 @@ public class Player {
 		ImageIcon i = new ImageIcon("res/drawable/player.png");
 		img = i.getImage();
 		
-		i = new ImageIcon("res/drawable/explosion.gif");
-		deathimg = i.getImage();
-		
 		bullets = new ArrayList();
 	}
 	
@@ -81,11 +77,7 @@ public class Player {
 	public Image getPlayer() {
 		return img; 
 	}
-	
-	public Image getDead() {
-		return deathimg;
-	}
-	
+		
 	public int getX() {
 		return x; 
 	}
@@ -196,11 +188,6 @@ public class Player {
 			
 		} else {
 			
-		}
-		
-		if (key == KeyEvent.VK_ESCAPE) { 
-			System.out.println("Exiting.");
-			System.exit(0);
 		}
 	}
 	
