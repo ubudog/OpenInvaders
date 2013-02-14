@@ -211,6 +211,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 				}
 				
 				g.drawString("Score: " + player.score, 0, 480);
+				g.drawString("Firing mode: " + firingMode.toString(), 0, 520); 
 
 				if (player.reloads > 0) {
 					g.setFont(gameFont);
