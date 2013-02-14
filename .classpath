@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/home/michael/EasyOgg/jorbis-0.0.15.jar"/>
-	<classpathentry kind="lib" path="/home/michael/EasyOgg/jogg-0.0.7.jar"/>
-	<classpathentry kind="lib" path="/home/michael/EasyOgg/easyogg.jar"/>
+	<classpathentry kind="lib" path="/home/ubudog/EasyOgg/jorbis-0.0.15.jar"/>
+	<classpathentry kind="lib" path="/home/ubudog/EasyOgg/jogg-0.0.7.jar"/>
+	<classpathentry kind="lib" path="/home/ubudog/EasyOgg/easyogg.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
