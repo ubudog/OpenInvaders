@@ -375,9 +375,9 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 		player.keyPressed(e);
 		int key = e.getKeyCode();
 		
-		if (key == KeyEvent.VK_ESCAPE && level > 0) { 
+		if (key == KeyEvent.VK_ESCAPE && level != 0) { 
 			level = 0; 
-		} else { 
+		} else if (key == KeyEvent.VK_ESCAPE && level == 0){ 
 			System.out.println("Exiting!"); 
 			System.exit(0); 
 		}
