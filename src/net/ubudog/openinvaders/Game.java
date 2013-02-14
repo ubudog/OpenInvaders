@@ -198,12 +198,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 				ArrayList bullets = player.getBullets();
 				for (int w = 0; w < bullets.size(); w++) {
 					Bullet m = (Bullet) bullets.get(w);
-					if (firingMode.toString().equals("single")) { 
-						g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
-					} else { 
-						g.drawImage(m.getBullet(), m.getX() - 7, m.getY(), null); 
-						g.drawImage(m.getBullet(), m.getX() + 10, m.getY(), null); 
-					}
+					g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
 				}
 			}
 		}

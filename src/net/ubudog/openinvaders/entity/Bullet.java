@@ -11,7 +11,7 @@ public class Bullet {
 	int y; 
 	Image img;
 	
-	boolean visible;
+	public boolean visible;
 	
 	public Bullet(int startX, int startY) {
 		x = startX;

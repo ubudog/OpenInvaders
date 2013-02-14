@@ -89,13 +89,18 @@ public class Player {
 	public void fireBullet() {
 		if (ammo > 0) {
 			if (Game.firingMode.toString().equals("single")) { 
+				new SoundManager("res/sounds/bullet.wav").start();
+				Bullet b = new Bullet(getX() + 2, getY());
+				bullets.add(b);
 				ammo--;
 			} else { 
+				new SoundManager("res/sounds/bullet.wav").start();
+				Bullet b = new Bullet(getX() + -5, getY());
+				Bullet b2 = new Bullet(getX() + 12, getY()); 
+				bullets.add(b);
+				bullets.add(b2); 
 				ammo = ammo - 2; 
 			}
-			new SoundManager("res/sounds/bullet.wav").start();
-			Bullet b = new Bullet(getX() + 2, getY());
-			bullets.add(b);
 		}
 	}
 		
