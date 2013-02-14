@@ -36,6 +36,8 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import net.ubudog.openinvaders.entity.Bullet;
+import net.ubudog.openinvaders.entity.Enemy;
+import net.ubudog.openinvaders.entity.EnemyBullet;
 import net.ubudog.openinvaders.entity.Explosion;
 import net.ubudog.openinvaders.entity.Player;
 import net.ubudog.openinvaders.map.Map;
@@ -266,6 +268,18 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 						bullets.remove(m); 
 					}					
 				}
+				
+				/**
+				ArrayList enemyBullets = Enemy.getBullets();
+				for (int w = 0; w < enemyBullets.size(); w++) { 
+					EnemyBullet e = (EnemyBullet) enemyBullets.get(w); 
+					g.drawImage(e.getBullet(), e.getX(), e.getY(), null); 
+					// Remove bullets from screen if they have passed the south boundary
+					if (e.getY() >= 600) { 
+						enemyBullets.remove(e);
+					}
+				}
+				*/
 			}
 		}
 

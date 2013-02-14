@@ -104,7 +104,7 @@ public class Enemy {
 		if (ammo > 0) {
 			ammo--; 
 			new SoundManager("res/sounds/bullet.wav").start();
-			Bullet b = new Bullet(getX() + 2, getY());
+			EnemyBullet b = new EnemyBullet(getX() + 2, getY());
 			enemyBullets.add(b);
 		}
 	}	
