@@ -1,5 +1,21 @@
 package net.ubudog.openinvaders;
 
+/*This file is part of OpenInvaders.
+
+OpenInvaders is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+OpenInvaders is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with OpenInvaders.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -45,6 +61,8 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	static String LEVEL1_MUSIC = MAIN_DIR + "/songlevel1.ogg";
 	static String ICON_LOCATION = MAIN_DIR + "/player.png";
 	
+	static String version; 
+	
 	static JFrame frame;
 	
 	static int startErrors = 0;
@@ -62,6 +80,8 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	ArrayList enemies; 
 	
 	public Game() {
+		version = "Alpha 0.1"; 
+		
 		addKeyListener(this);
 		addMouseListener(this); 
 		
@@ -136,7 +156,15 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			g.drawString("Exit", 175, 480);
 			
 			g.setFont(infoFont); 
-			g.drawString("Version: Alpha 0.1", 425, 535); 
+			g.drawString("Version: " + version.toString(),  425, 535); 
+		}
+		if (getLevel() == 500) { 
+			// Load games level
+			g.setFont(menuFont); 
+			g.setColor(Color.WHITE); 
+			g.drawString("Load Games", 150, 75); 
+			
+			g.drawString("Version: " + version.toString(), 425, 535); 
 		}
 		if (getLevel() == 1) {
 			g.setFont(gameFont); 
@@ -376,6 +404,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			
 			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 225 && arg0.getY() < 275) { 
 				System.out.println("Load games..."); 
+				level = 500; 
 			}
 			
 			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 300 && arg0.getY() < 350) { 
