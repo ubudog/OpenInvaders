@@ -185,7 +185,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 						g.drawImage(map.getSpace(), x * 32, y * 32, null);
 					}
 				}
-
+				
 				if (player.getAlive() == true) {
 					g.drawImage(player.getPlayer(), player.getX(),
 							player.getY(), null);
@@ -232,11 +232,15 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 				if (player.ammo <= 17) {
 					levelonenew = false;
 				}
-								
+												
 				ArrayList bullets = player.getBullets();
 				for (int w = 0; w < bullets.size(); w++) {
 					Bullet m = (Bullet) bullets.get(w);
 					g.drawImage(m.getBullet(), m.getX(), m.getY(), null);
+					// Remove bullets from screen if they have passed the north boundary
+					if (m.getY() <= 0) { 
+						bullets.remove(m); 
+					}
 				}
 			}
 		}
@@ -411,7 +415,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 		player.keyTyped(e);
 	}
 
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent arg0) {		
 		if (level == 0) { 			
 			if (arg0.getX() >= 150 && arg0.getX() < 350 &&  arg0.getY() >= 150 && arg0.getY() < 200) {
 				System.out.println("Starting a new game..."); 
