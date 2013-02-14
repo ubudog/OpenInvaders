@@ -348,10 +348,8 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 		}
 		*/
 
-		System.out.println("New game starting.");
 		System.out.println("Game version: " + GAME_VERSION);
-		System.out.println("Home directory detected as: " + USER_HOME);
-
+		
 		if (getFirstRun() == true) {
 			System.out.println("Controls:");
 			System.out.println("A/Left - Move Left");
