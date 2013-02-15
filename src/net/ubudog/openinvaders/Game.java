@@ -87,8 +87,14 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	
 	Explosion explosion; 
 	
+	Timer enemyFire; 
+	
+	Enemy enemy; 
+	
 	public Game() {
 		version = "Alpha 0.1"; 
+		
+		enemy = new Enemy(); 
 				
 		addKeyListener(this);
 		addMouseListener(this); 
@@ -113,6 +119,16 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			}
 		}); 
 		
+		enemyFire = new Timer(1000, this); 
+		enemyFire.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) { 
+				if (enemy.getAlive() == true) { 
+					enemy.fireBullet(); 
+				}
+			}
+		}); 
+		enemyFire.start(); 
+		
 		enemies = new ArrayList(); 
 		
 		if (level == 0) {
@@ -133,18 +149,49 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 					bullets.remove(w);
 				}
 			}
-			repaint();
+			
+			ArrayList enemyBullets = enemy.getBullets(); 
+			for (int w = 0; w < enemyBullets.size(); w++) { 
+				EnemyBullet e1 = (EnemyBullet) enemyBullets.get(w); 
+				if (e1.getVisible() == true) { 
+					e1.move(); 
+				} else { 
+					enemyBullets.remove(e); 
+				}
+			}
 		}
+		repaint(); 
 	}
 
 	public void checkCollisions() {
 		ArrayList bullets = player.getBullets();
 		for (int w = 0; w < bullets.size(); w++) {
 			Bullet m = (Bullet) bullets.get(w);
-			Rectangle m1 = m.getBounds();			
+			
+			Rectangle m1 = m.getBounds();		
+			Rectangle e = enemy.getBounds(); 
+			
+			if (m1.intersects(e)) { 
+				enemy.isAlive = false; 
+				bullets.remove(m); 
+			}
 		}
 		
+		ArrayList enemyBullets = enemy.getBullets(); 
+		for (int a = 0; a < enemyBullets.size(); a++) {
+			EnemyBullet z = (EnemyBullet) enemyBullets.get(a); 
+			
+			Rectangle z1 = z.getBounds(); 
+			Rectangle p = player.getBounds(); 
+			
+			if (z1.intersects(p)) { 
+				player.isAlive = false; 
+				enemyBullets.remove(z);
+			}
+		}
+				
 		Rectangle d = player.getBounds();
+		
 	}
 
 	public ArrayList bullets() {
@@ -223,6 +270,16 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 					}
 				}
 				
+				if (enemy.getAlive() == true) { 
+					g.drawImage(enemy.getEnemy(), enemy.getX(), enemy.getY(), null); 
+				} else {
+					if (explosion.getVisible() == true) { 
+						g.drawImage(explosion.getExplosion(), enemy.getX(), enemy.getY(), null); 
+						new SoundManager("res/sounds/explosion.wav").start(); 
+						explosionTimer.start();
+					}
+				}
+				
 				Random r = new Random();
 				String[] failmsg = { "You have lost!" }; 
 
@@ -234,6 +291,8 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 					g.setFont(gameFont);
 					g.setColor(Color.WHITE);
 					g.drawString("Reload! (R)", 0, 500);
+				} else if (player.ammo < 0) { 
+					player.ammo = 0; 
 				}
 				
 				g.drawString("Score: " + player.score, 0, 480);
@@ -269,17 +328,15 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 					}					
 				}
 				
-				/**
 				ArrayList enemyBullets = Enemy.getBullets();
 				for (int w = 0; w < enemyBullets.size(); w++) { 
 					EnemyBullet e = (EnemyBullet) enemyBullets.get(w); 
 					g.drawImage(e.getBullet(), e.getX(), e.getY(), null); 
 					// Remove bullets from screen if they have passed the south boundary
-					if (e.getY() >= 600) { 
+					if (e.getY() >= 490) { 
 						enemyBullets.remove(e);
 					}
 				}
-				*/
 			}
 		}
 

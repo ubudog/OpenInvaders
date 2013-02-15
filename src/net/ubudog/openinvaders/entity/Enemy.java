@@ -48,7 +48,6 @@ public class Enemy {
 	public Enemy() {
 		x = 44; 
 		y = 100;
-		map = new Map();
 		
 		ammo = 20;
 		reloads = 5; 
@@ -101,11 +100,8 @@ public class Enemy {
 	}
 	
 	public void fireBullet() {
-		if (ammo > 0) {
-			ammo--; 
-			new SoundManager("res/sounds/bullet.wav").start();
-			EnemyBullet b = new EnemyBullet(getX() + 2, getY());
-			enemyBullets.add(b);
-		}
+		new SoundManager("res/sounds/bullet.wav").start();
+		EnemyBullet b = new EnemyBullet(getX() + 2, getY());
+		enemyBullets.add(b);
 	}	
 }
