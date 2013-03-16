@@ -28,7 +28,7 @@ public class Box {
 	
 	public boolean visible; 
 	
-	public Box(int x, int y) {
+	public Box() {
 		ImageIcon box = new ImageIcon("res/drawable/box.png"); 
 		img = box.getImage(); 
 		

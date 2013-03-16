@@ -35,6 +35,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import net.ubudog.openinvaders.entity.Box;
 import net.ubudog.openinvaders.entity.Bullet;
 import net.ubudog.openinvaders.entity.Enemy;
 import net.ubudog.openinvaders.entity.EnemyBullet;
@@ -249,6 +250,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 						
 			// Level 1
 			for (int y = 0; y < 16; y++) {
+		// XXX
 				for (int x = 0; x < 16; x++) {
 					if (map.getMap(x, y).equals("w")) {
 						g.drawImage(map.getWall(), x * 32, y * 32, null);
@@ -258,6 +260,12 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 						g.drawImage(map.getSpace(), x * 32, y * 32, null);
 					}
 				}
+				
+				// XXX
+				// three boxes
+				g.drawImage(new Box().getBox(), 20, 400, null); 
+				g.drawImage(new Box().getBox(), 230, 400, null);
+				g.drawImage(new Box().getBox(), 450, 400, null); 
 				
 				if (player.getAlive() == true) {
 					g.drawImage(player.getPlayer(), player.getX(), player.getY(), null);
@@ -517,7 +525,11 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 				map = new Map();
 				player = new Player();
 				time = new Timer(25, this);
-				time.start();
+				if (time.isRunning() == true) {
+					time.restart(); 
+				} else { 
+					time.start(); 
+				}
 				enemyFire.start(); 
 			}
 			
