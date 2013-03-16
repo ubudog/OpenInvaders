@@ -127,7 +127,6 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 				}
 			}
 		}); 
-		enemyFire.start(); 
 		
 		enemies = new ArrayList(); 
 		
@@ -519,6 +518,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 				player = new Player();
 				time = new Timer(25, this);
 				time.start();
+				enemyFire.start(); 
 			}
 			
 			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 225 && arg0.getY() < 275) { 
