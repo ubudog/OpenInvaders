@@ -19,6 +19,9 @@ along with OpenInvaders.  If not, see <http://www.gnu.org/licenses/>.
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,6 +46,7 @@ import net.ubudog.openinvaders.entity.Explosion;
 import net.ubudog.openinvaders.entity.Player;
 import net.ubudog.openinvaders.map.Map;
 import net.ubudog.openinvaders.sound.SoundManager;
+;
 
 public class Game extends JPanel implements ActionListener, KeyListener, MouseListener {
 
@@ -58,6 +62,8 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	static boolean levelonenew = true;
 	static boolean leveltwonew = true;
 	static File firstDir;
+	
+	String btnmode; 
 
 	static String USER_HOME = System.getProperty("user.home");
 	static String MAIN_DIR = USER_HOME + "/.openinvaders";
@@ -90,15 +96,20 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	
 	Timer enemyFire; 
 	
-	Enemy enemy; 
+	Enemy enemy;
 	
 	public Game() {
 		version = "Alpha 0.1"; 
 		
+		time = new Timer(25, this); 
+		time.start(); 
+		
+		btnmode = "standard"; 
+		
 		enemy = new Enemy(); 
 				
 		addKeyListener(this);
-		addMouseListener(this); 
+		addMouseListener(this);
 				
 		setFocusable(true);
 
@@ -138,6 +149,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 
 	public void actionPerformed(ActionEvent e) {
 		if (level == 0) { 
+			
 		} else { 
 			checkCollisions();
 			ArrayList bullets = player.getBullets();
@@ -203,11 +215,16 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	}
 	
 	public void paint(Graphics g) {
-		if (getLevel() == 0) { 
+		
+	// System.out.println("Button mode: " + btnmode);
+		
+		if (getLevel() == 0) {
 			// Menu level
 			frame.setBackground(Color.BLACK);
 			
-			g.draw3DRect(150, 150, 200, 50, false); 
+		//	g.draw3DRect(150, 150, 200, 50, false); 
+			g.drawImage(new Button(btnmode).getButton(), 150, 150, 200, 50, null);			
+			
 			g.draw3DRect(150, 225, 200, 50, false);
 			g.draw3DRect(150, 300, 200, 50, false);
 			g.draw3DRect(150, 375, 200, 50, false);
@@ -216,7 +233,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			g.setFont(menuFont);
 			g.setColor(Color.WHITE); 
 			g.drawString("OpenInvaders", 150, 75); 
-			g.drawString("New Game", 175, 180); 
+		//	g.drawString("New Game", 175, 180); 
 			g.drawString("Load Game", 175, 255);
 			g.drawString("N/A", 175, 330);
 			g.drawString("N/A", 175, 405);
@@ -525,28 +542,26 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	}
 
 	public void keyTyped(KeyEvent e) {
-		player.keyTyped(e);		
+		player.keyTyped(e);
 	}
 
 	public void mouseClicked(MouseEvent arg0) {		
 		if (level == 0) { 			
-			if (arg0.getX() >= 150 && arg0.getX() < 350 &&  arg0.getY() >= 150 && arg0.getY() < 200) {
+			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 150 && arg0.getY() < 200) {
 				System.out.println("Starting a new game..."); 
 				level = 1; 
 				map = new Map();
 				player = new Player();
-				time = new Timer(25, this);
 				if (time.isRunning() == true) {
-					time.restart(); 
-				} else { 
-					time.start(); 
+//					time.restart(); 
 				}
 				enemyFire.start(); 
+				btnmode = "clicked";
 			}
 			
 			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 225 && arg0.getY() < 275) { 
 				System.out.println("Load games..."); 
-				level = 500; 
+	//			level = 500; 
 			}
 			
 			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 300 && arg0.getY() < 350) { 
@@ -563,13 +578,9 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			}
 			
 		} else { 
+			
 		}
 	}
-
-	public void mouseEntered(MouseEvent arg0) {
-		
-	}
-
 	public void mouseExited(MouseEvent arg0) {
 		
 	}
@@ -580,5 +591,9 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 
 	public void mousePressed(MouseEvent e) {
 		
+	}
+
+	public void mouseEntered(MouseEvent e) {		
+	
 	}
 }
