@@ -507,6 +507,17 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 				level--; 
 			}
 		}
+		
+		if (key == KeyEvent.VK_P) { 
+			if (time.isRunning()) { 
+				time.stop(); 
+				enemyFire.stop(); // XXX
+			} else { 
+				time.start(); 
+				enemyFire.start(); // XXX
+			}
+		}
+		
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -514,7 +525,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 	}
 
 	public void keyTyped(KeyEvent e) {
-		player.keyTyped(e);
+		player.keyTyped(e);		
 	}
 
 	public void mouseClicked(MouseEvent arg0) {		
