@@ -19,9 +19,6 @@ along with OpenInvaders.  If not, see <http://www.gnu.org/licenses/>.
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.PointerInfo;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -233,7 +230,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			g.setFont(menuFont);
 			g.setColor(Color.WHITE); 
 			g.drawString("OpenInvaders", 150, 75); 
-		//	g.drawString("New Game", 175, 180); 
+		//	g.drawString("Resume Game", 175, 180); 
 			g.drawString("Load Game", 175, 255);
 			g.drawString("N/A", 175, 330);
 			g.drawString("N/A", 175, 405);
@@ -561,7 +558,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			
 			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 225 && arg0.getY() < 275) { 
 				System.out.println("Load games..."); 
-	//			level = 500; 
+				level = 500; 
 			}
 			
 			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 300 && arg0.getY() < 350) { 
