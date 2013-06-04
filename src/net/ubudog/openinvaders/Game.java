@@ -215,6 +215,29 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 		
 	// System.out.println("Button mode: " + btnmode);
 		
+		if (getLevel() == 50) { 
+			frame.setBackground(Color.BLACK); 
+			
+			g.drawImage(new Button(btnmode).getButton(), 150, 150, 200, 50, null);			
+			
+			g.draw3DRect(150, 225, 200, 50, false);
+			g.draw3DRect(150, 300, 200, 50, false);
+			g.draw3DRect(150, 375, 200, 50, false);
+			g.draw3DRect(150, 450, 200, 50, false); 
+			
+			g.setFont(menuFont);
+			g.setColor(Color.WHITE); 
+			g.drawString("OpenInvaders - Paused", 100, 75); 
+		//	g.drawString("Resume Game", 175, 180); 
+			g.drawString("Load Game", 175, 255);
+			g.drawString("N/A", 175, 330);
+			g.drawString("N/A", 175, 405);
+			g.drawString("Exit", 175, 480);
+			
+			g.setFont(infoFont); 
+			g.drawString("Version: " + version.toString(),  425, 535);
+		}
+		
 		if (getLevel() == 0) {
 			// Menu level
 			frame.setBackground(Color.BLACK);
@@ -401,7 +424,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 				if (fail == true) {
 					g.setFont(gameFont);
 					g.setColor(Color.GREEN);
-					g.drawString("You have failed!  :(", 0, 200);
+					g.drawString("You lose!", 0, 200);
 				}
 				if (player.ammo > 0) {
 					g.setFont(gameFont);
@@ -478,7 +501,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			System.out.println("H - List these controls");
 		}
 
-		System.out.println("Start errors: " + startErrors);
+	//	System.out.println("Start errors: " + startErrors); // Not needed now
 		Game game = new Game();
 		frame = new JFrame(GAME_NAME);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -495,10 +518,15 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 		int key = e.getKeyCode();
 		
 		if (key == KeyEvent.VK_ESCAPE && level != 0) { 
-			level = 0; 
+			// Pause
+			level = 50;
+			enemyFire.stop(); 
 		} else if (key == KeyEvent.VK_ESCAPE && level == 0){ 
 			System.out.println("Exiting!"); 
 			System.exit(0); 
+		} else if (key == KeyEvent.VK_ESCAPE && level == 50) {
+			// Game is paused; unpause
+			
 		}
 		
 		if (key == KeyEvent.VK_K) { 
@@ -558,7 +586,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			
 			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 225 && arg0.getY() < 275) { 
 				System.out.println("Load games..."); 
-				level = 500; 
+				level = 500;
 			}
 			
 			if (arg0.getX() >= 150 && arg0.getX() < 350 && arg0.getY() >= 300 && arg0.getY() < 350) { 
