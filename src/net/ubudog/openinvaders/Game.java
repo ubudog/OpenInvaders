@@ -43,7 +43,6 @@ import net.ubudog.openinvaders.entity.Explosion;
 import net.ubudog.openinvaders.entity.Player;
 import net.ubudog.openinvaders.map.Map;
 import net.ubudog.openinvaders.sound.SoundManager;
-;
 
 public class Game extends JPanel implements ActionListener, KeyListener, MouseListener {
 
@@ -228,7 +227,7 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			g.setFont(menuFont);
 			g.setColor(Color.WHITE); 
 			g.drawString("OpenInvaders - Paused", 100, 75); 
-		//	g.drawString("Resume Game", 175, 180); 
+			g.drawString("Resume Game", 175, 180); 
 			g.drawString("Load Game", 175, 255);
 			g.drawString("N/A", 175, 330);
 			g.drawString("N/A", 175, 405);
@@ -467,7 +466,6 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 		firstDir = new File(MAIN_DIR);
 
 		if (firstDir.exists()) {
-			System.out.println("Not first run.");
 			firstRun = false;
 		} else {
 			System.out.println("First run.");
@@ -490,8 +488,6 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			 * (IOException e) { e.printStackTrace(); }
 		}
 		*/
-
-		System.out.println("Game version: " + GAME_VERSION);
 		
 		if (getFirstRun() == true) {
 			System.out.println("Controls:");
@@ -501,7 +497,6 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			System.out.println("H - List these controls");
 		}
 
-	//	System.out.println("Start errors: " + startErrors); // Not needed now
 		Game game = new Game();
 		frame = new JFrame(GAME_NAME);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -525,8 +520,8 @@ public class Game extends JPanel implements ActionListener, KeyListener, MouseLi
 			System.out.println("Exiting!"); 
 			System.exit(0); 
 		} else if (key == KeyEvent.VK_ESCAPE && level == 50) {
-			// Game is paused; unpause
-			
+			System.out.println("Exiting!");
+			System.exit(0);
 		}
 		
 		if (key == KeyEvent.VK_K) { 
