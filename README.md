@@ -1,6 +1,7 @@
 # OpenInvaders
 
 A simple, open-source Space Invaders like game.
+More of an exercise in Java than a real game ('cuz the code sucks).
 
 ## Map
 Editing the map is simple.  Open the .openinvaders directory in your home directory, and edit the map for the level you'd like to edit.
